@@ -4,320 +4,54 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Platform — Tap FIFA by Wilkins Media</title>
-  <meta name="description" content="Deep dive into the Tap FIFA monorepo: 5 applications, 11 packages, 39 data models, 12 API modules, and 31 frontend pages." />
+  <meta name="description" content="Simple platform overview for Tap FIFA by Wilkins Media." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./assets/styles.css" />
 </head>
 <body>
-
-<!-- ═══ HERO ═══ -->
 <header class="hero hero-compact" id="hero">
-  <div class="hero-bg">
-    <div class="hero-grid-lines"></div>
-    <div class="hero-orb orb-1"></div>
-    <div class="hero-orb orb-2"></div>
-  </div>
+  <div class="hero-bg"><div class="hero-grid-lines"></div><div class="hero-orb orb-1"></div></div>
   <nav class="top-nav">
-    <div class="nav-brand">
-      <a href="./" class="nav-brand-link"><span class="nav-logo">◆</span><span class="nav-title">Tap FIFA</span></a>
-    </div>
+    <div class="nav-brand"><a href="./" class="nav-brand-link"><span class="nav-logo">◆</span><span class="nav-title">Tap FIFA</span></a></div>
     <div class="nav-links">
-      <a href="./">Home</a>
-      <a href="./platform.html" class="nav-active">Platform</a>
-      <a href="./architecture.html">Architecture</a>
-      <a href="./media-studio.html">Media Studio</a>
-      <a href="./demand-model.html">Demand Model</a>
-      <a href="./sales-kit.html">Sales Kit</a>
+      <a href="./">Home</a><a href="./platform.html" class="nav-active">Platform</a><a href="./architecture.html">Architecture</a><a href="./media-studio.html">Media Studio</a><a href="./demand-model.html">Demand Model</a><a href="./sales-kit.html">Sales Kit</a>
     </div>
     <a class="nav-cta" href="https://github.com/FTHTrading/FIFA---Wilkins" target="_blank" rel="noreferrer">Open Repo</a>
   </nav>
-
   <div class="hero-content">
-    <div class="hero-eyebrow">
-      <span class="pulse-dot"></span>
-      <span>MONOREPO · 5 APPS · 11 PACKAGES · 39 DATA MODELS</span>
-    </div>
-    <h1 class="hero-title">The Platform</h1>
-    <p class="hero-subtitle">Everything built — applications, shared packages, data models, API modules, and frontend pages — in one production-grade pnpm + Turborepo monorepo.</p>
+    <div class="hero-eyebrow"><span class="pulse-dot"></span><span>PLATFORM OVERVIEW</span></div>
+    <h1 class="hero-title">Platform</h1>
+    <p class="hero-subtitle">In plain words: we run one system with separate views for fans, staff, admins, and sponsors.</p>
   </div>
-
   <div class="hero-stats">
-    <div class="stat-card"><span class="stat-value">5</span><span class="stat-label">Applications</span></div>
-    <div class="stat-card"><span class="stat-value">11</span><span class="stat-label">Shared Packages</span></div>
-    <div class="stat-card"><span class="stat-value">39</span><span class="stat-label">Data Models</span></div>
-    <div class="stat-card"><span class="stat-value">12</span><span class="stat-label">API Modules</span></div>
-    <div class="stat-card"><span class="stat-value">31</span><span class="stat-label">Frontend Pages</span></div>
+    <div class="stat-card"><span class="stat-value">4</span><span class="stat-label">User Views</span></div>
+    <div class="stat-card"><span class="stat-value">1</span><span class="stat-label">Core API</span></div>
+    <div class="stat-card"><span class="stat-value">2</span><span class="stat-label">Core Datastores</span></div>
   </div>
 </header>
 
-<!-- ═══ APPLICATIONS ═══ -->
-<section class="section" id="apps">
-  <div class="section-header">
-    <span class="section-eyebrow">Applications</span>
-    <h2>Five Apps. One Monorepo.</h2>
-    <p class="section-desc">Four Next.js 15 frontend surfaces and one NestJS API, all orchestrated by Turborepo with shared TypeScript packages.</p>
-  </div>
-
-  <div class="surfaces-grid">
-    <div class="surface-card surface-blue">
-      <div class="surface-status"><span class="pulse-dot-sm blue"></span> apps/web · Port 3000</div>
-      <h3>Guest Web</h3>
-      <p>Next.js 15 PWA for fans. Multilingual concierge, venue map, cultural food discovery, rewards, emergency mode, sponsor placements, and tap interface.</p>
-      <div class="surface-tags">
-        <span>/event/concierge</span><span>/event/map</span><span>/event/rewards</span><span>/event/emergency</span><span>/tap/food</span><span>/tap/directions</span><span>/tap/help</span><span>/tap/rewards</span>
-      </div>
-    </div>
-    <div class="surface-card surface-violet">
-      <div class="surface-status"><span class="pulse-dot-sm violet"></span> apps/admin · Port 3001</div>
-      <h3>Admin Control</h3>
-      <p>Next.js 15 admin panel for the host committee. Venue POIs, event management, translation approvals, and operational dashboard.</p>
-      <div class="surface-tags">
-        <span>/dashboard</span><span>/events</span><span>/translations</span>
-      </div>
-    </div>
-    <div class="surface-card surface-green">
-      <div class="surface-status"><span class="pulse-dot-sm green"></span> apps/staff-console · Port 3002</div>
-      <h3>Staff Console</h3>
-      <p>Next.js 15 operations console. Translation-assisted support queues, rapid escalation, and emergency incident management.</p>
-      <div class="surface-tags">
-        <span>/queue</span><span>/emergency</span>
-      </div>
-    </div>
-    <div class="surface-card surface-fuchsia">
-      <div class="surface-status"><span class="pulse-dot-sm fuchsia"></span> apps/admin-console · Port 3003</div>
-      <h3>Revenue Console</h3>
-      <p>Next.js 15 executive dashboard. Campaign performance, telecom analytics, revenue views by language and intent, demo simulation.</p>
-      <div class="surface-tags">
-        <span>/dashboard</span><span>/campaigns</span><span>/analytics</span><span>/telecom</span><span>/demo</span>
-      </div>
-    </div>
-    <div class="surface-card surface-amber">
-      <div class="surface-status"><span class="pulse-dot-sm amber"></span> apps/api · Port 4000</div>
-      <h3>NestJS API</h3>
-      <p>12 domain modules, Prisma 6 ORM, PostgreSQL 16 + pgvector, Redis 7 + BullMQ. REST endpoints with Swagger docs, rate limiting, audit logging.</p>
-      <div class="surface-tags">
-        <span>Swagger</span><span>Rate Limiting</span><span>Audit Logs</span><span>BullMQ</span><span>CORS</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ SHARED PACKAGES ═══ -->
-<section class="section section-dark" id="packages">
-  <div class="section-header">
-    <span class="section-eyebrow">Shared Packages</span>
-    <h2>11 Internal Packages</h2>
-    <p class="section-desc">Every package is consumed by all five apps via pnpm workspace references. Types, auth, translations, campaigns, analytics, emergency, and more — all shared.</p>
-  </div>
-
+<section class="section" id="views">
+  <div class="section-header"><span class="section-eyebrow">Who Uses It</span><h2>Four Views, One System</h2></div>
   <div class="built-grid">
-    <div class="glass-card built-card">
-      <h4>@wilkins/types</h4>
-      <p>Prisma 6 schema with 39 models. Generated client, TypeScript types, and database migrations.</p>
-    </div>
-    <div class="glass-card built-card">
-      <h4>@wilkins/auth</h4>
-      <p>JWT authentication, role-based access control, session management for staff, admin, and API consumers.</p>
-    </div>
-    <div class="glass-card built-card">
-      <h4>@wilkins/i18n</h4>
-      <p>Multilingual translation engine. <code>t()</code> resolver, RTL detection, 40+ language fallback merging.</p>
-    </div>
-    <div class="glass-card built-card">
-      <h4>@wilkins/ui</h4>
-      <p>Shared React component library. Brand-themed cards, buttons, layout primitives, design tokens.</p>
-    </div>
-    <div class="glass-card built-card">
-      <h4>@wilkins/lib</h4>
-      <p>Shared utilities: date formatting, currency helpers, validation, and common business logic.</p>
-    </div>
-    <div class="glass-card built-card">
-      <h4>@wilkins/campaigns</h4>
-      <p>Sponsor campaign engine. 3-tier monetization, impression/click/conversion tracking, cultural matching.</p>
-    </div>
-    <div class="glass-card built-card">
-      <h4>@wilkins/agentic</h4>
-      <p>MCP tool registry, intent classification, RAG retrieval with pgvector, cultural ranking, sponsor injection.</p>
-    </div>
-    <div class="glass-card built-card">
-      <h4>@wilkins/analytics</h4>
-      <p>Event tracking, revenue attribution, language breakdown, campaign performance, funnel metrics.</p>
-    </div>
-    <div class="glass-card built-card">
-      <h4>@wilkins/emergency</h4>
-      <p>Deterministic emergency system. 10 approved phrases, safety overrides, incident tracking.</p>
-    </div>
-    <div class="glass-card built-card">
-      <h4>@wilkins/maps</h4>
-      <p>Venue and city mapping. POI management, geofences, wayfinding logic, map data adapters.</p>
-    </div>
-    <div class="glass-card built-card">
-      <h4>@wilkins/config</h4>
-      <p>Shared configuration: environment variables, feature flags, brand packs, deployment settings.</p>
-    </div>
+    <div class="glass-card built-card"><h4>Fan View</h4><p>Multilingual help, directions, food, rewards, and safety support.</p></div>
+    <div class="glass-card built-card"><h4>Staff View</h4><p>Live request queue and response workflows.</p></div>
+    <div class="glass-card built-card"><h4>Admin View</h4><p>Content, events, and operational settings.</p></div>
+    <div class="glass-card built-card"><h4>Revenue View</h4><p>Campaign performance and sponsor outcomes.</p></div>
   </div>
 </section>
 
-<!-- ═══ DATA LAYER ═══ -->
-<section class="section" id="data">
-  <div class="section-header">
-    <span class="section-eyebrow">Data Layer</span>
-    <h2>39 Prisma Models</h2>
-    <p class="section-desc">PostgreSQL 16 with pgvector. Every model designed, migrated, and seeded with real Atlanta World Cup data.</p>
-  </div>
-
-  <div class="model-grid">
-    <div class="glass-panel model-group">
-      <h3>Core &amp; Identity</h3>
-      <div class="model-tags">
-        <span class="model-tag">User</span>
-        <span class="model-tag">GuestSession</span>
-        <span class="model-tag">Organization</span>
-        <span class="model-tag">Tenant</span>
-        <span class="model-tag">AuditLog</span>
-      </div>
-    </div>
-    <div class="glass-panel model-group">
-      <h3>Events &amp; Venues</h3>
-      <div class="model-tags">
-        <span class="model-tag">Event</span>
-        <span class="model-tag">EventDay</span>
-        <span class="model-tag">Venue</span>
-        <span class="model-tag">VenuePOI</span>
-        <span class="model-tag">VenueAlert</span>
-        <span class="model-tag">VenueMap</span>
-        <span class="model-tag">GeoFence</span>
-      </div>
-    </div>
-    <div class="glass-panel model-group">
-      <h3>Translation &amp; Safety</h3>
-      <div class="model-tags">
-        <span class="model-tag">TranslationEntry</span>
-        <span class="model-tag">ApprovedPhrase</span>
-        <span class="model-tag">EmergencyPhrase</span>
-        <span class="model-tag">EmergencyIncident</span>
-        <span class="model-tag">EscalationEvent</span>
-      </div>
-    </div>
-    <div class="glass-panel model-group">
-      <h3>Concierge &amp; Intelligence</h3>
-      <div class="model-tags">
-        <span class="model-tag">Conversation</span>
-        <span class="model-tag">Message</span>
-        <span class="model-tag">RagChunk</span>
-        <span class="model-tag">CulturalProfile</span>
-        <span class="model-tag">SearchQueryLog</span>
-        <span class="model-tag">AssistanceRequest</span>
-      </div>
-    </div>
-    <div class="glass-panel model-group">
-      <h3>Sponsors &amp; Revenue</h3>
-      <div class="model-tags">
-        <span class="model-tag">SponsorCampaign</span>
-        <span class="model-tag">SponsorRecommendation</span>
-        <span class="model-tag">SponsorChallenge</span>
-        <span class="model-tag">CouponRedemption</span>
-        <span class="model-tag">AnalyticsEvent</span>
-      </div>
-    </div>
-    <div class="glass-panel model-group">
-      <h3>Rewards</h3>
-      <div class="model-tags">
-        <span class="model-tag">RewardBadge</span>
-        <span class="model-tag">GuestPointsLedger</span>
-        <span class="model-tag">RewardClaim</span>
-      </div>
-    </div>
-    <div class="glass-panel model-group">
-      <h3>Telecom Pipeline</h3>
-      <div class="model-tags">
-        <span class="model-tag">TelecomSession</span>
-        <span class="model-tag">InboundMessage</span>
-        <span class="model-tag">OutboundMessage</span>
-        <span class="model-tag">DeliveryStatus</span>
-        <span class="model-tag">TelecomEvent</span>
-        <span class="model-tag">PhoneNumberBinding</span>
-        <span class="model-tag">ChannelPreference</span>
-      </div>
-    </div>
-    <div class="glass-panel model-group">
-      <h3>City Services</h3>
-      <div class="model-tags">
-        <span class="model-tag">CityService</span>
-        <span class="model-tag">Restaurant</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ API MODULES ═══ -->
-<section class="section section-dark" id="api-modules">
-  <div class="section-header">
-    <span class="section-eyebrow">API Modules</span>
-    <h2>12 NestJS Modules</h2>
-    <p class="section-desc">Each module is a self-contained domain with its own controllers, services, and DTOs. Port 4000, Swagger docs, rate limiting, audit logging.</p>
-  </div>
-
+<section class="section section-dark" id="tech">
+  <div class="section-header"><span class="section-eyebrow">What Runs It</span><h2>Simple Stack</h2></div>
   <div class="built-grid">
-    <div class="glass-card built-card"><h4>agentic</h4><p>MCP tool router, intent classification, RAG retrieval, cultural ranking, sponsor injection orchestration.</p></div>
-    <div class="glass-card built-card"><h4>analytics</h4><p>Event tracking, revenue attribution, language breakdown, campaign performance, funnel metrics.</p></div>
-    <div class="glass-card built-card"><h4>auth</h4><p>JWT authentication, role-based access, session management, and token refresh flows.</p></div>
-    <div class="glass-card built-card"><h4>campaigns</h4><p>Sponsor campaign CRUD, tier management (Smart Placement, Cultural Concierge, Reward Engine), targeting rules.</p></div>
-    <div class="glass-card built-card"><h4>chat</h4><p>Conversation management, message storage, and thread routing for guest-to-system interactions.</p></div>
-    <div class="glass-card built-card"><h4>concierge</h4><p>Guest concierge endpoint — the main entry point for multilingual, intent-driven fan assistance.</p></div>
-    <div class="glass-card built-card"><h4>emergency</h4><p>Emergency phrase lookup, incident creation, escalation triggers, safety-first deterministic responses.</p></div>
-    <div class="glass-card built-card"><h4>events</h4><p>Event and event-day management, match schedule, and host committee configuration.</p></div>
-    <div class="glass-card built-card"><h4>health</h4><p>API health checks, database connectivity, Redis status, and system readiness probes.</p></div>
-    <div class="glass-card built-card"><h4>maps</h4><p>Venue POI management, city service listings, restaurant data, and geofence operations.</p></div>
-    <div class="glass-card built-card"><h4>telecom</h4><p>Telnyx SMS/Voice webhooks, inbound message processing, language detection, outbound delivery.</p></div>
-    <div class="glass-card built-card"><h4>translation</h4><p>Translation entry management, phrase approvals, language coverage tracking, quality control.</p></div>
+    <div class="glass-card built-card"><h4>Frontend</h4><p>Next.js apps for each audience.</p></div>
+    <div class="glass-card built-card"><h4>Backend</h4><p>NestJS API for routing, logic, and integrations.</p></div>
+    <div class="glass-card built-card"><h4>Database</h4><p>PostgreSQL for persistent data and analytics.</p></div>
+    <div class="glass-card built-card"><h4>Queue/Cache</h4><p>Redis for speed and async jobs.</p></div>
   </div>
 </section>
 
-<!-- ═══ TECH STACK ═══ -->
-<section class="section" id="stack">
-  <div class="section-header">
-    <span class="section-eyebrow">Infrastructure</span>
-    <h2>Production-Grade Stack</h2>
-    <p class="section-desc">Every layer has been chosen for enterprise readiness, type safety, and developer velocity.</p>
-  </div>
-
-  <div class="built-grid">
-    <div class="glass-card built-card"><h4>Next.js 15</h4><p>App Router, React Server Components. Four independent frontend builds sharing common packages.</p></div>
-    <div class="glass-card built-card"><h4>NestJS</h4><p>Enterprise TypeScript framework with modular architecture, dependency injection, guards, pipes, interceptors.</p></div>
-    <div class="glass-card built-card"><h4>Prisma 6</h4><p>Type-safe ORM with 39 models. Auto-generated client, migrations, and seeding.</p></div>
-    <div class="glass-card built-card"><h4>PostgreSQL 16 + pgvector</h4><p>Primary database with vector similarity search for RAG retrieval and semantic intent matching.</p></div>
-    <div class="glass-card built-card"><h4>Redis 7 + BullMQ</h4><p>Caching, session storage, rate limiting, and background job processing for async operations.</p></div>
-    <div class="glass-card built-card"><h4>Turborepo + pnpm</h4><p>Monorepo orchestration. Parallel builds, dependency caching, workspace package linking.</p></div>
-    <div class="glass-card built-card"><h4>Docker Compose</h4><p>Full stack containerization: PostgreSQL, Redis, API, and all four frontend surfaces.</p></div>
-    <div class="glass-card built-card"><h4>Telnyx</h4><p>Telecom integration: SMS/MMS inbound and outbound, voice webhooks, and number management.</p></div>
-  </div>
-</section>
-
-<!-- ═══ FOOTER ═══ -->
-<footer class="site-footer">
-  <div class="footer-content">
-    <div class="footer-brand"><span class="nav-logo">◆</span><span>Tap FIFA by Wilkins Media</span></div>
-    <p class="footer-text">Built by <strong>FTH Trading × Wilkins Media Group</strong> for Atlanta 2026.</p>
-    <a class="btn btn-outline btn-sm" href="https://github.com/FTHTrading/FIFA---Wilkins" target="_blank" rel="noreferrer">GitHub Repository →</a>
-  </div>
-</footer>
-
-<script>
-// Fade-in observer for subpages
-const style = document.createElement('style');
-style.textContent = '.fade-in{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}.fade-in.visible{opacity:1;transform:translateY(0)}';
-document.head.appendChild(style);
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-}, { threshold: 0.1 });
-document.querySelectorAll('.section').forEach(s => { s.classList.add('fade-in'); observer.observe(s); });
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => { const t = document.querySelector(a.getAttribute('href')); if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); } });
-});
-</script>
+<footer class="site-footer"><div class="footer-content"><div class="footer-brand"><span class="nav-logo">◆</span><span>Tap FIFA by Wilkins Media</span></div><p class="footer-text">Built by <strong>FTH Trading × Wilkins Media Group</strong>.</p></div></footer>
 </body>
 </html>

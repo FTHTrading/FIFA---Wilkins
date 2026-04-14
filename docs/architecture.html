@@ -4,398 +4,49 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Architecture — Tap FIFA by Wilkins Media</title>
-  <meta name="description" content="System architecture, data flows, and pipeline design for the Tap FIFA Atlanta World Cup operating system." />
+  <meta name="description" content="Simple architecture explanation for Tap FIFA by Wilkins Media." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./assets/styles.css" />
 </head>
 <body>
-
-<!-- ═══ HERO ═══ -->
 <header class="hero hero-compact" id="hero">
-  <div class="hero-bg">
-    <div class="hero-grid-lines"></div>
-    <div class="hero-orb orb-1"></div>
-    <div class="hero-orb orb-2"></div>
-  </div>
+  <div class="hero-bg"><div class="hero-grid-lines"></div><div class="hero-orb orb-1"></div></div>
   <nav class="top-nav">
-    <div class="nav-brand">
-      <a href="./" class="nav-brand-link"><span class="nav-logo">◆</span><span class="nav-title">Tap FIFA</span></a>
-    </div>
-    <div class="nav-links">
-      <a href="./">Home</a>
-      <a href="./platform.html">Platform</a>
-      <a href="./architecture.html" class="nav-active">Architecture</a>
-      <a href="./media-studio.html">Media Studio</a>
-      <a href="./demand-model.html">Demand Model</a>
-      <a href="./sales-kit.html">Sales Kit</a>
-    </div>
+    <div class="nav-brand"><a href="./" class="nav-brand-link"><span class="nav-logo">◆</span><span class="nav-title">Tap FIFA</span></a></div>
+    <div class="nav-links"><a href="./">Home</a><a href="./platform.html">Platform</a><a href="./architecture.html" class="nav-active">Architecture</a><a href="./media-studio.html">Media Studio</a><a href="./demand-model.html">Demand Model</a><a href="./sales-kit.html">Sales Kit</a></div>
     <a class="nav-cta" href="https://github.com/FTHTrading/FIFA---Wilkins" target="_blank" rel="noreferrer">Open Repo</a>
   </nav>
-
   <div class="hero-content">
-    <div class="hero-eyebrow">
-      <span class="pulse-dot"></span>
-      <span>DATA FLOWS · PIPELINES · SYSTEM TOPOLOGY</span>
-    </div>
+    <div class="hero-eyebrow"><span class="pulse-dot"></span><span>ARCHITECTURE IN PLAIN ENGLISH</span></div>
     <h1 class="hero-title">Architecture</h1>
-    <p class="hero-subtitle">How data moves through the system — from a fan's first text message to a culturally-targeted sponsor placement, with safety overrides at every layer.</p>
+    <p class="hero-subtitle">A fan asks something. The system understands it. The right answer comes back fast in the right language.</p>
   </div>
 </header>
 
-<!-- ═══ SYSTEM TOPOLOGY ═══ -->
-<section class="section" id="topology">
-  <div class="section-header">
-    <span class="section-eyebrow">System Topology</span>
-    <h2>How Everything Connects</h2>
-    <p class="section-desc">Four frontend surfaces, one API gateway, shared data stores, and the Telnyx telecom bridge — all running from a single monorepo.</p>
-  </div>
-
-  <div class="topology-diagram">
-    <div class="topo-row">
-      <div class="topo-label">Frontends</div>
-      <div class="topo-nodes">
-        <div class="topo-node topo-blue">Guest Web<span class="topo-port">:3000</span></div>
-        <div class="topo-node topo-violet">Admin<span class="topo-port">:3001</span></div>
-        <div class="topo-node topo-green">Staff Console<span class="topo-port">:3002</span></div>
-        <div class="topo-node topo-fuchsia">Revenue<span class="topo-port">:3003</span></div>
-      </div>
-    </div>
-    <div class="topo-connector">▼ REST / fetch</div>
-    <div class="topo-row">
-      <div class="topo-label">API Layer</div>
-      <div class="topo-nodes">
-        <div class="topo-node topo-amber topo-wide">NestJS API — 12 Modules<span class="topo-port">:4000</span></div>
-      </div>
-    </div>
-    <div class="topo-connector">▼ Prisma ORM / ioredis</div>
-    <div class="topo-row">
-      <div class="topo-label">Data Stores</div>
-      <div class="topo-nodes">
-        <div class="topo-node topo-cyan">PostgreSQL 16<br/>+ pgvector<span class="topo-port">:5455</span></div>
-        <div class="topo-node topo-red">Redis 7<br/>+ BullMQ<span class="topo-port">:6380</span></div>
-      </div>
-    </div>
-    <div class="topo-connector-side">
-      <span class="topo-side-label">Telnyx Webhooks ↔ SMS/Voice</span>
+<section class="section" id="flow">
+  <div class="section-header"><span class="section-eyebrow">Flow</span><h2>Five-Step Request Flow</h2></div>
+  <div class="activation-block">
+    <div class="activation-steps">
+      <div class="step"><span class="step-num">1</span>Fan sends a request (web, text, or voice).</div>
+      <div class="step"><span class="step-num">2</span>System detects language and what the fan needs.</div>
+      <div class="step"><span class="step-num">3</span>Platform finds the best matching info from trusted data.</div>
+      <div class="step"><span class="step-num">4</span>If appropriate, it adds a sponsor offer.</div>
+      <div class="step"><span class="step-num">5</span>Response is delivered and results are tracked.</div>
     </div>
   </div>
 </section>
 
-<!-- ═══ GUEST WEB CONCIERGE FLOW ═══ -->
-<section class="section section-dark" id="concierge-flow">
-  <div class="section-header">
-    <span class="section-eyebrow">Flow 1</span>
-    <h2>Guest Web Concierge</h2>
-    <p class="section-desc">A fan opens the web app, selects their language, asks a question, and receives a culturally-aware, sponsor-eligible response.</p>
-  </div>
-
-  <div class="flow-pipeline">
-    <div class="flow-step flow-blue">
-      <div class="flow-icon">🌐</div>
-      <div class="flow-label">Fan opens Guest Web</div>
-      <div class="flow-detail">Language selection screen. 10 languages supported. RTL detection for Arabic.</div>
-    </div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step flow-blue">
-      <div class="flow-icon">💬</div>
-      <div class="flow-label">Types question</div>
-      <div class="flow-detail">"Where can I find halal food near the stadium?"</div>
-    </div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step flow-amber">
-      <div class="flow-icon">🧠</div>
-      <div class="flow-label">Intent Classification</div>
-      <div class="flow-detail">API detects language (ar), classifies intent (food_search), extracts entities (halal, stadium).</div>
-    </div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step flow-cyan">
-      <div class="flow-icon">🔍</div>
-      <div class="flow-label">RAG Retrieval</div>
-      <div class="flow-detail">pgvector similarity search across venue POIs, restaurants, and city services. Cultural ranking applied.</div>
-    </div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step flow-fuchsia">
-      <div class="flow-icon">💰</div>
-      <div class="flow-label">Sponsor Injection</div>
-      <div class="flow-detail">Eligible sponsor offers (halal restaurant promos) injected based on campaign tier and cultural match.</div>
-    </div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step flow-green">
-      <div class="flow-icon">✅</div>
-      <div class="flow-label">Response Delivered</div>
-      <div class="flow-detail">Culturally-aware response in Arabic with restaurant recs, directions, and sponsor offers.</div>
-    </div>
+<section class="section section-dark" id="safety">
+  <div class="section-header"><span class="section-eyebrow">Rule</span><h2>Safety Always Wins</h2></div>
+  <div class="built-grid">
+    <div class="glass-card built-card"><h4>Emergency First</h4><p>Safety responses override all sponsor logic.</p></div>
+    <div class="glass-card built-card"><h4>Deterministic Paths</h4><p>Critical help requests follow approved response rules.</p></div>
+    <div class="glass-card built-card"><h4>Auditable Events</h4><p>Requests and outcomes are logged for accountability.</p></div>
   </div>
 </section>
 
-<!-- ═══ SMS / VOICE PIPELINE ═══ -->
-<section class="section" id="sms-flow">
-  <div class="section-header">
-    <span class="section-eyebrow">Flow 2</span>
-    <h2>SMS / Voice Pipeline</h2>
-    <p class="section-desc">A fan texts or calls the event number. Telnyx routes to the API, which detects language, classifies intent, and sends a response — all without downloading an app.</p>
-  </div>
-
-  <div class="flow-pipeline">
-    <div class="flow-step flow-blue">
-      <div class="flow-icon">📱</div>
-      <div class="flow-label">Fan sends SMS</div>
-      <div class="flow-detail">"¿Dónde puedo ver el partido?" → Telnyx number</div>
-    </div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step flow-amber">
-      <div class="flow-icon">📡</div>
-      <div class="flow-label">Telnyx Webhook</div>
-      <div class="flow-detail">Inbound message hits API at /api/telecom/webhook. Session created, message logged.</div>
-    </div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step flow-amber">
-      <div class="flow-icon">🌍</div>
-      <div class="flow-label">Language Detection</div>
-      <div class="flow-detail">Detects Spanish (es). Creates TelecomSession with language binding.</div>
-    </div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step flow-amber">
-      <div class="flow-icon">🧠</div>
-      <div class="flow-label">Intent → Concierge</div>
-      <div class="flow-detail">Same agentic concierge pipeline: intent classification, RAG retrieval, cultural ranking.</div>
-    </div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step flow-fuchsia">
-      <div class="flow-icon">💰</div>
-      <div class="flow-label">Sponsor Check</div>
-      <div class="flow-detail">Eligible Spanish-language sponsor offers attached to response if campaign active.</div>
-    </div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step flow-green">
-      <div class="flow-icon">📤</div>
-      <div class="flow-label">Outbound SMS</div>
-      <div class="flow-detail">Response sent via Telnyx outbound API in Spanish. DeliveryStatus tracked.</div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ EMERGENCY ESCALATION ═══ -->
-<section class="section section-dark" id="emergency-flow">
-  <div class="section-header">
-    <span class="section-eyebrow">Flow 3</span>
-    <h2>Emergency Escalation</h2>
-    <p class="section-desc">Safety always wins. When a fan triggers an emergency phrase, the system bypasses all AI and sponsor logic and delivers deterministic, pre-approved safety responses.</p>
-  </div>
-
-  <div class="flow-pipeline">
-    <div class="flow-step flow-red">
-      <div class="flow-icon">🆘</div>
-      <div class="flow-label">Emergency Detected</div>
-      <div class="flow-detail">Fan says "I need a doctor" or triggers any of 10 safety phrases in any language.</div>
-    </div>
-    <div class="flow-arrow flow-arrow-red">→</div>
-    <div class="flow-step flow-red">
-      <div class="flow-icon">🛑</div>
-      <div class="flow-label">AI Bypassed</div>
-      <div class="flow-detail">No RAG, no sponsor injection, no hallucination. Deterministic path only.</div>
-    </div>
-    <div class="flow-arrow flow-arrow-red">→</div>
-    <div class="flow-step flow-red">
-      <div class="flow-icon">📋</div>
-      <div class="flow-label">Approved Phrase</div>
-      <div class="flow-detail">Pre-approved translation delivered in the fan's language. No AI generation.</div>
-    </div>
-    <div class="flow-arrow flow-arrow-red">→</div>
-    <div class="flow-step flow-amber">
-      <div class="flow-icon">🚨</div>
-      <div class="flow-label">Incident Created</div>
-      <div class="flow-detail">EmergencyIncident + EscalationEvent logged. Staff console alerted immediately.</div>
-    </div>
-    <div class="flow-arrow flow-arrow-red">→</div>
-    <div class="flow-step flow-green">
-      <div class="flow-icon">👤</div>
-      <div class="flow-label">Staff Responds</div>
-      <div class="flow-detail">Staff console shows incident. Translation-assisted rapid reply. Human in the loop.</div>
-    </div>
-  </div>
-
-  <div class="emergency-phrases-grid">
-    <h3>10 Pre-Approved Emergency Phrases</h3>
-    <div class="phrase-tags">
-      <span class="phrase-tag">🏥 Medical Emergency</span>
-      <span class="phrase-tag">🔥 Fire</span>
-      <span class="phrase-tag">👮 Police/Security</span>
-      <span class="phrase-tag">👶 Lost Child</span>
-      <span class="phrase-tag">🚑 Ambulance</span>
-      <span class="phrase-tag">⚡ Evacuation</span>
-      <span class="phrase-tag">🆘 General Help</span>
-      <span class="phrase-tag">💊 Pharmacy/First Aid</span>
-      <span class="phrase-tag">🚻 Accessibility</span>
-      <span class="phrase-tag">🔒 Shelter in Place</span>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ SPONSOR INJECTION PIPELINE ═══ -->
-<section class="section" id="sponsor-flow">
-  <div class="section-header">
-    <span class="section-eyebrow">Flow 4</span>
-    <h2>Sponsor Injection Pipeline</h2>
-    <p class="section-desc">Revenue doesn't interrupt the experience — it enhances it. Sponsors are matched by language, culture, intent, and location, then injected transparently.</p>
-  </div>
-
-  <div class="flow-pipeline">
-    <div class="flow-step flow-blue">
-      <div class="flow-icon">🎯</div>
-      <div class="flow-label">Intent Signal</div>
-      <div class="flow-detail">Fan intent: food_search, transport, hospitality, nightlife, shopping...</div>
-    </div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step flow-amber">
-      <div class="flow-icon">🏷️</div>
-      <div class="flow-label">Campaign Match</div>
-      <div class="flow-detail">Active SponsorCampaigns filtered by language, locale, intent category, and cultural profile.</div>
-    </div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step flow-fuchsia">
-      <div class="flow-icon">🏅</div>
-      <div class="flow-label">Tier Selection</div>
-      <div class="flow-detail">Smart Placement (passive), Cultural Concierge (contextual), or Reward Engine (interactive).</div>
-    </div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step flow-green">
-      <div class="flow-icon">📊</div>
-      <div class="flow-label">Attribution</div>
-      <div class="flow-detail">Impression, click, conversion tracked per campaign. Revenue attributed to language + intent.</div>
-    </div>
-  </div>
-
-  <div class="tier-grid">
-    <div class="glass-card tier-card">
-      <div class="tier-badge tier-1">Tier 1</div>
-      <h4>Smart Placement</h4>
-      <p>Passive sponsor placements in concierge responses, map cards, and search results. Lowest touch, broadest reach.</p>
-    </div>
-    <div class="glass-card tier-card">
-      <div class="tier-badge tier-2">Tier 2</div>
-      <h4>Cultural Concierge</h4>
-      <p>Contextual sponsor recommendations matched to team cultural profiles. Restaurant partnerships, cultural venues, language-specific offers.</p>
-    </div>
-    <div class="glass-card tier-card">
-      <div class="tier-badge tier-3">Tier 3</div>
-      <h4>Reward Engine</h4>
-      <p>Interactive challenges, QR scavenger hunts, match-day passport stamps. Highest engagement, premium pricing.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ AGENTIC RAG DETAIL ═══ -->
-<section class="section section-dark" id="rag">
-  <div class="section-header">
-    <span class="section-eyebrow">Intelligence Layer</span>
-    <h2>15 MCP Tools &amp; RAG Ranking</h2>
-    <p class="section-desc">Every concierge response is assembled from typed tool calls, vector-ranked sources, and a safety-first scoring pipeline.</p>
-  </div>
-
-  <div class="mcp-layout">
-    <div class="mcp-tools-panel glass-panel">
-      <h3>MCP Tool Registry</h3>
-      <div class="tool-list">
-        <div class="tool-item"><span class="tool-dot amber"></span>matchScheduleLookup</div>
-        <div class="tool-item"><span class="tool-dot amber"></span>teamProfileLookup</div>
-        <div class="tool-item"><span class="tool-dot amber"></span>sponsorRightsLookup</div>
-        <div class="tool-item"><span class="tool-dot blue"></span>venuePoiLookup</div>
-        <div class="tool-item"><span class="tool-dot blue"></span>cityPoiLookup</div>
-        <div class="tool-item"><span class="tool-dot blue"></span>hospitalityLookup</div>
-        <div class="tool-item"><span class="tool-dot blue"></span>restaurantAndReservationLookup</div>
-        <div class="tool-item"><span class="tool-dot cyan"></span>airportTransitLookup</div>
-        <div class="tool-item"><span class="tool-dot cyan"></span>fanFestivalLookup</div>
-        <div class="tool-item"><span class="tool-dot red"></span>emergencyPhraseLookup</div>
-        <div class="tool-item"><span class="tool-dot green"></span>multilingualIntentClassifier</div>
-        <div class="tool-item"><span class="tool-dot green"></span>culturalRecommendationEngine</div>
-        <div class="tool-item"><span class="tool-dot fuchsia"></span>sponsorInjectionEngine</div>
-        <div class="tool-item"><span class="tool-dot fuchsia"></span>rewardsAndPassportLookup</div>
-        <div class="tool-item"><span class="tool-dot fuchsia"></span>revenueAnalyticsLookup</div>
-      </div>
-    </div>
-
-    <div class="mcp-ranking-panel glass-panel">
-      <h3>RAG Ranking Factors</h3>
-      <div class="ranking-bars">
-        <div class="ranking-bar"><span class="bar-label">Semantic Relevance</span><div class="bar-track"><div class="bar-fill" style="width: 85%;"></div></div><span class="bar-weight">0.25</span></div>
-        <div class="ranking-bar"><span class="bar-label">Event Relevance</span><div class="bar-track"><div class="bar-fill" style="width: 55%;"></div></div><span class="bar-weight">0.15</span></div>
-        <div class="ranking-bar"><span class="bar-label">Match-Day Relevance</span><div class="bar-track"><div class="bar-fill" style="width: 55%;"></div></div><span class="bar-weight">0.15</span></div>
-        <div class="ranking-bar"><span class="bar-label">Venue Proximity</span><div class="bar-track"><div class="bar-fill" style="width: 40%;"></div></div><span class="bar-weight">0.10</span></div>
-        <div class="ranking-bar"><span class="bar-label">Language Fit</span><div class="bar-track"><div class="bar-fill" style="width: 40%;"></div></div><span class="bar-weight">0.10</span></div>
-        <div class="ranking-bar"><span class="bar-label">Team Relevance</span><div class="bar-track"><div class="bar-fill" style="width: 40%;"></div></div><span class="bar-weight">0.10</span></div>
-        <div class="ranking-bar"><span class="bar-label">Sponsor Eligibility</span><div class="bar-track"><div class="bar-fill" style="width: 40%;"></div></div><span class="bar-weight">0.10</span></div>
-        <div class="ranking-bar"><span class="bar-label">Safety Priority</span><div class="bar-track"><div class="bar-fill safety" style="width: 20%;"></div></div><span class="bar-weight">∞ override</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ DATA FLOW SUMMARY ═══ -->
-<section class="section" id="summary">
-  <div class="section-header">
-    <span class="section-eyebrow">Summary</span>
-    <h2>Every Layer. One System.</h2>
-  </div>
-
-  <div class="summary-grid">
-    <div class="glass-card summary-card">
-      <span class="summary-num">4</span>
-      <h4>Entry Points</h4>
-      <p>Guest Web, Admin, Staff Console, Revenue Console — plus SMS and Voice via Telnyx</p>
-    </div>
-    <div class="glass-card summary-card">
-      <span class="summary-num">1</span>
-      <h4>API Gateway</h4>
-      <p>NestJS with 12 domain modules, Swagger, rate limiting, audit logging</p>
-    </div>
-    <div class="glass-card summary-card">
-      <span class="summary-num">15</span>
-      <h4>MCP Tools</h4>
-      <p>Typed tools for every data domain: matches, venues, culture, sponsors, safety</p>
-    </div>
-    <div class="glass-card summary-card">
-      <span class="summary-num">39</span>
-      <h4>Data Models</h4>
-      <p>Prisma 6 schema covering users, events, sponsors, telecom, rewards, and emergencies</p>
-    </div>
-    <div class="glass-card summary-card">
-      <span class="summary-num">10</span>
-      <h4>Languages</h4>
-      <p>Full translation coverage with RTL support, fallback merging, and approved phrases</p>
-    </div>
-    <div class="glass-card summary-card">
-      <span class="summary-num">∞</span>
-      <h4>Safety Override</h4>
-      <p>Emergency phrases bypass all AI — deterministic, pre-approved, no hallucination</p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ FOOTER ═══ -->
-<footer class="site-footer">
-  <div class="footer-content">
-    <div class="footer-brand"><span class="nav-logo">◆</span><span>Tap FIFA by Wilkins Media</span></div>
-    <p class="footer-text">Built by <strong>FTH Trading × Wilkins Media Group</strong> for Atlanta 2026.</p>
-    <a class="btn btn-outline btn-sm" href="https://github.com/FTHTrading/FIFA---Wilkins" target="_blank" rel="noreferrer">GitHub Repository →</a>
-  </div>
-</footer>
-
-<script>
-// Fade-in observer for subpages
-const style = document.createElement('style');
-style.textContent = '.fade-in{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}.fade-in.visible{opacity:1;transform:translateY(0)}';
-document.head.appendChild(style);
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-}, { threshold: 0.1 });
-document.querySelectorAll('.section').forEach(s => { s.classList.add('fade-in'); observer.observe(s); });
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => { const t = document.querySelector(a.getAttribute('href')); if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); } });
-});
-</script>
+<footer class="site-footer"><div class="footer-content"><div class="footer-brand"><span class="nav-logo">◆</span><span>Tap FIFA by Wilkins Media</span></div><p class="footer-text">Built by <strong>FTH Trading × Wilkins Media Group</strong>.</p></div></footer>
 </body>
 </html>
