@@ -1,6 +1,7 @@
-import { Controller, Get, Post, Param, Query, Body, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Put, Param, Query, Body, HttpCode, HttpStatus } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiQuery } from '@nestjs/swagger';
 import { CampaignsService } from './campaigns.service';
+import { CreateCampaignDto } from './dto/create-campaign.dto';
 
 @ApiTags('campaigns')
 @Controller('campaigns')
@@ -20,6 +21,17 @@ export class CampaignsController {
     @Query('lang') language?: string,
   ) {
     return this.campaignsService.getActiveCampaigns(eventId, placement, language);
+  }
+
+  @Post()
+  @HttpCode(HttpStatus.CREATED)
+  @ApiOperation({ summary: 'Create a new sponsor campaign (admin)' })
+  createCampaign(@Body() body: CreateCampaignDto) {
+    return this.campaignsService.createCampaign({
+      ...body,
+      startsAt: body.startsAt ? new Date(body.startsAt) : undefined,
+      endsAt: body.endsAt ? new Date(body.endsAt) : undefined,
+    });
   }
 
   @Post(':id/impression')

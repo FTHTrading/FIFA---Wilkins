@@ -1,10 +1,21 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Target, Globe, MapPin, Zap, BarChart3, TrendingUp,
-  DollarSign, Filter, Users, Trophy, Gift, SlidersHorizontal, Clock3,
+  DollarSign, Filter, Users, Trophy, Gift, SlidersHorizontal, Clock3, Check, Loader2,
 } from 'lucide-react';
+
+const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000/api/v1';
+
+async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
+  const res = await fetch(`${API_BASE}${path}`, {
+    ...init,
+    headers: { 'Content-Type': 'application/json', ...init?.headers },
+  });
+  if (!res.ok) throw new Error(`API ${res.status}: ${res.statusText}`);
+  return res.json() as Promise<T>;
+}
 
 // ─── Mock Data (mirrors seed-atlanta.ts) ────────────────────────────────
 
@@ -101,6 +112,50 @@ export default function CampaignsPage() {
   const [tierFilter, setTierFilter] = useState<SponsorTier | 'ALL'>('ALL');
   const [showComposer, setShowComposer] = useState(false);
   const [draft, setDraft] = useState<CampaignDraft>(DEFAULT_DRAFT);
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveResult, setSaveResult] = useState<'saved' | 'error' | null>(null);
+  const [eventCtx, setEventCtx] = useState<{ id: string; organizationId: string } | null>(null);
+
+  useEffect(() => {
+    apiFetch<Array<{ id: string; organizationId: string; slug: string }>>('/events')
+      .then((events) => {
+        const ev = events.find((e) => e.slug === 'atlanta-2026') ?? events[0];
+        if (ev) setEventCtx({ id: ev.id, organizationId: ev.organizationId });
+      })
+      .catch(() => {});
+  }, []);
+
+  const handleSaveDraft = async () => {
+    if (!eventCtx) return;
+    setIsSaving(true);
+    setSaveResult(null);
+    try {
+      await apiFetch('/campaigns', {
+        method: 'POST',
+        body: JSON.stringify({
+          organizationId: eventCtx.organizationId,
+          eventId: eventCtx.id,
+          name: draft.name,
+          sponsorName: draft.sponsorName,
+          placement: draft.placement,
+          targetLanguages: draft.targetLanguages,
+          budget: draft.budget,
+          sponsorTier: draft.tier,
+          targetIntents: [draft.targetIntent],
+          geoRadiusM: draft.geoRadiusM,
+          timeWindow: draft.timeWindow,
+          rewardObject: draft.rewardObject,
+        }),
+      });
+      setSaveResult('saved');
+      setDraft(DEFAULT_DRAFT);
+      setTimeout(() => setSaveResult(null), 3000);
+    } catch {
+      setSaveResult('error');
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   const filtered = tierFilter === 'ALL' ? CAMPAIGNS : CAMPAIGNS.filter((c) => c.tier === tierFilter);
 
@@ -317,12 +372,24 @@ export default function CampaignsPage() {
           </div>
 
           <div className="mt-4 flex items-center gap-2">
-            <button className="rounded-lg bg-fuchsia-600 px-4 py-2 text-sm font-medium text-white hover:bg-fuchsia-500">
-              Save Draft
+            <button
+              type="button"
+              onClick={handleSaveDraft}
+              disabled={isSaving || !eventCtx}
+              className="inline-flex items-center gap-2 rounded-lg bg-fuchsia-600 px-4 py-2 text-sm font-medium text-white hover:bg-fuchsia-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isSaving ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : saveResult === 'saved' ? <Check className="h-3.5 w-3.5" /> : null}
+              {isSaving ? 'Saving…' : saveResult === 'saved' ? 'Saved!' : 'Save Draft'}
             </button>
-            <button className="rounded-lg border border-slate-700 px-4 py-2 text-sm font-medium text-slate-300 hover:bg-slate-800">
+            <button type="button" className="rounded-lg border border-slate-700 px-4 py-2 text-sm font-medium text-slate-300 hover:bg-slate-800">
               Preview Placement
             </button>
+            {saveResult === 'error' && (
+              <p className="text-xs text-red-400">Failed to save — check API connection</p>
+            )}
+            {!eventCtx && (
+              <p className="text-xs text-slate-500">Connect API to enable save</p>
+            )}
           </div>
         </section>
       )}

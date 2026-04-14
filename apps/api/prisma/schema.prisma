@@ -115,8 +115,10 @@ model EventDay {
   event     Event    @relation(fields: [eventId], references: [id])
   date      DateTime @db.Date
   label     String?  // "Day 1", "Opening Ceremony", etc.
-  startsAt  DateTime
-  endsAt    DateTime
+  matchInfo String?  // e.g. "USA vs Colombia, 5:00 PM ET"
+  gatesOpen String?  // e.g. "3:00 PM ET"
+  startsAt  DateTime?
+  endsAt    DateTime?
   createdAt DateTime @default(now())
 
   @@index([eventId])
@@ -157,6 +159,10 @@ enum POICategory {
   TRANSPORT
   SPONSOR_ZONE
   STAGE
+  PRAYER_ROOM
+  FAMILY_ZONE
+  ACCESSIBILITY
+  UTILITIES
   OTHER
 }
 
@@ -364,6 +370,11 @@ model SponsorCampaign {
   ctaUrl         String?
   placement      String         // "home_banner" | "map_overlay" | "concierge_card" | "language_select"
   targetLanguages String[]      @default([])
+  sponsorTier    String         @default("SMART_PLACEMENT") // "SMART_PLACEMENT" | "CULTURAL_CONCIERGE" | "REWARD_ENGINE"
+  targetIntents  String[]       @default([])
+  geoRadiusM     Int?
+  timeWindow     String?        // "ALL_DAY" | "PRE_MATCH" | "HALFTIME" | "POST_MATCH"
+  rewardObject   String?        // "NONE" | "COUPON" | "BADGE" | "PASSPORT_STAMP"
   status         CampaignStatus @default(DRAFT)
   impressions    Int            @default(0)
   clicks         Int            @default(0)

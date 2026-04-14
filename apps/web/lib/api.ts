@@ -148,3 +148,101 @@ export function recordImpression(campaignId: string): Promise<void> {
 export function recordClick(campaignId: string): Promise<void> {
   return apiFetch(`/campaigns/${encodeURIComponent(campaignId)}/click`, { method: 'POST' });
 }
+
+// ─── Rewards & Badges ─────────────────────────────────────────────────────────
+
+export interface RewardBadge {
+  id: string;
+  slug: string;
+  name: string;
+  description: string;
+  icon: string;
+  tier: 'BRONZE' | 'SILVER' | 'GOLD' | 'PLATINUM';
+  pointsValue: number;
+  requirement: string;
+  totalClaimed: number;
+  maxClaims: number | null;
+  isActive: boolean;
+  expiresAt?: string;
+}
+
+export interface ApiChallenge {
+  id: string;
+  name: string;
+  description: string;
+  type: string;
+  rewardPoints: number;
+  couponCode?: string;
+  couponValue?: string;
+  status: string;
+}
+
+export interface SessionRewards {
+  sessionId: string;
+  eventId: string;
+  totalPoints: number;
+  badges: Array<{ id: string; name: string; icon: string; tier: string }>;
+}
+
+export interface ClaimResult {
+  claimed: boolean;
+  reason?: string;
+  claim?: Record<string, unknown>;
+  badge?: RewardBadge;
+}
+
+export interface CouponResult {
+  redeemed: boolean;
+  reason?: string;
+  redemption?: Record<string, unknown>;
+}
+
+export function fetchBadges(eventId: string): Promise<RewardBadge[]> {
+  return apiFetch<RewardBadge[]>(`/campaigns/badges?eventId=${encodeURIComponent(eventId)}`);
+}
+
+export function claimBadge(badgeId: string, sessionId: string, eventId: string): Promise<ClaimResult> {
+  return apiFetch<ClaimResult>(`/campaigns/badges/${encodeURIComponent(badgeId)}/claim`, {
+    method: 'POST',
+    body: JSON.stringify({ sessionId, eventId }),
+  });
+}
+
+export function fetchSessionRewards(sessionId: string, eventId: string): Promise<SessionRewards> {
+  return apiFetch<SessionRewards>(
+    `/campaigns/rewards/session?sessionId=${encodeURIComponent(sessionId)}&eventId=${encodeURIComponent(eventId)}`,
+  );
+}
+
+export function fetchChallenges(eventId: string): Promise<ApiChallenge[]> {
+  return apiFetch<ApiChallenge[]>(`/campaigns/challenges?eventId=${encodeURIComponent(eventId)}`);
+}
+
+export function redeemCoupon(body: {
+  sessionId: string;
+  eventId: string;
+  couponCode: string;
+  campaignId?: string;
+  challengeId?: string;
+}): Promise<CouponResult> {
+  return apiFetch<CouponResult>('/campaigns/coupons/redeem', {
+    method: 'POST',
+    body: JSON.stringify(body),
+  });
+}
+
+// ─── Alerts ───────────────────────────────────────────────────────────────────
+
+export interface VenueAlert {
+  id: string;
+  severity: 'critical' | 'warning' | 'info';
+  title: string;
+  body: string;
+  postedAt: string;
+  source?: string;
+  eventId: string;
+}
+
+export function fetchAlerts(eventSlug: string): Promise<VenueAlert[]> {
+  return apiFetch<VenueAlert[]>(`/events/${encodeURIComponent(eventSlug)}/alerts`);
+}

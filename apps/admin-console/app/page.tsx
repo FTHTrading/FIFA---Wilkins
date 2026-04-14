@@ -7,6 +7,7 @@ const sections = [
   { href: '/emergency', label: 'Emergency', description: 'Emergency phrase management', color: 'bg-red-600' },
   { href: '/campaigns', label: 'Campaigns', description: 'Sponsor campaigns and targeting', color: 'bg-fuchsia-600' },
   { href: '/analytics', label: 'Analytics', description: 'Reports and performance metrics', color: 'bg-violet-600' },
+  { href: '/demo', label: 'Demo Mode', description: '6 multilingual persona simulations for sales demos', color: 'bg-emerald-600' },
 ];
 
 export default function AdminConsolePage() {

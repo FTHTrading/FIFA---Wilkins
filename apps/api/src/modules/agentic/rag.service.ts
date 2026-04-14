@@ -11,6 +11,8 @@ export interface RagDocument {
   tags: string[];
   freshnessScore: number;
   similarityScore?: number;
+  /** Combined weighted rank: 0.65×similarity + 0.25×freshness + 0.1×cultural. */
+  finalScore?: number;
 }
 
 interface RawRagRow {
@@ -28,6 +30,8 @@ export class RagService {
   private readonly logger = new Logger(RagService.name);
   private readonly provider = process.env.RAG_PROVIDER ?? 'pgvector';
   private readonly topK = 6;
+  /** Minimum cosine similarity score — results below this are discarded. */
+  private readonly minSimilarity = parseFloat(process.env.RAG_MIN_SIMILARITY ?? '0.35');
 
   constructor(
     private prisma: PrismaService,
@@ -100,15 +104,26 @@ export class RagService {
       LIMIT ${limit}
     `;
 
-    return rows.map((row) => ({
-      id: row.id,
-      source: row.source,
-      language: row.language,
-      content: row.content,
-      tags: row.tags ?? [],
-      similarityScore: row.similarity ?? 0,
-      freshnessScore: this.computeFreshnessScore(row.updatedat),
-    }));
+    return rows
+      .filter((row) => (row.similarity ?? 0) >= this.minSimilarity)
+      .map((row) => {
+        const similarityScore = row.similarity ?? 0;
+        const freshnessScore = this.computeFreshnessScore(row.updatedat);
+        // Cultural boost: prefer docs in the guest's exact language
+        const langBoost = row.language === params.language ? 0.05 : 0;
+        const finalScore = 0.65 * similarityScore + 0.25 * freshnessScore + 0.1 * (1 + langBoost);
+        return {
+          id: row.id,
+          source: row.source,
+          language: row.language,
+          content: row.content,
+          tags: row.tags ?? [],
+          similarityScore,
+          freshnessScore,
+          finalScore,
+        };
+      })
+      .sort((a, b) => (b.finalScore ?? 0) - (a.finalScore ?? 0));
   }
 
   // ─── Lexical fallback (no embedding / pgvector unavailable) ──────────────
@@ -147,15 +162,17 @@ export class RagService {
         const score = 0.6 * semanticScore + 0.25 * langScore + 0.15 * tagScore;
         return { chunk, score };
       })
+      .filter(({ score }) => score > 0)   // drop zero-hit results
       .sort((a, b) => b.score - a.score)
       .slice(0, limit)
-      .map(({ chunk }) => ({
+      .map(({ chunk, score }) => ({
         id: chunk.id,
         source: chunk.source,
         language: chunk.language,
         content: chunk.content,
         tags: chunk.tags,
         freshnessScore: this.computeFreshnessScore(chunk.updatedAt),
+        finalScore: score,
       }));
   }
 

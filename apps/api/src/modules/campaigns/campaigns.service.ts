@@ -9,6 +9,47 @@ export class CampaignsService {
 
   // ─── Campaigns ─────────────────────────────────────────────────────────────
 
+  async createCampaign(data: {
+    organizationId: string;
+    eventId: string;
+    name: string;
+    sponsorName: string;
+    placement: string;
+    targetLanguages?: string[];
+    budget?: number;
+    sponsorTier?: string;
+    targetIntents?: string[];
+    geoRadiusM?: number;
+    timeWindow?: string;
+    rewardObject?: string;
+    ctaText?: string;
+    ctaUrl?: string;
+    startsAt?: Date;
+    endsAt?: Date;
+  }) {
+    return this.prisma.sponsorCampaign.create({
+      data: {
+        organizationId: data.organizationId,
+        eventId: data.eventId,
+        name: data.name,
+        sponsorName: data.sponsorName,
+        placement: data.placement,
+        targetLanguages: data.targetLanguages ?? [],
+        budget: data.budget,
+        sponsorTier: data.sponsorTier ?? 'SMART_PLACEMENT',
+        targetIntents: data.targetIntents ?? [],
+        geoRadiusM: data.geoRadiusM,
+        timeWindow: data.timeWindow,
+        rewardObject: data.rewardObject,
+        ctaText: data.ctaText,
+        ctaUrl: data.ctaUrl,
+        startsAt: data.startsAt,
+        endsAt: data.endsAt,
+        status: 'DRAFT',
+      },
+    });
+  }
+
   async getActiveCampaigns(eventId: string, placement?: string, language?: string) {
     const now = new Date();
     return this.prisma.sponsorCampaign.findMany({

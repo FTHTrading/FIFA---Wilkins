@@ -91,6 +91,11 @@ export class AgenticService {
       priorityScore: 0.9,
     }));
 
+    const lowConfidence = contextDocs.length === 0;
+    const explanation = lowConfidence
+      ? 'I could not find high-confidence information for this query. Showing nearby results based on location only.'
+      : 'Results routed by intent, geospatial retrieval, cultural ranking, and sponsor monetization layer.';
+
     return {
       intent: parsedIntent,
       toolsUsed,
@@ -100,7 +105,8 @@ export class AgenticService {
       nearbyAmenities: rankedNearby,
       geocoding: online.geocoding,
       sponsorRecommendations,
-      explanation: 'Results routed by intent, geospatial retrieval, cultural ranking, and sponsor monetization layer.',
+      lowConfidence,
+      explanation,
     };
   }
 }

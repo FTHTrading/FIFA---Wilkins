@@ -1,7 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { fetchBadges, fetchSessionRewards, fetchChallenges } from '@/lib/api';
+import type { RewardBadge, ApiChallenge } from '@/lib/api';
 import { ArrowLeft, Trophy, Star, Gift, Zap, Lock, Check, ChevronRight } from 'lucide-react';
 
 // ─── Mock Data (mirrors seed badges + challenges) ───────────────────────
@@ -83,10 +85,60 @@ type Tab = 'passport' | 'challenges' | 'wallet';
 
 export default function RewardsPage() {
   const [tab, setTab] = useState<Tab>('passport');
+  const [badges, setBadges] = useState<Badge[]>(BADGES);
+  const [challenges, setChallenges] = useState<Challenge[]>(CHALLENGES);
+  const [totalPoints, setTotalPoints] = useState(GUEST_POINTS);
 
-  const earnedBadges = BADGES.filter((b) => b.status === 'earned');
-  const inProgressBadges = BADGES.filter((b) => b.status === 'in_progress');
-  const lockedBadges = BADGES.filter((b) => b.status === 'locked');
+  useEffect(() => {
+    const eventId = process.env.NEXT_PUBLIC_EVENT_ID ?? 'atlanta-2026';
+    const sessionId = sessionStorage.getItem('wilkins_session_id') ?? 'demo-arabic-family-01';
+
+    Promise.all([
+      fetchBadges(eventId),
+      fetchSessionRewards(sessionId, eventId),
+    ])
+      .then(([apiBadges, session]: [RewardBadge[], { totalPoints: number; badges: Array<{ id: string }> }]) => {
+        const earnedIds = new Set(session.badges.map((b) => b.id));
+        if (session.totalPoints) setTotalPoints(session.totalPoints);
+        if (apiBadges.length > 0) {
+          setBadges(
+            apiBadges.map((b) => ({
+              slug: b.slug,
+              name: b.name,
+              description: b.description,
+              icon: b.icon,
+              tier: b.tier,
+              pointsValue: b.pointsValue,
+              requirement: b.requirement,
+              status: earnedIds.has(b.id) ? ('earned' as const) : ('locked' as const),
+            })),
+          );
+        }
+      })
+      .catch(() => {});
+
+    fetchChallenges(eventId)
+      .then((apiChallenges: ApiChallenge[]) => {
+        if (apiChallenges.length === 0) return;
+        setChallenges(
+          apiChallenges.map((c) => ({
+            id: c.id,
+            name: c.name,
+            description: c.description,
+            type: c.type,
+            reward: `${c.rewardPoints} pts${c.couponValue ? ` + ${c.couponValue}` : ''}`,
+            progress: 0,
+            total: 1,
+            couponCode: c.couponCode,
+          })),
+        );
+      })
+      .catch(() => {});
+  }, []);
+
+  const earnedBadges = badges.filter((b) => b.status === 'earned');
+  const inProgressBadges = badges.filter((b) => b.status === 'in_progress');
+  const lockedBadges = badges.filter((b) => b.status === 'locked');
 
   return (
     <main className="min-h-screen bg-slate-950 text-white pb-24">
@@ -105,7 +157,7 @@ export default function RewardsPage() {
             <Star className="h-7 w-7 text-white" />
           </div>
           <div className="flex-1">
-            <p className="text-3xl font-bold">{GUEST_POINTS}</p>
+            <p className="text-3xl font-bold">{totalPoints}</p>
             <p className="text-xs text-slate-400">Total Points Earned</p>
           </div>
           <div className="text-right space-y-1">
@@ -247,7 +299,7 @@ export default function RewardsPage() {
         {/* ── Challenges Tab ── */}
         {tab === 'challenges' && (
           <div className="space-y-3">
-            {CHALLENGES.map((ch) => {
+            {challenges.map((ch) => {
               const pct = Math.round((ch.progress / ch.total) * 100);
               const isComplete = ch.progress >= ch.total;
               return (
@@ -296,7 +348,7 @@ export default function RewardsPage() {
             {/* Points Balance */}
             <div className="rounded-xl border border-amber-500/30 bg-amber-900/10 p-5 text-center">
               <p className="text-xs text-amber-400 uppercase tracking-wide mb-1">Points Balance</p>
-              <p className="text-4xl font-bold text-amber-400">{GUEST_POINTS}</p>
+              <p className="text-4xl font-bold text-amber-400">{totalPoints}</p>
               <p className="text-xs text-slate-400 mt-1">Earn more by completing challenges and scanning QR codes</p>
             </div>
 

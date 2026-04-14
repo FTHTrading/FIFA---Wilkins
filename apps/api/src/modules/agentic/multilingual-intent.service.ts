@@ -690,8 +690,8 @@ export class MultilingualIntentService {
     q: string,
     languageCode: string,
   ): Omit<MultilingualParsedIntent, 'detectedLanguage' | 'normalizedQuery'> | null {
-    const entries = INTENT_DB[languageCode] ?? INTENT_DB['en'];
-    let best: (typeof entries)[0] | null = null;
+    const entries: IntentEntry[] = INTENT_DB[languageCode] ?? INTENT_DB['en'] ?? [];
+    let best: IntentEntry | null = null;
     let bestScore = 0;
     let matchedSignals: string[] = [];
 
