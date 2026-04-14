@@ -102,6 +102,35 @@
 
 ---
 
+## Telecom APIs (Wilkins Media FIFA AI Connection System)
+
+Primary number: `+1-888-827-3432`
+
+Core CTA language:
+
+- Text FIFA
+- Tap FIFA
+- Call FIFA
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `POST` | `/telecom/webhooks/telnyx/sms` | Inbound SMS webhook (Telnyx) |
+| `POST` | `/telecom/webhooks/telnyx/status` | Delivery status webhook |
+| `POST` | `/telecom/webhooks/telnyx/voice` | Voice webhook scaffold + SMS follow-up path |
+| `POST` | `/telecom/send` | Manual outbound SMS send (ops/testing) |
+| `GET` | `/telecom/summary` | Telecom analytics summary (inbound, language, intent, emergency, sponsor, rewards) |
+| `GET` | `/telecom/health` | Provider and number health status |
+| `GET` | `/telecom/cta` | Localized public CTA copy |
+
+Telecom flow rules:
+
+- Emergency always outranks sponsor logic
+- Emergency messages use deterministic phrase handling
+- Sponsor injection is suppressed during emergency/medical routing
+- Rewards and sponsor offers are tracked as telecom-originated analytics events
+
+---
+
 ## Authentication
 
 - JWT bearer tokens for staff and admin routes

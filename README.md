@@ -254,11 +254,61 @@ Key route groups:
 - campaigns: `/api/v1/campaigns/*`
 - admin: `/api/v1/admin/*`
 
+## Wilkins Media FIFA AI Connection System
+
+Primary telecom entry number:
+
+- `+1-888-827-3432`
+
+Public CTA language:
+
+- Text FIFA
+- Tap FIFA
+- Call FIFA
+
+User-facing CTA copy:
+
+```text
+Need help, directions, food, rewards, or emergency support?
+
+Text FIFA: +1-888-827-3432
+```
+
+Activation CTA copy:
+
+```text
+Tap FIFA to unlock offers and rewards.
+Text FIFA for live help in your language.
+```
+
+Telecom integration summary:
+
+- Telnyx inbound SMS webhooks route into `/api/v1/telecom/webhooks/telnyx/sms`
+- Messages are language-detected and intent-classified through the existing multilingual engine
+- Emergency intent is routed deterministically and sponsor logic is suppressed
+- Concierge/reward/sponsor flows orchestrate existing `agentic`, `campaigns`, and `analytics` services
+- Telecom analytics are first-class via `/api/v1/telecom/summary`
+
+Required telecom env vars:
+
+- `TELECOM_PROVIDER=telnyx`
+- `TELNYX_API_KEY`
+- `TELNYX_PHONE_NUMBER=+18888273432`
+- `TELNYX_MESSAGING_PROFILE_ID` (recommended)
+- `TELECOM_PUBLIC_BASE_URL` (for links in SMS)
+
+Suggested Telnyx webhook targets:
+
+- Inbound SMS: `https://<api-host>/api/v1/telecom/webhooks/telnyx/sms`
+- Delivery updates: `https://<api-host>/api/v1/telecom/webhooks/telnyx/status`
+- Voice scaffold: `https://<api-host>/api/v1/telecom/webhooks/telnyx/voice`
+
 ## Operations Docs
 
 - [docs/product/overview.md](docs/product/overview.md)
 - [docs/product/demo-script-5-minute.md](docs/product/demo-script-5-minute.md)
 - [docs/operations/operations-guide.md](docs/operations/operations-guide.md)
+- [docs/operations/telecom-setup.md](docs/operations/telecom-setup.md)
 - [docs/api/api-reference.md](docs/api/api-reference.md)
 - [docs/runbooks/incident-response.md](docs/runbooks/incident-response.md)
 

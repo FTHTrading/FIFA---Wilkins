@@ -15,6 +15,7 @@ import { AnalyticsModule } from './modules/analytics/analytics.module';
 import { HealthModule } from './modules/health/health.module';
 import { MapsModule } from './modules/maps/maps.module';
 import { AgenticModule } from './modules/agentic/agentic.module';
+import { TelecomModule } from './modules/telecom/telecom.module';
 import { appConfig } from './common/config/app.config';
 
 @Module({
@@ -59,6 +60,7 @@ import { appConfig } from './common/config/app.config';
     AnalyticsModule,
     MapsModule,
     AgenticModule,
+    TelecomModule,
   ],
 })
 export class AppModule {}

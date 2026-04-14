@@ -10,6 +10,7 @@ const REVENUE_PER_SESSION = (TOTAL_REVENUE / TOTAL_SESSIONS).toFixed(2);
 const AVG_CTR = ((TOTAL_CLICKS / TOTAL_IMPRESSIONS) * 100).toFixed(1);
 const ACTIVE_LANGUAGES = 10;
 const ACTIVE_CAMPAIGNS = 12;
+const TELECOM_INBOUND_SMS = 3240;
 
 const TOP_CAMPAIGNS = [
   { name: 'Coca-Cola Fan Zone', revenue: 42_300, tier: 'Platinum', roas: 8.2, color: 'text-amber-300' },
@@ -49,14 +50,23 @@ export default function DashboardPage() {
           <h1 className="text-2xl font-bold font-display text-white">Revenue Dashboard</h1>
           <p className="text-slate-400 text-sm">Executive summary — monetization, reach & engagement</p>
         </div>
-        <Link
-          href="/analytics"
-          className="flex items-center gap-1.5 rounded-lg bg-fuchsia-500/10 border border-fuchsia-500/30 px-4 py-2 text-sm font-medium text-fuchsia-300 transition-all hover:bg-fuchsia-500/20 hover:border-fuchsia-400/50"
-        >
-          <BarChart3 className="h-4 w-4" />
-          Full Analytics
-          <ArrowUpRight className="h-3.5 w-3.5" />
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link
+            href="/telecom"
+            className="flex items-center gap-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 px-4 py-2 text-sm font-medium text-emerald-300 transition-all hover:bg-emerald-500/20 hover:border-emerald-400/50"
+          >
+            Text FIFA
+            <ArrowUpRight className="h-3.5 w-3.5" />
+          </Link>
+          <Link
+            href="/analytics"
+            className="flex items-center gap-1.5 rounded-lg bg-fuchsia-500/10 border border-fuchsia-500/30 px-4 py-2 text-sm font-medium text-fuchsia-300 transition-all hover:bg-fuchsia-500/20 hover:border-fuchsia-400/50"
+          >
+            <BarChart3 className="h-4 w-4" />
+            Full Analytics
+            <ArrowUpRight className="h-3.5 w-3.5" />
+          </Link>
+        </div>
       </header>
 
       {/* Hero revenue card */}
@@ -85,7 +95,7 @@ export default function DashboardPage() {
           { label: 'Total Sessions', value: TOTAL_SESSIONS.toLocaleString(), icon: Users, color: 'text-blue-400', bgColor: 'bg-blue-500/10' },
           { label: 'Impressions', value: TOTAL_IMPRESSIONS.toLocaleString(), icon: Eye, color: 'text-emerald-400', bgColor: 'bg-emerald-500/10' },
           { label: 'Avg CTR', value: `${AVG_CTR}%`, icon: MousePointer, color: 'text-amber-400', bgColor: 'bg-amber-500/10' },
-          { label: 'AI Queries', value: '8,437', icon: Sparkles, color: 'text-fuchsia-400', bgColor: 'bg-fuchsia-500/10' },
+          { label: 'Text FIFA Inbound', value: TELECOM_INBOUND_SMS.toLocaleString(), icon: Sparkles, color: 'text-fuchsia-400', bgColor: 'bg-fuchsia-500/10' },
         ].map((stat) => (
           <div key={stat.label} className="rounded-xl border border-slate-800 bg-slate-900 p-5 transition-all hover:border-slate-700">
             <div className="flex items-center gap-2 mb-2">

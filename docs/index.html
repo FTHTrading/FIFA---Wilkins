@@ -3,131 +3,464 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FIFA x Wilkins Demo</title>
-  <meta name="description" content="FTHTrading FIFA x Wilkins GitHub Pages demo for the Atlanta 2026 fan operations platform." />
+  <title>FIFA x Wilkins — Atlanta World Cup Command Surface</title>
+  <meta name="description" content="The definitive Atlanta FIFA World Cup 2026 guest and sponsor operating system. Live match intelligence, multilingual wayfinding, cultural concierge, and sponsor revenue layer for Mercedes-Benz Stadium." />
+  <meta property="og:title" content="FIFA x Wilkins — Atlanta World Cup 2026" />
+  <meta property="og:description" content="Multilingual fan OS, sponsor monetization engine, and event intelligence for 8 World Cup matches at Mercedes-Benz Stadium." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./assets/styles.css" />
 </head>
 <body>
-  <div class="site-shell">
-    <aside class="toc-panel">
-      <p class="eyebrow">Repository Demo</p>
-      <h1 id="brand-title">FIFA x Wilkins</h1>
-      <p id="brand-tagline" class="muted"></p>
-      <nav>
-        <a href="#overview">Overview</a>
-        <a href="#surfaces">Surfaces</a>
-        <a href="#infrastructure">Infrastructure</a>
-        <a href="#journey">Fan Journey</a>
-        <a href="#flowcharts">Flowcharts</a>
-        <a href="#activation">Activation</a>
-      </nav>
-      <a id="repo-link" class="repo-link" href="#" target="_blank" rel="noreferrer">Open GitHub Repository</a>
-    </aside>
 
-    <main class="content">
-      <section id="overview" class="hero panel glow-panel">
-        <div>
-          <p class="eyebrow" id="brand-program">FTHTrading</p>
-          <h2 id="hero-title"></h2>
-          <p id="hero-subtitle" class="hero-copy"></p>
-          <div class="cta-row">
-            <a class="button primary" href="../README.md">Read the README</a>
-            <a class="button secondary" href="#activation">Launch the Stack</a>
-          </div>
-        </div>
-        <div class="hero-orb"></div>
-      </section>
+<!-- ═══ HERO — LIVE ATLANTA CONTROL SURFACE ═══ -->
+<header class="hero" id="hero">
+  <div class="hero-bg">
+    <div class="hero-grid-lines"></div>
+    <div class="hero-orb orb-1"></div>
+    <div class="hero-orb orb-2"></div>
+    <div class="hero-orb orb-3"></div>
+  </div>
+  <nav class="top-nav">
+    <div class="nav-brand">
+      <span class="nav-logo">◆</span>
+      <span class="nav-title">FIFA × Wilkins</span>
+    </div>
+    <div class="nav-links">
+      <a href="#matches">Matches</a>
+      <a href="#culture">Culture</a>
+      <a href="#sponsors">Sponsors</a>
+      <a href="#map">Map</a>
+      <a href="#surfaces">Surfaces</a>
+      <a href="#built">System</a>
+      <a href="#activation">Activate</a>
+    </div>
+    <a class="nav-cta" href="https://github.com/FTHTrading/FIFA---Wilkins" target="_blank" rel="noreferrer">Open Repo</a>
+  </nav>
 
-      <section class="metrics-grid" id="metrics-grid"></section>
-
-      <section id="surfaces" class="panel">
-        <div class="section-head">
-          <p class="eyebrow">Color-Coded Surfaces</p>
-          <h3>One platform. Four buyer-facing entry points.</h3>
-        </div>
-        <div id="surfaces-grid" class="card-grid"></div>
-      </section>
-
-      <section id="infrastructure" class="panel">
-        <div class="section-head">
-          <p class="eyebrow">Infrastructure</p>
-          <h3>Repo-ready system layers</h3>
-        </div>
-        <div class="infra-grid">
-          <article class="infra-card blue">
-            <h4>Frontend</h4>
-            <p>Next.js 15 guest, staff, admin, and analytics surfaces.</p>
-          </article>
-          <article class="infra-card amber">
-            <h4>API + Agentic</h4>
-            <p>NestJS, Fastify, multilingual intent parsing, RAG, and sponsor injection.</p>
-          </article>
-          <article class="infra-card slate">
-            <h4>Data</h4>
-            <p>PostgreSQL 16, Prisma 6, pgvector, Redis 7, BullMQ.</p>
-          </article>
-          <article class="infra-card red">
-            <h4>Safety</h4>
-            <p>Deterministic emergency translations and operator escalation routes.</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="journey" class="panel">
-        <div class="section-head">
-          <p class="eyebrow">Fan Journey</p>
-          <h3>How the demo lands in a sales meeting</h3>
-        </div>
-        <ol id="journey-list" class="journey-list"></ol>
-      </section>
-
-      <section id="flowcharts" class="panel">
-        <div class="section-head">
-          <p class="eyebrow">Flowcharts</p>
-          <h3>Rendered directly in GitHub Pages</h3>
-        </div>
-        <div class="mermaid">
-flowchart LR
-    Fan[Fan Opens Mobile PWA] --> Lang[Language Selected]
-    Lang --> Concierge[Agentic Concierge]
-    Concierge --> Ranker[Cultural Ranking + RAG]
-    Ranker --> Results[Map, Rewards, Sponsors]
-    Concierge --> Safety[Emergency Mode]
-    Safety --> Staff[Staff Escalation]
-        </div>
-        <div class="mermaid second-chart">
-flowchart TB
-    Web[Guest Web] --> API[NestJS API]
-    Staff[Staff Console] --> API
-    Admin[Admin Control] --> API
-    Revenue[Revenue Console] --> API
-    API --> PG[(PostgreSQL)]
-    API --> Redis[(Redis)]
-    API --> Azure[Translation / OCR / Speech]
-    API --> Maps[Mapbox / Overpass]
-        </div>
-      </section>
-
-      <section id="activation" class="panel activation-panel">
-        <div class="section-head">
-          <p class="eyebrow">Activation</p>
-          <h3>One command to prep the Atlanta FIFA demo</h3>
-        </div>
-        <pre><code>pnpm activate:fth</code></pre>
-        <ul class="activation-list">
-          <li>Applies the FTHTrading brand pack to the GitHub Pages demo.</li>
-          <li>Copies `.env.example` into `.env` if needed.</li>
-          <li>Starts PostgreSQL and Redis via Docker Compose.</li>
-          <li>Generates Prisma, migrates the database, and seeds Atlanta data.</li>
-          <li>Launches the monorepo dev stack and opens the key URLs.</li>
-        </ul>
-      </section>
-    </main>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span class="pulse-dot"></span>
+      <span>ATLANTA 2026 · MERCEDES-BENZ STADIUM · 8 MATCHES · LIVE SYSTEM</span>
+    </div>
+    <h1 class="hero-title">Atlanta World Cup<br/>Guest &amp; Sponsor<br/>Operating System</h1>
+    <p class="hero-subtitle">Real match intelligence. Multilingual fan operations. Cultural concierge. Sponsor monetization engine. Emergency safety layer. One command surface for 8 FIFA World Cup matches at Mercedes-Benz Stadium.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#matches">Explore Match Days</a>
+      <a class="btn btn-glass" href="#sponsors">View Sponsor System</a>
+      <a class="btn btn-glass" href="#activation">Launch Demo</a>
+      <a class="btn btn-outline" href="https://github.com/FTHTrading/FIFA---Wilkins" target="_blank" rel="noreferrer">Open Repo →</a>
+    </div>
   </div>
 
-  <script type="module" src="./assets/app.js"></script>
+  <div class="hero-stats" id="hero-stats">
+    <div class="stat-card">
+      <span class="stat-value">8</span>
+      <span class="stat-label">Match Days</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">10</span>
+      <span class="stat-label">Languages</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">71K</span>
+      <span class="stat-label">Capacity</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">4</span>
+      <span class="stat-label">Surfaces</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">15</span>
+      <span class="stat-label">MCP Tools</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">$2.4M</span>
+      <span class="stat-label">Sponsor Inventory</span>
+    </div>
+  </div>
+
+  <!-- Live match ribbon -->
+  <div class="match-ribbon" id="match-ribbon"></div>
+</header>
+
+<!-- ═══ ATLANTA MATCH INTELLIGENCE ═══ -->
+<section class="section" id="matches">
+  <div class="section-header">
+    <span class="section-eyebrow">Match Intelligence</span>
+    <h2>Atlanta's Eight World Cup Matches</h2>
+    <p class="section-desc">Five group-stage matches, one Round of 32, one Round of 16, and the semifinal. Real teams, real dates, real audience profiles, real sponsor opportunities.</p>
+  </div>
+  <div class="match-grid" id="match-grid"></div>
+</section>
+
+<!-- ═══ TEAMS, CULTURE & DEMAND ENGINE ═══ -->
+<section class="section section-dark" id="culture">
+  <div class="section-header">
+    <span class="section-eyebrow">Culture &amp; Demand Engine</span>
+    <h2>Team Profiles &amp; Cultural Intelligence</h2>
+    <p class="section-desc">For each confirmed team presence in Atlanta: cultural profile, language needs, food affinities, hospitality preferences, and sponsor matching logic. TBD slots update dynamically from official sources.</p>
+  </div>
+  <div class="culture-grid" id="culture-grid"></div>
+</section>
+
+<!-- ═══ SPONSOR SYSTEM ═══ -->
+<section class="section" id="sponsors">
+  <div class="section-header">
+    <span class="section-eyebrow">Sponsor &amp; Revenue Engine</span>
+    <h2>Official Rights vs. Local Activation</h2>
+    <p class="section-desc">Clear separation of FIFA rights-sensitive lanes from the non-official, host-city, and local partner inventory this platform directly monetizes.</p>
+  </div>
+
+  <div class="sponsor-layout">
+    <div class="glass-panel rights-panel">
+      <div class="rights-badge">⚠️ RIGHTS-SENSITIVE</div>
+      <h3>Official FIFA Commercial Partners</h3>
+      <p class="muted">The platform does not hold official FIFA rights. These partners are shown as contextual awareness only — never implying partnership.</p>
+      <div class="sponsor-tags" id="official-sponsors"></div>
+    </div>
+
+    <div class="glass-panel activation-panel-sponsor">
+      <div class="activation-badge">✅ LOCAL MONETIZATION</div>
+      <h3>Host-City Activation Inventory</h3>
+      <p class="muted">The platform directly monetizes these non-rights-sensitive lanes through language-specific offers, cultural routing, and intent-triggered promotions.</p>
+      <div class="activation-grid" id="local-categories"></div>
+    </div>
+  </div>
+
+  <div class="products-grid">
+    <div class="glass-card product-card">
+      <span class="product-icon">🎫</span>
+      <h4>Language-Specific Coupons</h4>
+      <p>Sponsor offers rendered in the guest's language, triggered by cultural affinity and intent.</p>
+    </div>
+    <div class="glass-card product-card">
+      <span class="product-icon">🗺️</span>
+      <h4>Route-Based Triggers</h4>
+      <p>Sponsor placements fire by location: gate approach, fan festival, transport hub, concession zone.</p>
+    </div>
+    <div class="glass-card product-card">
+      <span class="product-icon">🏆</span>
+      <h4>Match-Day Passport</h4>
+      <p>Points, badges, QR challenges, and scavenger hunts tied to sponsor venues and match milestones.</p>
+    </div>
+    <div class="glass-card product-card">
+      <span class="product-icon">🍽️</span>
+      <h4>Cultural Dining Offers</h4>
+      <p>Restaurant recommendations matched to visiting-team cuisine profiles, with reservation links.</p>
+    </div>
+    <div class="glass-card product-card">
+      <span class="product-icon">🚗</span>
+      <h4>Transport Partnerships</h4>
+      <p>MARTA guides, rideshare coupons, airport transfer packages, and parking offers by match day.</p>
+    </div>
+    <div class="glass-card product-card">
+      <span class="product-icon">🏨</span>
+      <h4>Hospitality Upsells</h4>
+      <p>Hotel packages, premium lounge access, VIP experiences, and post-match city activations.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MAP-FIRST FAN JOURNEY ═══ -->
+<section class="section section-dark" id="map">
+  <div class="section-header">
+    <span class="section-eyebrow">Map-First Fan Journey</span>
+    <h2>Live Wayfinding &amp; Cultural Concierge</h2>
+    <p class="section-desc">The concierge combines venue POIs, city services, cultural restaurants, transport routes, and sponsor placements into a unified map experience powered by intent and language.</p>
+  </div>
+
+  <div class="map-demo">
+    <div class="map-viewport">
+      <div class="map-overlay-card" style="--card-top: 15%; --card-left: 10%;">
+        <span class="map-icon">🏟️</span>
+        <span>Mercedes-Benz Stadium</span>
+      </div>
+      <div class="map-overlay-card" style="--card-top: 25%; --card-left: 55%;">
+        <span class="map-icon">🎪</span>
+        <span>Fan Festival — Centennial Park</span>
+      </div>
+      <div class="map-overlay-card" style="--card-top: 55%; --card-left: 25%;">
+        <span class="map-icon">🚇</span>
+        <span>MARTA — Dome/GWCC Station</span>
+      </div>
+      <div class="map-overlay-card" style="--card-top: 65%; --card-left: 65%;">
+        <span class="map-icon">🏥</span>
+        <span>Grady Memorial Hospital</span>
+      </div>
+      <div class="map-overlay-card" style="--card-top: 40%; --card-left: 75%;">
+        <span class="map-icon">🍽️</span>
+        <span>Buford Hwy International</span>
+      </div>
+      <div class="map-grid-bg"></div>
+    </div>
+
+    <div class="intent-cards">
+      <div class="intent-card"><span>🍕</span> Food from home</div>
+      <div class="intent-card"><span>🚻</span> Find restroom</div>
+      <div class="intent-card"><span>🚪</span> Get to gate</div>
+      <div class="intent-card"><span>🏥</span> Need hospital</div>
+      <div class="intent-card"><span>🚶</span> Exit after match</div>
+      <div class="intent-card"><span>✈️</span> Airport transfer</div>
+      <div class="intent-card"><span>🎁</span> Sponsor reward</div>
+      <div class="intent-card"><span>🍽️</span> Reservations</div>
+      <div class="intent-card"><span>🎪</span> Fan Festival route</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ OPERATOR SURFACES ═══ -->
+<section class="section" id="surfaces">
+  <div class="section-header">
+    <span class="section-eyebrow">Operator Command Modules</span>
+    <h2>Four Surfaces. One Platform.</h2>
+    <p class="section-desc">Guest, Staff, Admin, Revenue — each surface speaks to a different buyer and operational need, all running from the same monorepo and data plane.</p>
+  </div>
+
+  <div class="surfaces-grid">
+    <div class="surface-card surface-blue">
+      <div class="surface-status"><span class="pulse-dot-sm blue"></span> Port 3000</div>
+      <h3>Guest Web</h3>
+      <p>Multilingual PWA for fans: concierge, venue map, cultural food discovery, rewards, emergency mode, sponsor placements, match-day wayfinding.</p>
+      <div class="surface-tags">
+        <span>10 Languages</span><span>Map</span><span>Rewards</span><span>Emergency</span><span>Sponsors</span>
+      </div>
+    </div>
+    <div class="surface-card surface-green">
+      <div class="surface-status"><span class="pulse-dot-sm green"></span> Port 3002</div>
+      <h3>Staff Console</h3>
+      <p>Translation-assisted queue, rapid reply templates, incident escalation, multilingual support workflows for stadium and city operations staff.</p>
+      <div class="surface-tags">
+        <span>Queue</span><span>Translation</span><span>Escalation</span><span>Incidents</span>
+      </div>
+    </div>
+    <div class="surface-card surface-violet">
+      <div class="surface-status"><span class="pulse-dot-sm violet"></span> Port 3001</div>
+      <h3>Admin Control</h3>
+      <p>Venue POIs, emergency phrases, translation approvals, event configuration, sponsor campaign setup, and content operations for the host committee.</p>
+      <div class="surface-tags">
+        <span>POIs</span><span>Phrases</span><span>Campaigns</span><span>Events</span>
+      </div>
+    </div>
+    <div class="surface-card surface-fuchsia">
+      <div class="surface-status"><span class="pulse-dot-sm fuchsia"></span> Port 3003</div>
+      <h3>Revenue Console</h3>
+      <p>Executive dashboard: campaign performance, revenue by language and intent, zone heat maps, sponsor ROI, and match-day analytics for commercial buyers.</p>
+      <div class="surface-tags">
+        <span>Revenue</span><span>Campaigns</span><span>Analytics</span><span>ROI</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MCP / AGENTIC RAG SYSTEM ═══ -->
+<section class="section section-dark" id="mcp">
+  <div class="section-header">
+    <span class="section-eyebrow">MCP / Agentic RAG Architecture</span>
+    <h2>Live Atlanta Event Intelligence</h2>
+    <p class="section-desc">15 typed MCP tools, structured RAG with pgvector, source adapters for 9 data classes, event-day priority weighting, and safety-first deterministic overrides.</p>
+  </div>
+
+  <div class="mcp-layout">
+    <div class="mcp-tools-panel glass-panel">
+      <h3>MCP Tool Registry</h3>
+      <div class="tool-list">
+        <div class="tool-item"><span class="tool-dot amber"></span>matchScheduleLookup</div>
+        <div class="tool-item"><span class="tool-dot amber"></span>teamProfileLookup</div>
+        <div class="tool-item"><span class="tool-dot amber"></span>sponsorRightsLookup</div>
+        <div class="tool-item"><span class="tool-dot blue"></span>venuePoiLookup</div>
+        <div class="tool-item"><span class="tool-dot blue"></span>cityPoiLookup</div>
+        <div class="tool-item"><span class="tool-dot blue"></span>hospitalityLookup</div>
+        <div class="tool-item"><span class="tool-dot blue"></span>restaurantAndReservationLookup</div>
+        <div class="tool-item"><span class="tool-dot cyan"></span>airportTransitLookup</div>
+        <div class="tool-item"><span class="tool-dot cyan"></span>fanFestivalLookup</div>
+        <div class="tool-item"><span class="tool-dot red"></span>emergencyPhraseLookup</div>
+        <div class="tool-item"><span class="tool-dot green"></span>multilingualIntentClassifier</div>
+        <div class="tool-item"><span class="tool-dot green"></span>culturalRecommendationEngine</div>
+        <div class="tool-item"><span class="tool-dot fuchsia"></span>sponsorInjectionEngine</div>
+        <div class="tool-item"><span class="tool-dot fuchsia"></span>rewardsAndPassportLookup</div>
+        <div class="tool-item"><span class="tool-dot fuchsia"></span>revenueAnalyticsLookup</div>
+      </div>
+    </div>
+
+    <div class="mcp-sources-panel glass-panel">
+      <h3>Source Adapters</h3>
+      <div class="source-list">
+        <div class="source-item"><span class="source-badge official">FIFA</span>Schedule, match data, commercial partners</div>
+        <div class="source-item"><span class="source-badge venue">Venue</span>Mercedes-Benz Stadium maps, gates, A-Z guide</div>
+        <div class="source-item"><span class="source-badge city">City</span>Atlanta host committee, neighborhoods, dining</div>
+        <div class="source-item"><span class="source-badge transit">Transit</span>MARTA routes, airport guidance, rideshare zones</div>
+        <div class="source-item"><span class="source-badge hospitality">Hosp.</span>FIFA hospitality, suites, premium packages</div>
+        <div class="source-item"><span class="source-badge internal">CMS</span>Venue POIs, emergency phrases, campaigns</div>
+        <div class="source-item"><span class="source-badge internal">Rewards</span>Badges, passport, coupons, challenges</div>
+        <div class="source-item"><span class="source-badge community">Comm.</span>Fan festival, volunteer ops, supporter activity</div>
+        <div class="source-item"><span class="source-badge internal">Analytics</span>Revenue, impressions, conversions, ROI</div>
+      </div>
+    </div>
+
+    <div class="mcp-ranking-panel glass-panel">
+      <h3>RAG Ranking Factors</h3>
+      <div class="ranking-bars">
+        <div class="ranking-bar"><span class="bar-label">Semantic Relevance</span><div class="bar-track"><div class="bar-fill" style="width: 25%;"></div></div><span class="bar-weight">0.25</span></div>
+        <div class="ranking-bar"><span class="bar-label">Event Relevance</span><div class="bar-track"><div class="bar-fill" style="width: 15%;"></div></div><span class="bar-weight">0.15</span></div>
+        <div class="ranking-bar"><span class="bar-label">Match-Day Relevance</span><div class="bar-track"><div class="bar-fill" style="width: 15%;"></div></div><span class="bar-weight">0.15</span></div>
+        <div class="ranking-bar"><span class="bar-label">Venue Proximity</span><div class="bar-track"><div class="bar-fill" style="width: 10%;"></div></div><span class="bar-weight">0.10</span></div>
+        <div class="ranking-bar"><span class="bar-label">Language Fit</span><div class="bar-track"><div class="bar-fill" style="width: 10%;"></div></div><span class="bar-weight">0.10</span></div>
+        <div class="ranking-bar"><span class="bar-label">Team Relevance</span><div class="bar-track"><div class="bar-fill" style="width: 10%;"></div></div><span class="bar-weight">0.10</span></div>
+        <div class="ranking-bar"><span class="bar-label">Sponsor Eligibility</span><div class="bar-track"><div class="bar-fill" style="width: 10%;"></div></div><span class="bar-weight">0.10</span></div>
+        <div class="ranking-bar"><span class="bar-label">Safety Priority</span><div class="bar-track"><div class="bar-fill safety" style="width: 5%;"></div></div><span class="bar-weight">∞ override</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHAT HAS BEEN BUILT ═══ -->
+<section class="section" id="built">
+  <div class="section-header">
+    <span class="section-eyebrow">System Depth</span>
+    <h2>What Has Been Built</h2>
+    <p class="section-desc">Not a prototype. A production-grade monorepo with real data models, seed pipelines, and operational surfaces.</p>
+  </div>
+
+  <div class="built-grid">
+    <div class="glass-card built-card">
+      <h4>Multilingual Guest OS</h4>
+      <p>10-language PWA with intent-based concierge, venue map, cultural food discovery, emergency mode, rewards, and demo sessions for 6 visitor personas.</p>
+    </div>
+    <div class="glass-card built-card">
+      <h4>Agentic Concierge + RAG</h4>
+      <p>Intent parser, tool router, cultural ranker, pgvector retrieval, and sponsor injection engine with trace metadata on every response.</p>
+    </div>
+    <div class="glass-card built-card">
+      <h4>Deterministic Emergency System</h4>
+      <p>8 emergency phrases with approved translations across all languages. Safety logic always outranks sponsor logic. No hallucination allowed.</p>
+    </div>
+    <div class="glass-card built-card">
+      <h4>3-Tier Sponsor Engine</h4>
+      <p>Smart Placement, Cultural Concierge, and Reward Engine tiers. 12 seeded campaigns with impression, click, and conversion attribution.</p>
+    </div>
+    <div class="glass-card built-card">
+      <h4>Revenue Console</h4>
+      <p>Campaign performance, language breakdown, intent distribution, zone heat maps, and real-time revenue simulation with CFR and ROI analytics.</p>
+    </div>
+    <div class="glass-card built-card">
+      <h4>Full Stack Infrastructure</h4>
+      <p>Next.js 15 · NestJS · Prisma 6 · PostgreSQL 16 · pgvector · Redis 7 · BullMQ · Turborepo · Docker Compose · CI/CD.</p>
+    </div>
+    <div class="glass-card built-card">
+      <h4>Rewards &amp; Passport</h4>
+      <p>10 reward badges, 6 sponsor challenges, point ledgers, QR coupon redemption, match-day scavenger hunts, and cultural discovery routes.</p>
+    </div>
+    <div class="glass-card built-card">
+      <h4>Staff &amp; Admin Operations</h4>
+      <p>Translation-assisted queues, rapid reply workflows, incident tracking, POI management, phrase approvals, and event configuration.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHAT HAS BEEN GENERATED FOR ATLANTA ═══ -->
+<section class="section section-dark" id="atlanta-data">
+  <div class="section-header">
+    <span class="section-eyebrow">Atlanta Intelligence</span>
+    <h2>Generated for Atlanta 2026</h2>
+    <p class="section-desc">Every data point is tied to the real Atlanta World Cup environment — teams, venues, transport, and commercial context.</p>
+  </div>
+
+  <div class="atlanta-grid">
+    <div class="glass-card atlanta-card">
+      <span class="atlanta-icon">📅</span>
+      <h4>8 Match Schedule</h4>
+      <p>Spain, Cape Verde, South Africa, Saudi Arabia, Morocco, Haiti, Uzbekistan — plus knockout placeholders with live TBD resolution.</p>
+    </div>
+    <div class="glass-card atlanta-card">
+      <span class="atlanta-icon">👥</span>
+      <h4>7 Team Cultural Profiles</h4>
+      <p>Language needs, cuisine affinities, dietary requirements, hospitality style, transport preferences, and local restaurant recommendations.</p>
+    </div>
+    <div class="glass-card atlanta-card">
+      <span class="atlanta-icon">💰</span>
+      <h4>12 Sponsor Campaigns</h4>
+      <p>3 monetization tiers, language-targeted creative, intent triggers, and revenue attribution across Smart Placement, Cultural Concierge, and Reward Engine.</p>
+    </div>
+    <div class="glass-card atlanta-card">
+      <span class="atlanta-icon">🏟️</span>
+      <h4>20 Venue POIs</h4>
+      <p>Gates, restrooms, first aid, concessions, merch, prayer room, family zone, charging stations, accessibility services — all multilingual.</p>
+    </div>
+    <div class="glass-card atlanta-card">
+      <span class="atlanta-icon">🍽️</span>
+      <h4>14 Restaurants + 8 City Services</h4>
+      <p>Halal, Japanese, Korean, Mexican, Brazilian, Ethiopian, Indian, Thai — mapped to team-specific cultural affinities and neighborhoods.</p>
+    </div>
+    <div class="glass-card atlanta-card">
+      <span class="atlanta-icon">🚇</span>
+      <h4>Transport &amp; City Context</h4>
+      <p>MARTA routes, airport transfers, rideshare zones, Fan Festival operations, Georgia World Congress Center, and neighborhood guides.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHITE-LABEL FUTURE ═══ -->
+<section class="section" id="future">
+  <div class="section-header">
+    <span class="section-eyebrow">White-Label Platform</span>
+    <h2>Beyond FIFA. Beyond Atlanta.</h2>
+    <p class="section-desc">The same platform powers any stadium, convention, airport, or city-scale event. Brand packs swap identity. Data adapters swap context. The OS stays the same.</p>
+  </div>
+
+  <div class="future-grid">
+    <div class="future-card"><span class="future-icon">🏟️</span><h4>Stadiums &amp; Arenas</h4></div>
+    <div class="future-card"><span class="future-icon">🏛️</span><h4>Conventions</h4></div>
+    <div class="future-card"><span class="future-icon">✈️</span><h4>Airports</h4></div>
+    <div class="future-card"><span class="future-icon">🌍</span><h4>Global Events</h4></div>
+    <div class="future-card"><span class="future-icon">🏙️</span><h4>City Tourism</h4></div>
+    <div class="future-card"><span class="future-icon">🎭</span><h4>Festivals &amp; Expos</h4></div>
+  </div>
+</section>
+
+<!-- ═══ ACTIVATION ═══ -->
+<section class="section section-dark" id="activation">
+  <div class="section-header">
+    <span class="section-eyebrow">Activation</span>
+    <h2>One Command to Launch Atlanta</h2>
+  </div>
+
+  <div class="activation-block">
+    <pre class="activation-code"><code>pnpm activate:fth</code></pre>
+    <div class="activation-steps">
+      <div class="step"><span class="step-num">1</span> Applies the FTHTrading brand pack to the demo surfaces</div>
+      <div class="step"><span class="step-num">2</span> Provisions environment from <code>.env.example</code></div>
+      <div class="step"><span class="step-num">3</span> Starts PostgreSQL 16 and Redis 7 via Docker Compose</div>
+      <div class="step"><span class="step-num">4</span> Generates Prisma client and runs migrations</div>
+      <div class="step"><span class="step-num">5</span> Seeds Atlanta match schedule, teams, venues, sponsors, and demo data</div>
+      <div class="step"><span class="step-num">6</span> Launches Guest Web, Staff Console, Admin Control, and Revenue Console</div>
+      <div class="step"><span class="step-num">7</span> Opens all demo surfaces in your browser</div>
+    </div>
+  </div>
+
+  <div class="activation-urls">
+    <div class="url-card"><span class="url-port">:3000</span> Guest Experience</div>
+    <div class="url-card"><span class="url-port">:3001</span> Admin Control</div>
+    <div class="url-card"><span class="url-port">:3002</span> Staff Console</div>
+    <div class="url-card"><span class="url-port">:3003</span> Revenue Console</div>
+    <div class="url-card"><span class="url-port">:4000</span> API + Swagger</div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <span class="nav-logo">◆</span>
+      <span>FIFA × Wilkins</span>
+    </div>
+    <p class="footer-text">Built by <strong>FTHTrading × Wilkins Media Group</strong> for Atlanta 2026.</p>
+    <p class="footer-text muted">The Atlanta World Cup guest and sponsor operating system around the real match slate, real visitor flows, real venue ecosystem, and real monetization moments.</p>
+    <a class="btn btn-outline btn-sm" href="https://github.com/FTHTrading/FIFA---Wilkins" target="_blank" rel="noreferrer">GitHub Repository →</a>
+  </div>
+</footer>
+
+<script type="module" src="./assets/app.js"></script>
 </body>
 </html>

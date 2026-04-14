@@ -53,4 +53,17 @@ export const appConfig = registerAs('app', () => ({
     vectorIndex: process.env.RAG_VECTOR_INDEX ?? 'wilkins-cultural-index',
     mcpEnabled: process.env.MCP_AGENTIC_ENABLED === 'true',
   },
+
+  telecom: {
+    provider: process.env.TELECOM_PROVIDER ?? 'telnyx',
+    telnyxApiKey: process.env.TELNYX_API_KEY,
+    telnyxPublicKey: process.env.TELNYX_PUBLIC_KEY,
+    telnyxMessagingProfileId: process.env.TELNYX_MESSAGING_PROFILE_ID,
+    telnyxConnectionId: process.env.TELNYX_CONNECTION_ID,
+    telnyxPhoneNumber: process.env.TELNYX_PHONE_NUMBER ?? '+18888273432',
+    defaultEventId: process.env.TELECOM_DEFAULT_EVENT_ID,
+    defaultVenueId: process.env.TELECOM_DEFAULT_VENUE_ID,
+    publicBaseUrl: process.env.TELECOM_PUBLIC_BASE_URL,
+    shortLinkBaseUrl: process.env.SHORT_LINK_BASE_URL,
+  },
 }));

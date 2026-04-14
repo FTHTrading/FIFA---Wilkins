@@ -1,0 +1,420 @@
+{
+  "venue": {
+    "name": "Mercedes-Benz Stadium",
+    "city": "Atlanta",
+    "state": "Georgia",
+    "country": "US",
+    "capacity": 71000,
+    "coordinates": { "latitude": 33.7553, "longitude": -84.4006 },
+    "address": "1 AMB Drive NW, Atlanta, GA 30313"
+  },
+  "tournament": {
+    "name": "FIFA World Cup 2026",
+    "hostCities": ["Atlanta"],
+    "totalAtlantaMatches": 8
+  },
+  "matches": [
+    {
+      "id": "ATL-GS1",
+      "date": "2026-06-15",
+      "kickoff": "18:00",
+      "stage": "Group Stage",
+      "stageCode": "GS",
+      "homeTeam": "Spain",
+      "homeTeamCode": "ESP",
+      "homeTeamFlag": "🇪🇸",
+      "awayTeam": "Cape Verde",
+      "awayTeamCode": "CPV",
+      "awayTeamFlag": "🇨🇻",
+      "confirmed": true,
+      "audienceProfile": {
+        "primaryLanguages": ["es", "pt"],
+        "secondaryLanguages": ["en", "fr"],
+        "estimatedAttendance": 71000,
+        "supporterSplit": { "home": 70, "away": 15, "neutral": 15 },
+        "premiumDemand": "very-high",
+        "familyDemand": "high"
+      },
+      "sponsorAngle": "Spanish-language premium hospitality, Iberian/Portuguese cuisine, opening match energy",
+      "localActivation": "Tapas restaurants, Spanish wine bars, Latin nightlife, Midtown/Buckhead dining"
+    },
+    {
+      "id": "ATL-GS2",
+      "date": "2026-06-18",
+      "kickoff": "15:00",
+      "stage": "Group Stage",
+      "stageCode": "GS",
+      "homeTeam": "TBD",
+      "homeTeamCode": "TBD",
+      "homeTeamFlag": "🏳️",
+      "awayTeam": "South Africa",
+      "awayTeamCode": "RSA",
+      "awayTeamFlag": "🇿🇦",
+      "confirmed": false,
+      "audienceProfile": {
+        "primaryLanguages": ["en", "zu", "af"],
+        "secondaryLanguages": ["fr", "pt"],
+        "estimatedAttendance": 68000,
+        "supporterSplit": { "home": 40, "away": 35, "neutral": 25 },
+        "premiumDemand": "high",
+        "familyDemand": "medium"
+      },
+      "sponsorAngle": "African diaspora hospitality, multicultural food discovery, South African supporter energy",
+      "localActivation": "African restaurants, Buford Highway international dining, community viewing parties"
+    },
+    {
+      "id": "ATL-GS3",
+      "date": "2026-06-21",
+      "kickoff": "18:00",
+      "stage": "Group Stage",
+      "stageCode": "GS",
+      "homeTeam": "Spain",
+      "homeTeamCode": "ESP",
+      "homeTeamFlag": "🇪🇸",
+      "awayTeam": "Saudi Arabia",
+      "awayTeamCode": "KSA",
+      "awayTeamFlag": "🇸🇦",
+      "confirmed": true,
+      "audienceProfile": {
+        "primaryLanguages": ["es", "ar"],
+        "secondaryLanguages": ["en", "fr"],
+        "estimatedAttendance": 71000,
+        "supporterSplit": { "home": 55, "away": 30, "neutral": 15 },
+        "premiumDemand": "very-high",
+        "familyDemand": "very-high"
+      },
+      "sponsorAngle": "Arabic + Spanish dual hospitality, halal dining premium, prayer-room wayfinding, family-first",
+      "localActivation": "Halal restaurants, Mediterranean dining, Arabic cultural zones, family suites"
+    },
+    {
+      "id": "ATL-GS4",
+      "date": "2026-06-24",
+      "kickoff": "15:00",
+      "stage": "Group Stage",
+      "stageCode": "GS",
+      "homeTeam": "Morocco",
+      "homeTeamCode": "MAR",
+      "homeTeamFlag": "🇲🇦",
+      "awayTeam": "Haiti",
+      "awayTeamCode": "HAI",
+      "awayTeamFlag": "🇭🇹",
+      "confirmed": true,
+      "audienceProfile": {
+        "primaryLanguages": ["ar", "fr"],
+        "secondaryLanguages": ["ht", "en", "es"],
+        "estimatedAttendance": 65000,
+        "supporterSplit": { "home": 45, "away": 30, "neutral": 25 },
+        "premiumDemand": "high",
+        "familyDemand": "high"
+      },
+      "sponsorAngle": "North African + Caribbean cultural crossover, French-language hospitality, diaspora community energy",
+      "localActivation": "North African cuisine, Caribbean food, Haitian community events, French-language concierge"
+    },
+    {
+      "id": "ATL-GS5",
+      "date": "2026-06-27",
+      "kickoff": "18:00",
+      "stage": "Group Stage",
+      "stageCode": "GS",
+      "homeTeam": "TBD",
+      "homeTeamCode": "TBD",
+      "homeTeamFlag": "🏳️",
+      "awayTeam": "Uzbekistan",
+      "awayTeamCode": "UZB",
+      "awayTeamFlag": "🇺🇿",
+      "confirmed": false,
+      "audienceProfile": {
+        "primaryLanguages": ["uz", "ru"],
+        "secondaryLanguages": ["en", "tr"],
+        "estimatedAttendance": 64000,
+        "supporterSplit": { "home": 40, "away": 30, "neutral": 30 },
+        "premiumDemand": "medium",
+        "familyDemand": "high"
+      },
+      "sponsorAngle": "Central Asian cultural discovery, multilingual exploration, emerging market supporter engagement",
+      "localActivation": "Turkish & Central Asian restaurants, international food courts, cultural discovery routes"
+    },
+    {
+      "id": "ATL-R32",
+      "date": "2026-07-01",
+      "kickoff": "16:00",
+      "stage": "Round of 32",
+      "stageCode": "R32",
+      "homeTeam": "1L",
+      "homeTeamCode": "TBD",
+      "homeTeamFlag": "🏆",
+      "awayTeam": "3EHIJK",
+      "awayTeamCode": "TBD",
+      "awayTeamFlag": "🏆",
+      "confirmed": false,
+      "audienceProfile": {
+        "primaryLanguages": ["en"],
+        "secondaryLanguages": ["es", "fr", "ar", "pt"],
+        "estimatedAttendance": 71000,
+        "supporterSplit": { "home": 45, "away": 45, "neutral": 10 },
+        "premiumDemand": "very-high",
+        "familyDemand": "high"
+      },
+      "sponsorAngle": "Knockout intensity, maximum sponsor inventory value, premium transport and VIP",
+      "localActivation": "Premium hospitality upsells, VIP transport packages, post-match city experiences"
+    },
+    {
+      "id": "ATL-R16",
+      "date": "2026-07-07",
+      "kickoff": "17:00",
+      "stage": "Round of 16",
+      "stageCode": "R16",
+      "homeTeam": "W86",
+      "homeTeamCode": "TBD",
+      "homeTeamFlag": "🏆",
+      "awayTeam": "W88",
+      "awayTeamCode": "TBD",
+      "awayTeamFlag": "🏆",
+      "confirmed": false,
+      "audienceProfile": {
+        "primaryLanguages": ["en"],
+        "secondaryLanguages": ["es", "fr", "ar", "pt", "de"],
+        "estimatedAttendance": 71000,
+        "supporterSplit": { "home": 50, "away": 40, "neutral": 10 },
+        "premiumDemand": "very-high",
+        "familyDemand": "medium"
+      },
+      "sponsorAngle": "Peak knockout demand, highest-value sponsor slots, urgency-driven premium hospitality",
+      "localActivation": "Premium exit routing, airport transfer packages, hotel partnerships, nightlife activations"
+    },
+    {
+      "id": "ATL-SF",
+      "date": "2026-07-15",
+      "kickoff": "20:00",
+      "stage": "Semi-final",
+      "stageCode": "SF",
+      "homeTeam": "W99",
+      "homeTeamCode": "TBD",
+      "homeTeamFlag": "🏆",
+      "awayTeam": "W100",
+      "awayTeamCode": "TBD",
+      "awayTeamFlag": "🏆",
+      "confirmed": false,
+      "audienceProfile": {
+        "primaryLanguages": ["en", "es", "fr", "ar", "pt", "de", "ja", "ko"],
+        "estimatedAttendance": 71000,
+        "supporterSplit": { "home": 45, "away": 45, "neutral": 10 },
+        "premiumDemand": "maximum",
+        "familyDemand": "high"
+      },
+      "sponsorAngle": "Global spotlight, maximum media value, all-language activation, premium-only hospitality tiers",
+      "localActivation": "City-wide activations, airport arrivals, hotel partnerships, Fan Festival peak programming"
+    }
+  ],
+  "teamProfiles": {
+    "ESP": {
+      "name": "Spain",
+      "flag": "🇪🇸",
+      "languages": ["es"],
+      "culturalProfile": {
+        "cuisineAffinities": ["tapas", "paella", "churros", "jamon", "spanish-wine"],
+        "dietaryNotes": [],
+        "hospitalityStyle": "family-social",
+        "nightlifeAffinity": "high",
+        "premiumAffinity": "very-high",
+        "familyFocus": "high",
+        "transportPreference": "public-transit"
+      },
+      "localRecommendations": {
+        "restaurants": ["Bulla Gastrobar (Midtown)", "Barcelona Wine Bar (Inman Park)", "Cooks & Soldiers (Westside)"],
+        "neighborhoods": ["Midtown", "Buckhead", "Virginia-Highland"],
+        "culturalVenues": ["Buckhead nightlife strip", "Ponce City Market"]
+      }
+    },
+    "CPV": {
+      "name": "Cape Verde",
+      "flag": "🇨🇻",
+      "languages": ["pt"],
+      "culturalProfile": {
+        "cuisineAffinities": ["cachupa", "grilled-fish", "portuguese-influenced", "tropical-fruit"],
+        "dietaryNotes": [],
+        "hospitalityStyle": "community-gathering",
+        "nightlifeAffinity": "high",
+        "premiumAffinity": "medium",
+        "familyFocus": "very-high",
+        "transportPreference": "rideshare"
+      },
+      "localRecommendations": {
+        "restaurants": ["Piri Piri Grillhouse (Buford Highway)", "O-Ku (Westside)"],
+        "neighborhoods": ["Buford Highway corridor", "Decatur"],
+        "culturalVenues": ["Community viewing parties", "Piedmont Park gatherings"]
+      }
+    },
+    "RSA": {
+      "name": "South Africa",
+      "flag": "🇿🇦",
+      "languages": ["en", "zu", "af"],
+      "culturalProfile": {
+        "cuisineAffinities": ["braai", "biltong", "bunny-chow", "bobotie", "south-african-wine"],
+        "dietaryNotes": [],
+        "hospitalityStyle": "community-celebration",
+        "nightlifeAffinity": "high",
+        "premiumAffinity": "medium",
+        "familyFocus": "high",
+        "transportPreference": "rideshare"
+      },
+      "localRecommendations": {
+        "restaurants": ["Buford Highway International Corridor", "Krog Street Market"],
+        "neighborhoods": ["East Atlanta Village", "Little Five Points"],
+        "culturalVenues": ["Atlanta African festivals", "Community watch parties"]
+      }
+    },
+    "KSA": {
+      "name": "Saudi Arabia",
+      "flag": "🇸🇦",
+      "languages": ["ar"],
+      "culturalProfile": {
+        "cuisineAffinities": ["kabsa", "lamb", "hummus", "dates", "arabic-coffee"],
+        "dietaryNotes": ["halal-required"],
+        "hospitalityStyle": "premium-family",
+        "nightlifeAffinity": "low",
+        "premiumAffinity": "very-high",
+        "familyFocus": "very-high",
+        "transportPreference": "private-car"
+      },
+      "localRecommendations": {
+        "restaurants": ["Al-Amir (Buford Highway)", "Baraonda (Midtown)", "Rumi's Kitchen"],
+        "neighborhoods": ["Buckhead", "Midtown", "Sandy Springs"],
+        "culturalVenues": ["Mercedes-Benz Stadium Prayer Room", "Al-Farooq Masjid"]
+      }
+    },
+    "MAR": {
+      "name": "Morocco",
+      "flag": "🇲🇦",
+      "languages": ["ar", "fr"],
+      "culturalProfile": {
+        "cuisineAffinities": ["tagine", "couscous", "mint-tea", "pastilla", "harira"],
+        "dietaryNotes": ["halal-required"],
+        "hospitalityStyle": "family-communal",
+        "nightlifeAffinity": "medium",
+        "premiumAffinity": "high",
+        "familyFocus": "very-high",
+        "transportPreference": "public-transit"
+      },
+      "localRecommendations": {
+        "restaurants": ["Cafe Agora (Buckhead)", "Mediterranean Grill (Midtown)"],
+        "neighborhoods": ["Buford Highway", "Clarkston"],
+        "culturalVenues": ["International corridor community spaces"]
+      }
+    },
+    "HAI": {
+      "name": "Haiti",
+      "flag": "🇭🇹",
+      "languages": ["fr", "ht"],
+      "culturalProfile": {
+        "cuisineAffinities": ["griot", "rice-and-beans", "plantains", "tassot", "haitian-patties"],
+        "dietaryNotes": [],
+        "hospitalityStyle": "vibrant-community",
+        "nightlifeAffinity": "high",
+        "premiumAffinity": "medium",
+        "familyFocus": "very-high",
+        "transportPreference": "rideshare"
+      },
+      "localRecommendations": {
+        "restaurants": ["Caribbean restaurants on Buford Highway", "International corridor"],
+        "neighborhoods": ["Clarkston", "Stone Mountain area"],
+        "culturalVenues": ["Community gathering spaces", "Caribbean festivals"]
+      }
+    },
+    "UZB": {
+      "name": "Uzbekistan",
+      "flag": "🇺🇿",
+      "languages": ["uz", "ru"],
+      "culturalProfile": {
+        "cuisineAffinities": ["plov", "samsa", "shashlik", "lagman", "green-tea"],
+        "dietaryNotes": ["halal-preferred"],
+        "hospitalityStyle": "communal-gathering",
+        "nightlifeAffinity": "low",
+        "premiumAffinity": "medium",
+        "familyFocus": "very-high",
+        "transportPreference": "rideshare"
+      },
+      "localRecommendations": {
+        "restaurants": ["Turkish/Central Asian spots on Buford Highway"],
+        "neighborhoods": ["Buford Highway", "Chamblee"],
+        "culturalVenues": ["International food courts", "Community centers"]
+      }
+    }
+  },
+  "sponsors": {
+    "officialFIFA": {
+      "note": "Rights-sensitive. Platform must not imply official partnership. Display as contextual awareness only.",
+      "partners": [
+        { "name": "adidas", "category": "Official Partner" },
+        { "name": "Coca-Cola", "category": "Official Partner" },
+        { "name": "Visa", "category": "Official Partner" },
+        { "name": "Hyundai/Kia", "category": "Official Partner" },
+        { "name": "Qatar Airways", "category": "Official Partner" },
+        { "name": "Aramco", "category": "Official Partner" },
+        { "name": "Bank of America", "category": "Tournament Sponsor" },
+        { "name": "DoorDash", "category": "Tournament Sponsor" },
+        { "name": "Verizon", "category": "Tournament Sponsor" },
+        { "name": "McDonald's", "category": "Tournament Sponsor" },
+        { "name": "AB InBev", "category": "Tournament Sponsor" },
+        { "name": "Hisense", "category": "Tournament Sponsor" },
+        { "name": "Lay's", "category": "Tournament Sponsor" },
+        { "name": "Airbnb", "category": "Tournament Sponsor" }
+      ]
+    },
+    "localActivation": {
+      "note": "Non-rights-sensitive. Platform can directly monetize these lanes.",
+      "categories": [
+        "Local restaurants & dining reservations",
+        "Rideshare & transport partners",
+        "Hotel & lodging partners",
+        "City tourism & attractions",
+        "Local retail & shopping",
+        "Nightlife & entertainment venues",
+        "Grocery & convenience delivery",
+        "Cultural experience providers",
+        "Fan merchandise (non-official)",
+        "Photography & media services"
+      ]
+    }
+  },
+  "cityContext": {
+    "fanFestival": {
+      "name": "FIFA Fan Festival — Centennial Olympic Park",
+      "location": "Centennial Olympic Park",
+      "coordinates": { "latitude": 33.7607, "longitude": -84.3931 },
+      "features": ["Giant screens", "Live entertainment", "Food vendors", "Sponsor activations", "Cultural programming"]
+    },
+    "transport": {
+      "marta": {
+        "nearestStation": "Dome/GWCC/Philips Arena/CNN Center Station",
+        "lines": ["Blue", "Green"],
+        "walkToStadium": "10 minutes"
+      },
+      "airport": {
+        "name": "Hartsfield-Jackson Atlanta International Airport",
+        "code": "ATL",
+        "distanceKm": 14,
+        "martaLink": "Gold Line to Five Points, transfer to Blue/Green"
+      },
+      "rideshare": {
+        "pickupZone": "Northside Drive & Andrew Young International Blvd",
+        "surgePricing": "Expected 2-3x on match days"
+      }
+    },
+    "keyVenues": [
+      { "name": "Mercedes-Benz Stadium", "role": "Match venue", "coordinates": { "latitude": 33.7553, "longitude": -84.4006 } },
+      { "name": "Centennial Olympic Park", "role": "FIFA Fan Festival", "coordinates": { "latitude": 33.7607, "longitude": -84.3931 } },
+      { "name": "Georgia World Congress Center", "role": "Media & operations center", "coordinates": { "latitude": 33.7600, "longitude": -84.3976 } },
+      { "name": "CNN Center", "role": "Media hub", "coordinates": { "latitude": 33.7578, "longitude": -84.3948 } },
+      { "name": "State Farm Arena", "role": "Potential overflow events", "coordinates": { "latitude": 33.7573, "longitude": -84.3963 } }
+    ],
+    "neighborhoods": [
+      { "name": "Downtown", "character": "Stadium core, hotels, transit hub", "walkability": "high" },
+      { "name": "Midtown", "character": "Dining, arts, Piedmont Park", "walkability": "high" },
+      { "name": "Buckhead", "character": "Upscale dining, nightlife, luxury hotels", "walkability": "medium" },
+      { "name": "Buford Highway", "character": "International corridor: Korean, Vietnamese, Mexican, Ethiopian, halal", "walkability": "low" },
+      { "name": "East Atlanta Village", "character": "Independent restaurants, nightlife, community feel", "walkability": "medium" },
+      { "name": "Decatur", "character": "Walkable dining district, craft beverages", "walkability": "high" }
+    ]
+  }
+}

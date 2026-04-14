@@ -51,6 +51,10 @@ model GuestSession {
 
   conversations Conversation[]
   analyticsEvents AnalyticsEvent[]
+  inboundMessages InboundMessage[]
+  outboundMessages OutboundMessage[]
+  telecomEvents TelecomEvent[]
+  telecomSession TelecomSession?
 
   @@index([eventId])
   @@index([languageCode])
@@ -756,4 +760,201 @@ model CouponRedemption {
 
   @@index([sessionId, eventId])
   @@index([couponCode])
+}
+
+// ─── Telecom / SMS / Voice ─────────────────────────────────────────────────
+
+enum TelecomChannel {
+  SMS
+  VOICE
+  WHATSAPP
+}
+
+enum TelecomDirection {
+  INBOUND
+  OUTBOUND
+}
+
+enum TelecomMessageStatus {
+  RECEIVED
+  PROCESSED
+  SENT
+  DELIVERED
+  FAILED
+}
+
+enum TelecomProvider {
+  TELNYX
+  MOCK
+  OTHER
+}
+
+model TelecomSession {
+  id               String          @id @default(cuid())
+  phoneNumber      String
+  normalizedPhone  String
+  channel          TelecomChannel  @default(SMS)
+  provider         TelecomProvider @default(TELNYX)
+  guestSessionId   String?         @unique
+  guestSession     GuestSession?   @relation(fields: [guestSessionId], references: [sessionId])
+  eventId          String?
+  preferredLanguage String?
+  isActive         Boolean         @default(true)
+  lastInboundAt    DateTime?
+  lastOutboundAt   DateTime?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+
+  inboundMessages  InboundMessage[]
+  outboundMessages OutboundMessage[]
+  events           TelecomEvent[]
+  preferences      ChannelPreference[]
+
+  @@unique([normalizedPhone, channel])
+  @@index([eventId, channel])
+}
+
+model InboundMessage {
+  id               String               @id @default(cuid())
+  telecomSessionId String?
+  telecomSession   TelecomSession?      @relation(fields: [telecomSessionId], references: [id])
+  sessionId        String?
+  guestSession     GuestSession?        @relation(fields: [sessionId], references: [sessionId])
+  phoneNumber      String
+  body             String               @db.Text
+  normalizedBody   String               @db.Text
+  detectedLanguage String?
+  intent           String?
+  campaignId       String?
+  rewardId         String?
+  emergencyFlag    Boolean              @default(false)
+  externalMessageId String?
+  externalProvider String?
+  direction        TelecomDirection     @default(INBOUND)
+  status           TelecomMessageStatus @default(RECEIVED)
+  metadata         Json?
+  createdAt        DateTime             @default(now())
+
+  escalationEvents EscalationEvent[]
+
+  @@index([sessionId, createdAt])
+  @@index([detectedLanguage, intent])
+  @@index([emergencyFlag, createdAt])
+  @@index([telecomSessionId, createdAt])
+}
+
+model OutboundMessage {
+  id               String               @id @default(cuid())
+  telecomSessionId String?
+  telecomSession   TelecomSession?      @relation(fields: [telecomSessionId], references: [id])
+  sessionId        String?
+  guestSession     GuestSession?        @relation(fields: [sessionId], references: [sessionId])
+  phoneNumber      String
+  body             String               @db.Text
+  detectedLanguage String?
+  intent           String?
+  campaignId       String?
+  rewardId         String?
+  emergencyFlag    Boolean              @default(false)
+  externalMessageId String?
+  externalProvider String?
+  direction        TelecomDirection     @default(OUTBOUND)
+  status           TelecomMessageStatus @default(SENT)
+  deliveredAt      DateTime?
+  metadata         Json?
+  createdAt        DateTime             @default(now())
+
+  deliveryStatuses DeliveryStatus[]
+
+  @@index([sessionId, createdAt])
+  @@index([detectedLanguage, intent])
+  @@index([campaignId])
+  @@index([telecomSessionId, createdAt])
+}
+
+model DeliveryStatus {
+  id               String               @id @default(cuid())
+  outboundMessageId String
+  outboundMessage  OutboundMessage      @relation(fields: [outboundMessageId], references: [id])
+  externalMessageId String
+  providerStatus   String
+  status           TelecomMessageStatus
+  metadata         Json?
+  createdAt        DateTime             @default(now())
+
+  @@index([externalMessageId, createdAt])
+  @@index([providerStatus])
+}
+
+model TelecomEvent {
+  id               String         @id @default(cuid())
+  telecomSessionId String?
+  telecomSession   TelecomSession? @relation(fields: [telecomSessionId], references: [id])
+  sessionId        String?
+  guestSession     GuestSession?   @relation(fields: [sessionId], references: [sessionId])
+  eventId          String?
+  type             String
+  channel          TelecomChannel @default(SMS)
+  phoneNumber      String?
+  language         String?
+  intent           String?
+  campaignId       String?
+  rewardId         String?
+  emergencyFlag    Boolean        @default(false)
+  metadata         Json?
+  createdAt        DateTime       @default(now())
+
+  @@index([type, createdAt])
+  @@index([eventId, type])
+  @@index([sessionId, createdAt])
+  @@index([campaignId])
+}
+
+model EscalationEvent {
+  id                String   @id @default(cuid())
+  inboundMessageId  String
+  inboundMessage    InboundMessage @relation(fields: [inboundMessageId], references: [id])
+  emergencyIncidentId String?
+  assistanceRequestId String?
+  severity          String   @default("high")
+  status            String   @default("open")
+  notes             String?
+  metadata          Json?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@index([severity, createdAt])
+  @@index([status, createdAt])
+}
+
+model PhoneNumberBinding {
+  id               String          @id @default(cuid())
+  phoneNumber      String          @unique
+  normalizedPhone  String          @unique
+  provider         TelecomProvider @default(TELNYX)
+  channel          TelecomChannel  @default(SMS)
+  label            String?
+  isPrimary        Boolean         @default(false)
+  isActive         Boolean         @default(true)
+  metadata         Json?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+
+  @@index([isPrimary, isActive])
+}
+
+model ChannelPreference {
+  id               String          @id @default(cuid())
+  telecomSessionId String
+  telecomSession   TelecomSession  @relation(fields: [telecomSessionId], references: [id])
+  preferredLanguage String?
+  smsOptIn         Boolean         @default(true)
+  voiceOptIn       Boolean         @default(true)
+  whatsappOptIn    Boolean         @default(false)
+  lastUpdatedBy    String?
+  metadata         Json?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+
+  @@index([telecomSessionId])
 }

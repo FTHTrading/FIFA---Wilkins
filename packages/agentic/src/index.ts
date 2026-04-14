@@ -4,6 +4,8 @@
  * Infrastructure color: Amber #D97706
  */
 
+export * from './mcp-tools.js';
+
 // ─── Intent Types ───────────────────────────────────────────────────────────
 
 export type GuestIntent =

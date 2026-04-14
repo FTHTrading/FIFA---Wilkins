@@ -6,5 +6,6 @@ import { EmergencyGateway } from './emergency.gateway';
 @Module({
   controllers: [EmergencyController],
   providers: [EmergencyService, EmergencyGateway],
+  exports: [EmergencyService],
 })
 export class EmergencyModule {}
