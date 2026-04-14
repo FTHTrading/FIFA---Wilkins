@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { Navigation, Utensils, Trophy, ShieldAlert, QrCode, Smartphone, ArrowRight } from 'lucide-react';
+import { Navigation, Utensils, Trophy, ShieldAlert, Smartphone, ArrowRight } from 'lucide-react';
+import { QRCodeSVG } from 'qrcode.react';
 
 // ─── Action Cards ─────────────────────────────────────────────────────────────
 
@@ -78,38 +79,55 @@ export default function TapLandingPage() {
         <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-brand-gold/10 blur-3xl" />
         <div className="absolute -left-10 -bottom-10 h-32 w-32 rounded-full bg-brand-electric/10 blur-3xl" />
 
-        <div className="relative">
-          <div className="mb-1 flex items-center gap-2">
-            <QrCode className="h-4 w-4 text-brand-gold" />
-            <span className="text-xs font-semibold uppercase tracking-widest text-brand-gold">
-              Scan · Move · Experience
-            </span>
+        <div className="relative flex items-start justify-between gap-3">
+          {/* ── Text ────────────────────────────────────────── */}
+          <div className="flex-1 min-w-0">
+            <div className="mb-1 flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-brand-gold animate-pulse" />
+              <span className="text-xs font-semibold uppercase tracking-widest text-brand-gold">
+                Scan · Move · Experience
+              </span>
+            </div>
+
+            <h1 className="mt-3 font-display text-4xl font-black tracking-tight text-white">
+              TAP <span className="text-brand-gold">FIFA</span>
+            </h1>
+
+            <p className="mt-2 text-sm leading-relaxed text-brand-muted">
+              Your AI-powered guide to FIFA World Cup 2026.
+              <br />
+              <span className="text-brand-text font-medium">Atlanta · Mercedes-Benz Stadium</span>
+            </p>
+
+            <div className="mt-4 flex items-center gap-3">
+              <a
+                href="sms:+18888273432?body=FIFA"
+                className="inline-flex items-center gap-2 rounded-xl bg-brand-gold px-4 py-2.5 text-sm font-bold text-brand-black shadow-brand transition-all hover:bg-brand-gold-light active:scale-[0.97]"
+              >
+                <Smartphone className="h-4 w-4" />
+                Text FIFA
+              </a>
+              <a
+                href="tel:+18888273432"
+                className="inline-flex items-center gap-2 rounded-xl border border-brand-border bg-brand-surface px-4 py-2.5 text-sm font-medium text-brand-text transition-all hover:border-brand-gold/50"
+              >
+                Call FIFA
+              </a>
+            </div>
           </div>
 
-          <h1 className="mt-3 font-display text-4xl font-black tracking-tight text-white">
-            TAP <span className="text-brand-gold">FIFA</span>
-          </h1>
-
-          <p className="mt-2 text-sm leading-relaxed text-brand-muted">
-            Your AI-powered guide to the FIFA World Cup 2026.
-            <br />
-            <span className="text-brand-text font-medium">Atlanta · Mercedes-Benz Stadium</span>
-          </p>
-
-          <div className="mt-4 flex items-center gap-3">
-            <a
-              href="sms:+18888273432?body=FIFA"
-              className="inline-flex items-center gap-2 rounded-xl bg-brand-gold px-4 py-2.5 text-sm font-bold text-brand-black shadow-brand transition-all hover:bg-brand-gold-light active:scale-[0.97]"
-            >
-              <Smartphone className="h-4 w-4" />
-              Text FIFA
-            </a>
-            <a
-              href="tel:+18888273432"
-              className="inline-flex items-center gap-2 rounded-xl border border-brand-border bg-brand-surface px-4 py-2.5 text-sm font-medium text-brand-text transition-all hover:border-brand-gold/50"
-            >
-              Call FIFA
-            </a>
+          {/* ── QR Code ─────────────────────────────────────── */}
+          <div className="shrink-0 flex flex-col items-center gap-1.5">
+            <div className="rounded-xl bg-white p-2 shadow-lg">
+              <QRCodeSVG
+                value="sms:+18888273432?body=FIFA"
+                size={96}
+                bgColor="#FFFFFF"
+                fgColor="#0A0A0F"
+                level="M"
+              />
+            </div>
+            <span className="text-2xs font-semibold text-brand-gold">Scan to start</span>
           </div>
         </div>
       </div>
@@ -160,19 +178,74 @@ export default function TapLandingPage() {
         })}
       </div>
 
-      {/* ── Sponsor Offer ───────────────────────────────────── */}
-      <div className={`rounded-2xl border border-fuchsia-500/30 bg-gradient-to-br ${SPONSOR.color} p-4`}>
-        <div className="flex items-center justify-between">
-          <div>
-            <span className="text-2xs font-semibold uppercase tracking-widest text-fuchsia-400">
-              Official Partner
-            </span>
-            <p className="mt-1 font-display text-sm font-bold text-white">{SPONSOR.offer}</p>
-            <p className="mt-1 text-xs text-brand-muted">
-              Show code: <span className="font-mono text-brand-gold">{SPONSOR.code}</span>
+      {/* ── Poster Mockup ───────────────────────────────────── */}
+      <div className="mb-6">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-brand-muted">
+          The physical entry point
+        </p>
+        <div className="relative overflow-hidden rounded-2xl border border-brand-gold/30 bg-gradient-to-b from-brand-navy to-brand-black p-6 text-center">
+          {/* Dot grid */}
+          <div
+            className="absolute inset-0 opacity-[0.04]"
+            style={{ backgroundImage: 'radial-gradient(circle, #C9A84C 1px, transparent 1px)', backgroundSize: '18px 18px' }}
+          />
+          <div className="relative">
+            <div className="mb-3 inline-block rounded-full border border-brand-gold/40 px-3 py-0.5">
+              <span className="text-2xs font-bold uppercase tracking-widest text-brand-gold">
+                FIFA World Cup 2026 · Atlanta
+              </span>
+            </div>
+
+            <div className="mx-auto mb-3 w-fit rounded-xl bg-white p-3 shadow-xl ring-1 ring-brand-gold/20">
+              <QRCodeSVG
+                value="sms:+18888273432?body=FIFA"
+                size={128}
+                bgColor="#FFFFFF"
+                fgColor="#0A0A0F"
+                level="M"
+              />
+            </div>
+
+            <p className="font-display text-3xl font-black tracking-tight text-white">
+              TAP <span className="text-brand-gold">FIFA</span>
             </p>
+            <p className="mt-1 text-sm font-medium text-brand-muted">Scan. Move. Experience.</p>
+
+            <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-brand-gold/30 bg-brand-gold/10 px-4 py-2">
+              <Smartphone className="h-4 w-4 text-brand-gold" />
+              <span className="font-mono text-sm font-bold text-brand-gold">1-888-827-3432</span>
+            </div>
+            <p className="mt-2 text-2xs text-brand-muted/60">Text FIFA · Tap FIFA · Call FIFA</p>
           </div>
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-surface text-2xl">
+        </div>
+      </div>
+
+      {/* ── Sponsor Offer ───────────────────────────────────── */}
+      <div className="relative overflow-hidden rounded-2xl border border-red-500/30 bg-gradient-to-br from-red-950/40 via-brand-surface to-brand-surface p-4">
+        <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-red-600/10 blur-2xl" />
+        <div className="relative flex items-center justify-between gap-3">
+          <div className="flex-1 min-w-0">
+            <div className="mb-2 flex flex-wrap items-center gap-1.5">
+              <span className="rounded bg-red-500/20 px-2 py-0.5 text-2xs font-bold uppercase tracking-wider text-red-400">
+                Official Partner
+              </span>
+              <span className="rounded bg-brand-gold/20 px-2 py-0.5 text-2xs font-bold uppercase tracking-wider text-brand-gold">
+                Live Offer
+              </span>
+            </div>
+            <p className="font-display text-base font-bold text-white leading-tight">{SPONSOR.offer}</p>
+            <p className="mt-0.5 text-xs text-brand-muted">
+              Code: <span className="font-mono font-bold text-brand-gold">{SPONSOR.code}</span>
+            </p>
+            <a
+              href={`sms:+18888273432?body=${SPONSOR.code}`}
+              className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-red-600 px-3 py-1.5 text-xs font-bold text-white transition-all hover:bg-red-500 active:scale-[0.97]"
+            >
+              <Smartphone className="h-3.5 w-3.5" />
+              Claim via Text
+            </a>
+          </div>
+          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-red-500/20 bg-red-950/40 text-4xl">
             🥤
           </div>
         </div>
