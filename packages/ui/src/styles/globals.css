@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Wilkins Media Design Tokens ─────────────────────────────────────────── */
+@layer base {
+  :root {
+    --background: 222 47% 5%;
+    --foreground: 220 60% 94%;
+    --card: 222 40% 12%;
+    --border: 220 30% 20%;
+    --brand-gold: 42 55% 54%;
+    --brand-electric: 217 91% 60%;
+    --radius: 0.5rem;
+  }
+
+  * {
+    @apply border-brand-border;
+  }
+
+  body {
+    @apply bg-brand-black text-brand-text antialiased;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+
+  /* RTL support */
+  [dir='rtl'] {
+    direction: rtl;
+  }
+
+  /* Focus ring accessibility */
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-electric ring-offset-2 ring-offset-brand-black;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    @apply w-1.5;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-brand-black;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-brand-border;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-brand-muted;
+  }
+}
+
+/* ─── Typography Utilities ────────────────────────────────────────────────── */
+@layer components {
+  .text-gradient-gold {
+    @apply bg-gold-gradient bg-clip-text text-transparent;
+  }
+
+  .card-glass {
+    @apply rounded-xl border border-brand-border bg-brand-surface/80 backdrop-blur-sm;
+  }
+
+  .emergency-ring {
+    @apply ring-4 ring-brand-emergency ring-offset-2 ring-offset-brand-black;
+  }
+}

@@ -1,0 +1,132 @@
+version: '3.9'
+
+services:
+  # ─── Databases ─────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: wilkins_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: wilkins
+      POSTGRES_USER: wilkins
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-wilkins_dev}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U wilkins -d wilkins']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: wilkins_redis
+    restart: unless-stopped
+    command: redis-server --requirepass ${REDIS_PASSWORD:-wilkins_dev}
+    volumes:
+      - redis_data:/data
+    ports:
+      - '6379:6379'
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ─── API ───────────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    container_name: wilkins_api
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgresql://wilkins:${POSTGRES_PASSWORD:-wilkins_dev}@postgres:5432/wilkins
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-wilkins_dev}
+    ports:
+      - '4000:4000'
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # ─── Web (Guest PWA) ────────────────────────────────────
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    container_name: wilkins_web
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_API_URL: http://api:4000/api/v1
+    ports:
+      - '3000:3000'
+    depends_on:
+      - api
+
+  # ─── Admin (operator dashboard) ────────────────────────
+  admin:
+    build:
+      context: .
+      dockerfile: apps/admin/Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: http://api:4000/api/v1
+    container_name: wilkins_admin
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_API_URL: http://api:4000/api/v1
+    ports:
+      - '3001:3000'
+    depends_on:
+      - api
+
+  # ─── Admin Console (analytics / campaigns) ─────────────
+  admin-console:
+    build:
+      context: .
+      dockerfile: apps/admin-console/Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: http://api:4000/api/v1
+    container_name: wilkins_admin_console
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_API_URL: http://api:4000/api/v1
+    ports:
+      - '3003:3000'
+    depends_on:
+      - api
+
+  # ─── Staff Console ──────────────────────────────────────
+  staff-console:
+    build:
+      context: .
+      dockerfile: apps/staff-console/Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: http://api:4000/api/v1
+    container_name: wilkins_staff_console
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_API_URL: http://api:4000/api/v1
+    ports:
+      - '3002:3000'
+    depends_on:
+      - api
+
+volumes:
+  postgres_data:
+  redis_data:

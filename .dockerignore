@@ -1,0 +1,43 @@
+# Dependency directories
+node_modules
+**/node_modules
+
+# Build artifacts
+**/.next
+**/dist
+**/build
+
+# Prisma generated
+**/generated
+
+# Turbo
+.turbo
+**/.turbo
+
+# Test/coverage
+**/coverage
+**/.jest
+
+# Local env files — never copy secrets into image
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode
+.idea
+*.log
+
+# Git
+.git
+.gitignore
+
+# Docs / infra diagrams (not needed in runtime images)
+docs/
+infra/
+scripts/
+*.md

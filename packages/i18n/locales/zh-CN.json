@@ -1,0 +1,7 @@
+{
+  "nav": { "home": "首页", "map": "场馆地图", "find": "寻求帮助", "concierge": "礼宾服务", "emergency": "紧急情况", "translate": "翻译", "transport": "交通", "alerts": "提醒" },
+  "language": { "select": "请选择您的语言", "change": "更改语言", "current": "中文（简体）" },
+  "home": { "welcome": "欢迎来到亚特兰大", "tagline": "您的多语言赛事伴侣", "how_can_we_help": "今天我们能为您提供什么帮助？", "find_location": "查找位置", "get_translation": "获取翻译帮助", "emergency_help": "紧急援助", "cultural_concierge": "文化礼宾服务" },
+  "emergency": { "title": "紧急援助", "subtitle": "点击短语展示给工作人员", "i_need_hospital": "我需要去医院", "i_am_lost": "我迷路了", "lost_passport": "我丢失了护照", "lost_child": "我的孩子走失了", "need_police": "我需要警察", "need_medical": "我需要医疗帮助", "need_transport": "我需要交通工具", "need_translation": "我需要翻译帮助", "play_audio": "播放音频", "escalation_sent": "帮助正在赶来。请留在原地。", "emergency_number": "紧急电话: 911" },
+  "common": { "loading": "加载中…", "error": "出现错误", "retry": "重试", "close": "关闭", "back": "返回", "open": "营业中", "closed": "已关闭", "sponsored": "赞助", "powered_by": "由 Wilkins Media 提供支持" }
+}

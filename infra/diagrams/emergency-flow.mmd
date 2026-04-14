@@ -1,0 +1,37 @@
+%% Emergency Flow — Wilkins Media Global Guest OS
+%% Color: Red #DC2626
+%%
+%% CRITICAL: Emergency content uses APPROVED translations only.
+%% AI never generates emergency text.
+
+flowchart TD
+    A["Guest enters emergency mode"] --> B["Display 8 emergency presets<br/>in guest language"]
+    B --> C["Guest taps phrase<br/>e.g. 'I need a hospital'"]
+
+    C --> D["Full-screen display"]
+    D --> D1["Large translated text<br/>in guest language"]
+    D --> D2["English fallback visible"]
+    D --> D3["Voice playback button<br/>(if audio available)"]
+
+    C --> E{"Phrase type"}
+
+    E -->|"Medical"| F["Show nearest hospital/urgent care<br/>Map route overlay"]
+    E -->|"Lost child"| G["Immediate staff escalation<br/>Security team alerted"]
+    E -->|"Police"| H["Show local emergency number<br/>Staff escalation"]
+    E -->|"Lost"| I["Show guest location on map<br/>Staff notification"]
+    E -->|"Transport"| J["Show nearest transit options<br/>Rideshare link"]
+    E -->|"Passport"| K["Show embassy/consulate info<br/>Staff escalation"]
+
+    F --> L["Staff receives alert<br/>with location + language"]
+    G --> L
+    H --> L
+    I --> L
+    K --> L
+
+    L --> M["Staff acknowledges"]
+    M --> N["Incident tracked<br/>analytics logged"]
+    N --> O["Incident resolved"]
+
+    style A fill:#DC2626,color:#fff
+    style D fill:#DC2626,color:#fff
+    style L fill:#DC2626,color:#fff

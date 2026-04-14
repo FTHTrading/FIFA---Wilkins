@@ -1,0 +1,28 @@
+%% Staff Assistance Flow — Wilkins Media Global Guest OS
+%% Color: Emerald #059669
+
+flowchart TD
+    A["Guest sends help request<br/>(any language)"] --> B["Message enters staff queue"]
+    B --> C["AI translates to English<br/>+ confidence score"]
+    C --> D["Staff sees translated message<br/>+ guest location + language"]
+
+    D --> E{"Staff action"}
+
+    E -->|"Quick reply"| F["Select approved preset<br/>Auto-translated to guest language"]
+    E -->|"Custom reply"| G["Staff types English response<br/>AI translates to guest language"]
+    E -->|"Escalate"| H{"Escalation type"}
+
+    H -->|"Medical"| I["Flag as medical<br/>Priority: URGENT<br/>Notify emergency team"]
+    H -->|"Lost Child"| J["Flag as lost child<br/>Priority: URGENT<br/>Security notified"]
+    H -->|"General"| K["Reassign to supervisor"]
+
+    F --> L["Guest receives translated response"]
+    G --> L
+    I --> M["Emergency team dispatched"]
+    J --> N["Security team dispatched"]
+    K --> O["Supervisor takes over"]
+
+    L --> P["Request resolved<br/>Analytics logged"]
+    M --> P
+    N --> P
+    O --> P

@@ -1,0 +1,28 @@
+{
+  "name": "Wilkins Media Global Guest OS",
+  "short_name": "Wilkins OS",
+  "description": "Your multilingual guide to the world's greatest events.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#0A0A0F",
+  "background_color": "#0A0A0F",
+  "lang": "en",
+  "categories": ["travel", "navigation", "utilities"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "prefer_related_applications": false
+}

@@ -1,0 +1,39 @@
+%% Admin Console Flow — Wilkins Media Global Guest OS
+%% Color: Violet #7C3AED
+
+flowchart TD
+    A["Admin logs in<br/>Role-based access"] --> B{"Admin dashboard"}
+
+    B --> C["Event Management"]
+    B --> D["Venue & POI Management"]
+    B --> E["Translation Workflow"]
+    B --> F["Emergency Management"]
+    B --> G["Campaign Management"]
+    B --> H["Analytics Dashboard"]
+
+    C --> C1["Create / edit events"]
+    C --> C2["Configure supported languages"]
+    C --> C3["Set event schedule"]
+
+    D --> D1["Map-based POI editor"]
+    D --> D2["Upload venue maps"]
+    D --> D3["Manage city services & restaurants"]
+
+    E --> E1["Review pending translations"]
+    E --> E2["Approve / reject with confidence"]
+    E --> E3["Manage approved phrase packs"]
+
+    F --> F1["Edit emergency phrases"]
+    F --> F2["Monitor active incidents"]
+    F --> F3["View incident timeline"]
+
+    G --> G1["Create sponsor campaigns"]
+    G --> G2["Set targeting rules<br/>(language, venue, time)"]
+    G --> G3["View impressions & clicks"]
+    G --> G4["Sponsor performance cards"]
+
+    H --> H1["Session count by language"]
+    H --> H2["Top search queries"]
+    H --> H3["Failed searches report"]
+    H --> H4["Emergency usage stats"]
+    H --> H5["Sponsor CTR & revenue"]

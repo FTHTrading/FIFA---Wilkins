@@ -1,0 +1,7 @@
+{
+  "nav": { "home": "Home", "map": "Mappa del Luogo", "find": "Trova Aiuto", "concierge": "Portineria", "emergency": "Emergenza", "translate": "Tradurre", "transport": "Trasporti", "alerts": "Avvisi" },
+  "language": { "select": "Seleziona la tua lingua", "change": "Cambia lingua", "current": "Italiano" },
+  "home": { "welcome": "Benvenuto ad Atlanta", "tagline": "Il tuo compagno multilingue per gli eventi", "how_can_we_help": "Come possiamo aiutarti oggi?", "find_location": "Trovare un luogo", "get_translation": "Ottenere aiuto con la traduzione", "emergency_help": "Aiuto di emergenza", "cultural_concierge": "Portineria culturale" },
+  "emergency": { "title": "Aiuto di Emergenza", "subtitle": "Tocca una frase per mostrarla al personale", "i_need_hospital": "Ho bisogno di un ospedale", "i_am_lost": "Mi sono perso", "lost_passport": "Ho perso il mio passaporto", "lost_child": "Ho perso mio figlio", "need_police": "Ho bisogno della polizia", "need_medical": "Ho bisogno di aiuto medico", "need_transport": "Ho bisogno di trasporto", "need_translation": "Ho bisogno di aiuto con la traduzione", "play_audio": "Riproduci audio", "escalation_sent": "L'aiuto è in arrivo. Rimani dove sei.", "emergency_number": "Emergenze: 911" },
+  "common": { "loading": "Caricamento…", "error": "Si è verificato un errore", "retry": "Riprova", "close": "Chiudi", "back": "Indietro", "open": "Aperto", "closed": "Chiuso", "sponsored": "Sponsorizzato", "powered_by": "Realizzato da Wilkins Media" }
+}

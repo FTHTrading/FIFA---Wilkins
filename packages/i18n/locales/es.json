@@ -1,0 +1,139 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "map": "Mapa del Recinto",
+    "find": "Encontrar Ayuda",
+    "concierge": "Conserje",
+    "emergency": "Emergencia",
+    "translate": "Traducir",
+    "transport": "Transporte",
+    "alerts": "Alertas"
+  },
+  "language": {
+    "select": "Selecciona tu idioma",
+    "change": "Cambiar idioma",
+    "current": "Español"
+  },
+  "home": {
+    "welcome": "Bienvenido a Atlanta",
+    "tagline": "Tu acompañante multilingüe para el evento",
+    "how_can_we_help": "¿Cómo podemos ayudarte hoy?",
+    "find_location": "Encontrar una ubicación",
+    "get_translation": "Obtener ayuda con traducción",
+    "emergency_help": "Ayuda de emergencia",
+    "cultural_concierge": "Conserje cultural"
+  },
+  "search": {
+    "placeholder": "Buscar — baños, puertas, comida, ayuda…",
+    "no_results": "No se encontraron resultados",
+    "try_different": "Intenta con otro término de búsqueda",
+    "nearest": "Más cercano",
+    "showing_results": "Mostrando {{count}} resultados"
+  },
+  "poi": {
+    "gate": "Puerta",
+    "restroom": "Baño",
+    "first_aid": "Primeros Auxilios",
+    "concession": "Puestos de Comida",
+    "merchandise": "Mercancía",
+    "seating": "Asientos",
+    "accessibility": "Accesibilidad",
+    "exit": "Salida",
+    "help_desk": "Mesa de Ayuda",
+    "transport": "Transporte",
+    "parking": "Estacionamiento",
+    "prayer_room": "Sala de Oración",
+    "family_area": "Área Familiar",
+    "vip": "VIP",
+    "get_directions": "Obtener indicaciones",
+    "distance_away": "a {{distance}}"
+  },
+  "emergency": {
+    "title": "Ayuda de Emergencia",
+    "subtitle": "Toca una frase para mostrársela al personal",
+    "call_emergency": "Llamar a Servicios de Emergencia",
+    "i_need_hospital": "Necesito un hospital",
+    "i_am_lost": "Estoy perdido",
+    "lost_passport": "Perdí mi pasaporte",
+    "lost_child": "Perdí a mi hijo/a",
+    "need_police": "Necesito a la policía",
+    "need_medical": "Necesito ayuda médica",
+    "need_transport": "Necesito transporte",
+    "need_translation": "Necesito ayuda con traducción",
+    "show_staff": "Muestra esto a un miembro del personal",
+    "play_audio": "Reproducir audio",
+    "escalation_sent": "La ayuda está en camino. Quédate donde estás.",
+    "emergency_number": "Emergencias: 911"
+  },
+  "chat": {
+    "title": "Ayuda de Traducción en Vivo",
+    "placeholder": "Escribe tu mensaje…",
+    "send": "Enviar",
+    "connecting": "Conectando con el personal…",
+    "connected": "Conectado con el personal",
+    "staff_typing": "El personal está escribiendo…",
+    "your_message": "Tu mensaje",
+    "staff_reply": "Respuesta del personal",
+    "voice_input": "Entrada de voz",
+    "end_chat": "Terminar conversación",
+    "escalate": "Solicitar ayuda urgente",
+    "confidence_low": "⚠️ La traducción puede ser aproximada",
+    "session_ended": "Esta conversación ha terminado"
+  },
+  "concierge": {
+    "title": "Conserje Cultural",
+    "subtitle": "Encuentra comida, servicios y lugares que se sientan como en casa",
+    "food_from_home": "Comida de casa",
+    "find_food": "Encontrar restaurantes",
+    "find_services": "Encontrar servicios",
+    "dietary": {
+      "halal": "Halal",
+      "kosher": "Kosher",
+      "vegetarian": "Vegetariano",
+      "vegan": "Vegano",
+      "gluten_free": "Sin gluten"
+    },
+    "cuisine": {
+      "latin_american": "Latinoamericano",
+      "west_african": "África Occidental",
+      "middle_eastern": "Medio Oriente",
+      "east_asian": "Asia Oriental",
+      "south_asian": "Asia del Sur",
+      "european": "Europeo",
+      "caribbean": "Caribeño"
+    },
+    "open_now": "Abierto ahora",
+    "distance": "Distancia",
+    "price": "Precio",
+    "rating": "Calificación",
+    "directions": "Obtener indicaciones",
+    "call": "Llamar",
+    "website": "Sitio web"
+  },
+  "camera": {
+    "title": "Traducción por Cámara",
+    "subtitle": "Apunta tu cámara a cualquier letrero o menú",
+    "capture": "Capturar",
+    "retake": "Volver a tomar",
+    "translating": "Traduciendo…",
+    "translated_text": "Texto traducido",
+    "original_text": "Texto original",
+    "copy": "Copiar texto",
+    "low_confidence": "La traducción puede ser aproximada"
+  },
+  "common": {
+    "loading": "Cargando…",
+    "error": "Algo salió mal",
+    "retry": "Intentar de nuevo",
+    "close": "Cerrar",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "confirm": "Confirmar",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "open": "Abierto",
+    "closed": "Cerrado",
+    "sponsored": "Patrocinado",
+    "powered_by": "Desarrollado por Wilkins Media"
+  }
+}

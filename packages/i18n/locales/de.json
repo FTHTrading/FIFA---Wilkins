@@ -1,0 +1,7 @@
+{
+  "nav": { "home": "Startseite", "map": "Geländeplan", "find": "Hilfe finden", "concierge": "Concierge", "emergency": "Notfall", "translate": "Übersetzen", "transport": "Transport", "alerts": "Benachrichtigungen" },
+  "language": { "select": "Wählen Sie Ihre Sprache", "change": "Sprache ändern", "current": "Deutsch" },
+  "home": { "welcome": "Willkommen in Atlanta", "tagline": "Ihr mehrsprachiger Veranstaltungsbegleiter", "how_can_we_help": "Wie können wir Ihnen heute helfen?", "find_location": "Einen Ort finden", "get_translation": "Übersetzungshilfe erhalten", "emergency_help": "Notfallhilfe", "cultural_concierge": "Kultureller Concierge" },
+  "emergency": { "title": "Notfallhilfe", "subtitle": "Tippen Sie auf einen Satz, um ihn dem Personal zu zeigen", "i_need_hospital": "Ich brauche ein Krankenhaus", "i_am_lost": "Ich habe mich verlaufen", "lost_passport": "Ich habe meinen Pass verloren", "lost_child": "Ich habe mein Kind verloren", "need_police": "Ich brauche die Polizei", "need_medical": "Ich brauche medizinische Hilfe", "need_transport": "Ich brauche ein Transportmittel", "need_translation": "Ich brauche Übersetzungshilfe", "play_audio": "Audio abspielen", "escalation_sent": "Hilfe ist unterwegs. Bleiben Sie, wo Sie sind.", "emergency_number": "Notruf: 911" },
+  "common": { "loading": "Laden…", "error": "Ein Fehler ist aufgetreten", "retry": "Erneut versuchen", "close": "Schließen", "back": "Zurück", "open": "Geöffnet", "closed": "Geschlossen", "sponsored": "Gesponsert", "powered_by": "Unterstützt von Wilkins Media" }
+}

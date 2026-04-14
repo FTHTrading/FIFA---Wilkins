@@ -1,0 +1,39 @@
+%% Sponsor Engine Flow — Wilkins Media Global Guest OS
+%% Color: Fuchsia #C026D3
+
+flowchart TD
+    A["Guest searches<br/>food / transport / shopping"] --> B["Intent parsed"]
+    B --> C["Load guest profile<br/>language, region, dietary prefs"]
+
+    C --> D["Query active campaigns<br/>matching event + time window"]
+
+    D --> E["Filter by targeting rules"]
+    E --> E1["Language match"]
+    E --> E2["Venue / geofence match"]
+    E --> E3["Query intent match"]
+    E --> E4["Cultural profile match"]
+
+    E1 --> F["Score each campaign"]
+    E2 --> F
+    E3 --> F
+    E4 --> F
+
+    F --> G["Ranking Formula<br/>cultural 0.35 + proximity 0.20<br/>+ open 0.10 + sponsor 0.20<br/>+ quality 0.15"]
+
+    G --> H{"Is this emergency?"}
+    H -->|"Yes"| I["BLOCK all sponsors<br/>Never inject during emergency"]
+    H -->|"No"| J["Inject up to 2 sponsored items<br/>Clearly labeled 'Promoted'"]
+
+    J --> K["Log SponsorRecommendation<br/>campaignId, score, placement"]
+    K --> L["Guest sees organic + sponsored results"]
+
+    L --> M{"Guest clicks sponsor?"}
+    M -->|"Yes"| N["Log sponsor_click<br/>Increment campaign clicks"]
+    M -->|"No"| O["Log impression only"]
+
+    N --> P["Admin sees performance<br/>Impressions, clicks, CTR"]
+    O --> P
+
+    style I fill:#DC2626,color:#fff
+    style J fill:#C026D3,color:#fff
+    style G fill:#C026D3,color:#fff

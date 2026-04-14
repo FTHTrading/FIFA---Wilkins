@@ -1,0 +1,58 @@
+{
+  "slug": "fthtrading-fifa-wilkins",
+  "brandOwner": "FTHTrading",
+  "programName": "FIFA x Wilkins",
+  "eventName": "Atlanta 2026 FIFA World Cup Demo",
+  "location": "Atlanta, Georgia",
+  "tagline": "Commercial-ready fan operations, wayfinding, translation, and sponsor revenue layer",
+  "heroTitle": "Atlanta FIFA guest operations, revenue, and safety in one system.",
+  "heroSubtitle": "A color-coded, white-label operating system for multilingual fan journeys across the stadium, the city, and sponsor touchpoints.",
+  "repoUrl": "https://github.com/FTHTrading/FIFA---Wilkins",
+  "colors": {
+    "ink": "#08111f",
+    "surface": "#0c1730",
+    "panel": "#122140",
+    "line": "#2d4372",
+    "text": "#eef4ff",
+    "muted": "#94a8cc",
+    "primary": "#0ea5e9",
+    "accent": "#d946ef",
+    "success": "#22c55e",
+    "alert": "#ef4444"
+  },
+  "metrics": [
+    { "label": "Languages Live", "value": "10" },
+    { "label": "Revenue Surface", "value": "$223.4K" },
+    { "label": "Demo Stack", "value": "Web + Staff + Admin + API" },
+    { "label": "Market", "value": "Atlanta FIFA" }
+  ],
+  "surfaces": [
+    {
+      "title": "Guest Web",
+      "color": "blue",
+      "description": "Concierge search, venue map, rewards, cultural food discovery, emergency mode."
+    },
+    {
+      "title": "Staff Console",
+      "color": "green",
+      "description": "Translation-assisted support, queue workflows, rapid escalation."
+    },
+    {
+      "title": "Admin Control",
+      "color": "violet",
+      "description": "POIs, campaigns, emergency phrases, translation approvals."
+    },
+    {
+      "title": "Revenue Console",
+      "color": "fuchsia",
+      "description": "Executive dashboard with campaign, language, and intent monetization views."
+    }
+  ],
+  "journey": [
+    "Fan enters in their own language.",
+    "Agentic concierge interprets intent and location.",
+    "Cultural ranking + RAG return relevant venue and city guidance.",
+    "Transparent sponsor offers and rewards are injected when eligible.",
+    "Safety routes bypass monetization and use deterministic approved phrases."
+  ]
+}

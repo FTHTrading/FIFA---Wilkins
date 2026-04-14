@@ -1,0 +1,28 @@
+%% Guest User Flow — Wilkins Media Global Guest OS
+%% Color: Blue #2563EB
+
+flowchart TD
+    A["Guest scans QR code"] --> B["Guest selects language"]
+    B --> C["App loads event + city layer<br/>in chosen language"]
+    C --> D{"What does the guest need?"}
+
+    D -->|"Navigate"| E["Venue Map View<br/>Browse POI categories"]
+    D -->|"Find Food"| F["Cultural Food Discovery<br/>Diet + cuisine affinity ranking"]
+    D -->|"Emergency"| G["Emergency Mode<br/>Approved phrase packs"]
+    D -->|"Get Help"| H["Live Help Query<br/>Staff translation bridge"]
+    D -->|"Translate"| I["Camera / Voice Translation"]
+    D -->|"City Services"| J["Hospital, Transport,<br/>ATM, Pharmacy"]
+
+    E --> K["Map centers on POI<br/>Translated labels"]
+    F --> L["Nearby restaurants ranked<br/>by culture, distance, sponsors"]
+    G --> M["Full-screen approved translation<br/>+ English fallback + map route"]
+    H --> N["Message sent in guest language<br/>Staff sees English"]
+    I --> O["OCR / STT result<br/>translated in real-time"]
+    J --> P["City POI list<br/>with directions"]
+
+    K --> Q["Guest navigates"]
+    L --> Q
+    M --> R["Staff escalation available"]
+    N --> S["Staff replies → translated back"]
+    O --> Q
+    P --> Q

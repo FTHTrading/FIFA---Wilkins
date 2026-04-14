@@ -1,0 +1,55 @@
+{
+  "nav": {
+    "home": "الرئيسية",
+    "map": "خريطة المكان",
+    "find": "العثور على مساعدة",
+    "concierge": "الكونسيرج",
+    "emergency": "الطوارئ",
+    "translate": "الترجمة",
+    "transport": "المواصلات",
+    "alerts": "التنبيهات"
+  },
+  "language": {
+    "select": "اختر لغتك",
+    "change": "تغيير اللغة",
+    "current": "العربية"
+  },
+  "home": {
+    "welcome": "مرحباً بك في أتلانتا",
+    "tagline": "رفيقك متعدد اللغات في الفعاليات",
+    "how_can_we_help": "كيف يمكننا مساعدتك اليوم؟",
+    "find_location": "البحث عن موقع",
+    "get_translation": "الحصول على مساعدة في الترجمة",
+    "emergency_help": "مساعدة الطوارئ",
+    "cultural_concierge": "الكونسيرج الثقافي"
+  },
+  "emergency": {
+    "title": "مساعدة الطوارئ",
+    "subtitle": "انقر على عبارة لإظهارها للموظفين",
+    "call_emergency": "الاتصال بخدمات الطوارئ",
+    "i_need_hospital": "أحتاج إلى مستشفى",
+    "i_am_lost": "أنا ضائع",
+    "lost_passport": "فقدت جواز سفري",
+    "lost_child": "فقدت طفلي",
+    "need_police": "أحتاج إلى الشرطة",
+    "need_medical": "أحتاج إلى مساعدة طبية",
+    "need_transport": "أحتاج إلى وسيلة نقل",
+    "need_translation": "أحتاج إلى مساعدة في الترجمة",
+    "show_staff": "أظهر هذا لأحد أعضاء الفريق",
+    "play_audio": "تشغيل الصوت",
+    "escalation_sent": "المساعدة في الطريق. ابق في مكانك.",
+    "emergency_number": "الطوارئ: 911"
+  },
+  "common": {
+    "loading": "جاري التحميل…",
+    "error": "حدث خطأ ما",
+    "retry": "حاول مرة أخرى",
+    "close": "إغلاق",
+    "back": "رجوع",
+    "next": "التالي",
+    "open": "مفتوح",
+    "closed": "مغلق",
+    "sponsored": "برعاية",
+    "powered_by": "مدعوم من Wilkins Media"
+  }
+}

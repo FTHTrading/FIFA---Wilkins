@@ -1,0 +1,54 @@
+%% Wilkins Media Global Guest OS — System Overview
+%% Infrastructure Color Legend:
+%%   Guest #2563EB | Staff #059669 | Admin #7C3AED | Maps #0891B2
+%%   Agentic #D97706 | Emergency #DC2626 | Sponsor #C026D3
+%%   Data #334155 | Integrations #EA580C | Analytics #4F46E5
+
+flowchart TD
+    subgraph Clients
+        A["Guest Mobile PWA<br/>#2563EB"]
+        B["Staff Console<br/>#059669"]
+        C["Admin Console<br/>#7C3AED"]
+    end
+
+    A --> GW["API Gateway<br/>NestJS + Fastify"]
+    B --> GW
+    C --> GW
+
+    subgraph Core Services
+        GW --> IP["Intent Parser<br/>#D97706"]
+        GW --> EM["Emergency Service<br/>#DC2626"]
+        GW --> MP["Maps Service<br/>#0891B2"]
+        GW --> CM["Campaigns Service<br/>#C026D3"]
+        GW --> TR["Translation Service<br/>#EA580C"]
+        GW --> AN["Analytics Service<br/>#4F46E5"]
+        GW --> ST["Staff Queue Service<br/>#059669"]
+        GW --> EV["Events Service"]
+    end
+
+    subgraph Agentic Layer
+        IP --> TR2["Tool Router<br/>#D97706"]
+        TR2 --> MP
+        TR2 --> CP["Cultural Profile<br/>#D97706"]
+        TR2 --> RG["RAG Retrieval<br/>#D97706"]
+        TR2 --> EM
+        TR2 --> CM
+    end
+
+    subgraph External Integrations
+        MP --> MX["Mapbox<br/>#EA580C"]
+        MP --> OV["Overpass / OSM<br/>#EA580C"]
+        MP --> VP["Venue POI Store"]
+        TR --> TP["Translation Provider<br/>#EA580C"]
+        TR --> SP["Speech / OCR<br/>#EA580C"]
+    end
+
+    subgraph Data Layer
+        GW --> PG[("PostgreSQL<br/>#334155")]
+        GW --> RD[("Redis / BullMQ<br/>#334155")]
+        GW --> S3[("Object Storage<br/>#334155")]
+        RG --> VS[("Vector Store<br/>#334155")]
+    end
+
+    CM --> RE["Campaign Rules Engine<br/>#C026D3"]
+    AN --> PG

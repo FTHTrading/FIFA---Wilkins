@@ -1,0 +1,7 @@
+{
+  "nav": { "home": "홈", "map": "경기장 지도", "find": "도움 찾기", "concierge": "컨시어지", "emergency": "긴급", "translate": "번역", "transport": "교통", "alerts": "알림" },
+  "language": { "select": "언어를 선택하세요", "change": "언어 변경", "current": "한국어" },
+  "home": { "welcome": "애틀란타에 오신 것을 환영합니다", "tagline": "다국어 이벤트 컴패니언", "how_can_we_help": "오늘 어떻게 도와드릴까요?", "find_location": "위치 찾기", "get_translation": "번역 도움 받기", "emergency_help": "긴급 지원", "cultural_concierge": "문화 컨시어지" },
+  "emergency": { "title": "긴급 지원", "subtitle": "문구를 탭하여 직원에게 보여주세요", "i_need_hospital": "병원이 필요합니다", "i_am_lost": "길을 잃었습니다", "lost_passport": "여권을 잃어버렸습니다", "lost_child": "아이를 잃어버렸습니다", "need_police": "경찰이 필요합니다", "need_medical": "의료 도움이 필요합니다", "need_transport": "교통수단이 필요합니다", "need_translation": "번역 도움이 필요합니다", "play_audio": "오디오 재생", "escalation_sent": "도움이 오고 있습니다. 그 자리에 있어 주세요.", "emergency_number": "긴급: 911" },
+  "common": { "loading": "로딩 중…", "error": "오류가 발생했습니다", "retry": "다시 시도", "close": "닫기", "back": "뒤로", "open": "영업 중", "closed": "영업 종료", "sponsored": "스폰서", "powered_by": "Wilkins Media 제공" }
+}

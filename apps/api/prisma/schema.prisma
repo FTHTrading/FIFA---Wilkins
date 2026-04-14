@@ -1,0 +1,748 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Auth & Identity ────────────────────────────────────────────────────────
+
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  EDITOR
+  TRANSLATOR_REVIEWER
+  STAFF
+  SPONSOR_MANAGER
+  GUEST
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  role         UserRole @default(STAFF)
+  organizationId String?
+  organization Organization? @relation(fields: [organizationId], references: [id])
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([email])
+  @@index([organizationId])
+}
+
+model GuestSession {
+  id           String   @id @default(cuid())
+  sessionId    String   @unique
+  languageCode String   @default("en")
+  eventId      String?
+  venueId      String?
+  ipHash       String?  // hashed, for rate limiting only
+  startedAt    DateTime @default(now())
+  lastSeenAt   DateTime @default(now()) @updatedAt
+  event        Event?   @relation(fields: [eventId], references: [id])
+
+  conversations Conversation[]
+  analyticsEvents AnalyticsEvent[]
+
+  @@index([eventId])
+  @@index([languageCode])
+}
+
+// ─── Organizations & Events ──────────────────────────────────────────────────
+
+model Organization {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  logoUrl   String?
+  website   String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users  User[]
+  events Event[]
+  campaigns SponsorCampaign[]
+}
+
+enum EventStatus {
+  DRAFT
+  PUBLISHED
+  LIVE
+  COMPLETED
+  ARCHIVED
+}
+
+model Event {
+  id             String      @id @default(cuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  name           String
+  slug           String      @unique
+  description    String?
+  logoUrl        String?
+  coverImageUrl  String?
+  status         EventStatus @default(DRAFT)
+  primaryLanguage String     @default("en")
+  supportedLanguages String[] @default(["en"])
+  timezone       String      @default("America/New_York")
+  startsAt       DateTime
+  endsAt         DateTime
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  venues         Venue[]
+  eventDays      EventDay[]
+  guestSessions  GuestSession[]
+  campaigns      SponsorCampaign[]
+  alerts         VenueAlert[]
+
+  @@index([organizationId])
+  @@index([status])
+}
+
+model EventDay {
+  id        String   @id @default(cuid())
+  eventId   String
+  event     Event    @relation(fields: [eventId], references: [id])
+  date      DateTime @db.Date
+  label     String?  // "Day 1", "Opening Ceremony", etc.
+  startsAt  DateTime
+  endsAt    DateTime
+  createdAt DateTime @default(now())
+
+  @@index([eventId])
+}
+
+// ─── Venues & POIs ──────────────────────────────────────────────────────────
+
+model Venue {
+  id          String   @id @default(cuid())
+  eventId     String
+  event       Event    @relation(fields: [eventId], references: [id])
+  name        String
+  description String?
+  address     String?
+  city        String?
+  country     String?
+  latitude    Float?
+  longitude   Float?
+  mapboxStyleUrl String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  pois        VenuePOI[]
+  alerts      VenueAlert[]
+
+  @@index([eventId])
+}
+
+enum POICategory {
+  GATE
+  RESTROOM
+  FIRST_AID
+  CONCESSION
+  MERCHANDISE
+  INFORMATION
+  PARKING
+  TRANSPORT
+  SPONSOR_ZONE
+  STAGE
+  OTHER
+}
+
+model VenuePOI {
+  id          String      @id @default(cuid())
+  venueId     String
+  venue       Venue       @relation(fields: [venueId], references: [id])
+  name        String
+  nameI18n    Json?       // { es: "...", fr: "..." }
+  category    POICategory
+  description String?
+  latitude    Float
+  longitude   Float
+  floor       String?
+  isActive    Boolean     @default(true)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@index([venueId, category])
+}
+
+model VenueAlert {
+  id        String   @id @default(cuid())
+  eventId   String
+  event     Event    @relation(fields: [eventId], references: [id])
+  venueId   String?
+  venue     Venue?   @relation(fields: [venueId], references: [id])
+  severity  String   @default("info") // "critical" | "warning" | "info"
+  title     String
+  titleI18n Json?
+  body      String
+  bodyI18n  Json?
+  source    String?
+  expiresAt DateTime?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([eventId, isActive])
+}
+
+// ─── Translations ────────────────────────────────────────────────────────────
+
+enum TranslationType {
+  STATIC_APPROVED
+  MANAGED_DYNAMIC
+  LIVE_CONVERSATIONAL
+}
+
+enum TranslationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  NEEDS_REVIEW
+}
+
+model TranslationEntry {
+  id           String            @id @default(cuid())
+  key          String            // dot-notation key, e.g. "emergency.call_ambulance"
+  sourceText   String
+  sourceLang   String
+  targetText   String
+  targetLang   String
+  type         TranslationType   @default(MANAGED_DYNAMIC)
+  status       TranslationStatus @default(PENDING)
+  confidence   Float?            // 0.0–1.0
+  provider     String?           // "azure" | "google" | "deepl" | "human"
+  reviewedById String?
+  eventId      String?
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  @@unique([key, sourceLang, targetLang, eventId])
+  @@index([key])
+  @@index([targetLang, status])
+}
+
+// ─── Emergency ───────────────────────────────────────────────────────────────
+
+model EmergencyPhrase {
+  id           String   @id @default(cuid())
+  phraseKey    String   @unique // e.g. "call_ambulance"
+  urgency      String   @default("medium")
+  icon         String
+  translations Json     // { en: "...", es: "...", ... } — pre-approved only
+  audioUrls    Json?    // { en: "https://...", es: "..." }
+  isActive     Boolean  @default(true)
+  sortOrder    Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model EmergencyIncident {
+  id          String   @id @default(cuid())
+  sessionId   String
+  phraseKey   String
+  eventId     String?
+  venueId     String?
+  language    String
+  location    String?
+  status      String   @default("open") // "open" | "acknowledged" | "resolved"
+  staffId     String?
+  acknowledgedAt DateTime?
+  resolvedAt  DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([eventId, status])
+}
+
+// ─── Chat / Live Translation ─────────────────────────────────────────────────
+
+enum ConversationStatus {
+  OPEN
+  ACTIVE
+  RESOLVED
+  ABANDONED
+}
+
+model Conversation {
+  id             String             @id @default(cuid())
+  guestSessionId String
+  guestSession   GuestSession       @relation(fields: [guestSessionId], references: [id])
+  eventId        String?
+  staffId        String?
+  status         ConversationStatus @default(OPEN)
+  guestLanguage  String
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+
+  messages Message[]
+
+  @@index([guestSessionId])
+  @@index([eventId, status])
+}
+
+model Message {
+  id             String       @id @default(cuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
+  senderType     String       // "guest" | "staff" | "system"
+  senderId       String?
+  originalText   String
+  originalLang   String
+  translatedText String?
+  translatedLang String?
+  confidence     Float?
+  isRead         Boolean      @default(false)
+  createdAt      DateTime     @default(now())
+
+  @@index([conversationId])
+}
+
+// ─── Concierge / City Services ───────────────────────────────────────────────
+
+model CityService {
+  id           String   @id @default(cuid())
+  eventId      String?
+  name         String
+  nameI18n     Json?
+  category     String   // "restaurant" | "hotel" | "transport" | "pharmacy" | etc.
+  description  String?
+  descriptionI18n Json?
+  address      String?
+  city         String?
+  latitude     Float?
+  longitude    Float?
+  phone        String?
+  website      String?
+  priceRange   String?  // "$" | "$$" | "$$$" | "$$$$"
+  rating       Float?
+  cuisineTypes String[]
+  dietaryOptions String[]
+  openingHours Json?    // { mon: { open: "09:00", close: "22:00" }, ... }
+  distanceM    Float?   // meters from venue
+  imageUrl     String?
+  isActive     Boolean  @default(true)
+  isFeatured   Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([eventId, category])
+}
+
+// ─── Sponsor Campaigns ───────────────────────────────────────────────────────
+
+enum CampaignStatus {
+  DRAFT
+  ACTIVE
+  PAUSED
+  COMPLETED
+}
+
+model SponsorCampaign {
+  id             String         @id @default(cuid())
+  organizationId String
+  organization   Organization   @relation(fields: [organizationId], references: [id])
+  eventId        String
+  event          Event          @relation(fields: [eventId], references: [id])
+  name           String
+  sponsorName    String
+  logoUrl        String?
+  bannerUrl      String?
+  ctaText        String?
+  ctaUrl         String?
+  placement      String         // "home_banner" | "map_overlay" | "concierge_card" | "language_select"
+  targetLanguages String[]      @default([])
+  status         CampaignStatus @default(DRAFT)
+  impressions    Int            @default(0)
+  clicks         Int            @default(0)
+  budget         Float?
+  startsAt       DateTime?
+  endsAt         DateTime?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  @@index([eventId, status])
+}
+
+// ─── Analytics ───────────────────────────────────────────────────────────────
+
+model AnalyticsEvent {
+  id             String   @id @default(cuid())
+  type           String   // "page_view" | "language_selected" | "poi_viewed" | "search" | etc.
+  sessionId      String?
+  guestSession   GuestSession? @relation(fields: [sessionId], references: [sessionId])
+  eventId        String?
+  language       String?
+  payload        Json?
+  createdAt      DateTime @default(now())
+
+  @@index([type, eventId])
+  @@index([createdAt])
+}
+
+// ─── Multi-Tenancy ──────────────────────────────────────────────────────────
+
+model Tenant {
+  id             String   @id @default(cuid())
+  organizationId String
+  name           String
+  slug           String   @unique
+  domain         String?  @unique
+  logoUrl        String?
+  primaryColor   String?
+  config         Json?    // white-label config overrides
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([organizationId])
+}
+
+// ─── Venue Maps ─────────────────────────────────────────────────────────────
+
+model VenueMap {
+  id             String   @id @default(cuid())
+  venueId        String
+  name           String
+  mapboxStyleUrl String?
+  floorLabel     String?  // "Level 1", "Main Concourse"
+  sortOrder      Int      @default(0)
+  bounds         Json?    // { sw: [lng, lat], ne: [lng, lat] }
+  isDefault      Boolean  @default(false)
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([venueId])
+}
+
+// ─── RAG / Vector Retrieval ─────────────────────────────────────────────────
+// pgvector extension must be enabled: CREATE EXTENSION IF NOT EXISTS vector;
+// The `embedding` column uses the Unsupported type because Prisma does not yet
+// have first-class pgvector support. Raw queries use `$queryRaw` for similarity
+// searches via the <=> cosine distance operator.
+
+model RagChunk {
+  id          String   @id @default(cuid())
+  source      String   // "venue-guide" | "cultural-profile" | "city-service" | "faq"
+  sourceId    String?  // optional foreign-key hint (e.g. VenuePOI.id or CityService.id)
+  eventId     String?
+  language    String   @default("en")
+  title       String?
+  content     String   @db.Text
+  tags        String[] @default([])
+  // Vector embedding stored as pgvector type via raw migration.
+  // Prisma cannot model it natively, so it is declared as Unsupported.
+  embedding   Unsupported("vector(1536)")?
+  embeddingModel String? // which model produced this vector, e.g. "text-embedding-3-small"
+  tokenCount  Int?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([eventId, language])
+  @@index([source, language])
+  @@index([tags])
+}
+
+// ─── Restaurants ────────────────────────────────────────────────────────────
+
+model Restaurant {
+  id             String   @id @default(cuid())
+  eventId        String?
+  venueId        String?
+  name           String
+  nameI18n       Json?
+  description    String?
+  descriptionI18n Json?
+  address        String?
+  city           String?
+  country        String?
+  latitude       Float?
+  longitude      Float?
+  phone          String?
+  website        String?
+  priceRange     String?  // "$" | "$$" | "$$$" | "$$$$"
+  rating         Float?
+  cuisineType    String   // "american" | "mexican" | "japanese" | "korean" | "halal" | etc.
+  cuisineTags    String[]
+  dietaryOptions String[] // "halal" | "kosher" | "vegan" | "vegetarian" | "gluten-free"
+  openingHours   Json?
+  imageUrl       String?
+  distanceM      Float?
+  isSponsored    Boolean  @default(false)
+  sponsorPriority Int     @default(0)
+  isActive       Boolean  @default(true)
+  isFeatured     Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([eventId, cuisineType])
+  @@index([venueId])
+}
+
+// ─── Approved Phrases (Deterministic Translations) ──────────────────────────
+
+model ApprovedPhrase {
+  id           String   @id @default(cuid())
+  category     String   // "emergency" | "wayfinding" | "hospitality" | "transport"
+  phraseKey    String   @unique
+  description  String?
+  translations Json     // { en: "...", es: "...", ar: "...", ... }
+  audioUrls    Json?    // { en: "url", es: "url" }
+  icon         String?
+  sortOrder    Int      @default(0)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([category])
+}
+
+// ─── Staff Assistance Requests ──────────────────────────────────────────────
+
+enum AssistanceStatus {
+  PENDING
+  ASSIGNED
+  IN_PROGRESS
+  RESOLVED
+  ESCALATED
+  CANCELLED
+}
+
+enum AssistancePriority {
+  LOW
+  NORMAL
+  HIGH
+  URGENT
+}
+
+model AssistanceRequest {
+  id             String             @id @default(cuid())
+  sessionId      String
+  eventId        String
+  venueId        String?
+  staffId        String?
+  type           String             // "translation" | "directions" | "medical" | "lost_child" | "general"
+  status         AssistanceStatus   @default(PENDING)
+  priority       AssistancePriority @default(NORMAL)
+  guestLanguage  String
+  originalMessage String
+  translatedMessage String?
+  staffResponse  String?
+  translatedResponse String?
+  guestLatitude  Float?
+  guestLongitude Float?
+  location       String?
+  resolvedAt     DateTime?
+  escalatedAt    DateTime?
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+
+  @@index([eventId, status])
+  @@index([staffId, status])
+}
+
+// ─── Sponsor Recommendation Log ─────────────────────────────────────────────
+
+model SponsorRecommendation {
+  id             String   @id @default(cuid())
+  campaignId     String
+  sessionId      String?
+  eventId        String
+  queryIntent    String?  // "food" | "transport" | "shopping" | etc.
+  languageCode   String?
+  culturalScore  Float?
+  proximityScore Float?
+  finalScore     Float?
+  placement      String   // "concierge_card" | "map_overlay" | "search_result"
+  wasClicked     Boolean  @default(false)
+  wasDismissed   Boolean  @default(false)
+  createdAt      DateTime @default(now())
+
+  @@index([campaignId])
+  @@index([eventId, createdAt])
+}
+
+// ─── Cultural Profile ───────────────────────────────────────────────────────
+
+model CulturalProfile {
+  id                  String   @id @default(cuid())
+  sessionId           String   @unique
+  languageCode        String
+  region              String?  // inferred region
+  dietaryPreferences  String[]
+  cuisineAffinities   String[]
+  transportPreference String?
+  behaviorTags        String[]
+  accessibilityNeeds  String[]
+  riskLevel           String   @default("standard") // "standard" | "elevated"
+  lastUpdated         DateTime @default(now()) @updatedAt
+  createdAt           DateTime @default(now())
+
+  @@index([languageCode])
+}
+
+// ─── Search Query Log ───────────────────────────────────────────────────────
+
+model SearchQueryLog {
+  id           String   @id @default(cuid())
+  sessionId    String?
+  eventId      String?
+  query        String
+  intent       String?  // parsed intent
+  languageCode String?
+  resultCount  Int      @default(0)
+  hasResults   Boolean  @default(true)
+  latencyMs    Int?
+  toolsUsed    String[]
+  createdAt    DateTime @default(now())
+
+  @@index([eventId, intent])
+  @@index([createdAt])
+  @@index([hasResults])
+}
+
+// ─── Rewards & Points ───────────────────────────────────────────────────────
+
+enum BadgeTier {
+  BRONZE
+  SILVER
+  GOLD
+  PLATINUM
+}
+
+model RewardBadge {
+  id           String    @id @default(cuid())
+  eventId      String
+  slug         String    @unique
+  name         String
+  nameI18n     Json?     // { es: "...", fr: "..." }
+  description  String
+  descriptionI18n Json?
+  icon         String    // emoji or icon key
+  tier         BadgeTier @default(BRONZE)
+  pointsValue  Int       @default(10)
+  maxClaims    Int?      // null = unlimited
+  totalClaimed Int       @default(0)
+  requirement  String    // human-readable unlock criteria
+  sponsorId    String?   // campaign that funds this badge
+  imageUrl     String?
+  isActive     Boolean   @default(true)
+  expiresAt    DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  claims RewardClaim[]
+
+  @@index([eventId])
+}
+
+model GuestPointsLedger {
+  id          String   @id @default(cuid())
+  sessionId   String
+  eventId     String
+  action      String   // "badge_claim" | "sponsor_visit" | "challenge_complete" | "coupon_redeem" | "bonus"
+  points      Int      // positive = earn, negative = spend
+  referenceId String?  // badge id, campaign id, challenge id
+  description String?
+  createdAt   DateTime @default(now())
+
+  @@index([sessionId, eventId])
+  @@index([createdAt])
+}
+
+model RewardClaim {
+  id          String   @id @default(cuid())
+  sessionId   String
+  eventId     String
+  badgeId     String
+  badge       RewardBadge @relation(fields: [badgeId], references: [id])
+  claimedAt   DateTime @default(now())
+  onChainTxId String?  // optional: on-chain mint tx for power users
+
+  @@unique([sessionId, badgeId])
+  @@index([sessionId, eventId])
+}
+
+// ─── Sponsor Challenges & Geo-Fences ────────────────────────────────────────
+
+enum ChallengeStatus {
+  ACTIVE
+  PAUSED
+  COMPLETED
+  EXPIRED
+}
+
+model SponsorChallenge {
+  id            String          @id @default(cuid())
+  eventId       String
+  campaignId    String?         // linked sponsor campaign
+  name          String
+  nameI18n      Json?
+  description   String
+  descriptionI18n Json?
+  type          String          // "visit" | "scan_qr" | "checkin" | "survey" | "scavenger_hunt" | "multi_step"
+  requirements  Json            // steps/conditions as structured JSON
+  rewardBadgeId String?         // badge earned on completion
+  rewardPoints  Int             @default(0)
+  couponCode    String?
+  couponValue   String?         // "10% off" | "$5" | "Free drink"
+  status        ChallengeStatus @default(ACTIVE)
+  maxCompletions Int?
+  totalCompletions Int          @default(0)
+  startsAt      DateTime?
+  endsAt        DateTime?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  @@index([eventId, status])
+}
+
+model GeoFence {
+  id          String   @id @default(cuid())
+  eventId     String
+  name        String
+  latitude    Float
+  longitude   Float
+  radiusM     Float    // radius in meters
+  triggerType String   // "enter" | "exit" | "dwell"
+  campaignId  String?  // trigger sponsor offer
+  challengeId String?  // trigger challenge step
+  alertMessage String?
+  alertMessageI18n Json?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([eventId, isActive])
+}
+
+// ─── Coupon & Offer Tracking ────────────────────────────────────────────────
+
+model CouponRedemption {
+  id          String   @id @default(cuid())
+  sessionId   String
+  eventId     String
+  campaignId  String?
+  challengeId String?
+  couponCode  String
+  couponValue String?
+  redeemedAt  DateTime @default(now())
+  merchantId  String?  // restaurant / CityService id
+
+  @@index([sessionId, eventId])
+  @@index([couponCode])
+}

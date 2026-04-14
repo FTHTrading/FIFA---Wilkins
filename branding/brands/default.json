@@ -1,0 +1,29 @@
+{
+  "slug": "default",
+  "brandOwner": "Wilkins Media",
+  "programName": "Global Guest OS",
+  "eventName": "Major Event Demo",
+  "location": "Host City",
+  "tagline": "White-label multilingual fan operations platform",
+  "heroTitle": "Welcome the world in every language.",
+  "heroSubtitle": "Navigation, translation, emergency support, and sponsor monetization for live events.",
+  "repoUrl": "https://github.com/FTHTrading/FIFA---Wilkins",
+  "colors": {
+    "ink": "#09101f",
+    "surface": "#0f1a30",
+    "panel": "#13203d",
+    "line": "#2b3b63",
+    "text": "#ebf2ff",
+    "muted": "#8ea2c8",
+    "primary": "#3b82f6",
+    "accent": "#c026d3",
+    "success": "#22c55e",
+    "alert": "#ef4444"
+  },
+  "metrics": [
+    { "label": "Languages", "value": "10" },
+    { "label": "Surfaces", "value": "4" },
+    { "label": "Revenue Views", "value": "Campaign / Language / Intent" },
+    { "label": "Launch Mode", "value": "1-Button Activation" }
+  ]
+}

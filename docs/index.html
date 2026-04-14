@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FIFA x Wilkins Demo</title>
+  <meta name="description" content="FTHTrading FIFA x Wilkins GitHub Pages demo for the Atlanta 2026 fan operations platform." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/styles.css" />
+</head>
+<body>
+  <div class="site-shell">
+    <aside class="toc-panel">
+      <p class="eyebrow">Repository Demo</p>
+      <h1 id="brand-title">FIFA x Wilkins</h1>
+      <p id="brand-tagline" class="muted"></p>
+      <nav>
+        <a href="#overview">Overview</a>
+        <a href="#surfaces">Surfaces</a>
+        <a href="#infrastructure">Infrastructure</a>
+        <a href="#journey">Fan Journey</a>
+        <a href="#flowcharts">Flowcharts</a>
+        <a href="#activation">Activation</a>
+      </nav>
+      <a id="repo-link" class="repo-link" href="#" target="_blank" rel="noreferrer">Open GitHub Repository</a>
+    </aside>
+
+    <main class="content">
+      <section id="overview" class="hero panel glow-panel">
+        <div>
+          <p class="eyebrow" id="brand-program">FTHTrading</p>
+          <h2 id="hero-title"></h2>
+          <p id="hero-subtitle" class="hero-copy"></p>
+          <div class="cta-row">
+            <a class="button primary" href="../README.md">Read the README</a>
+            <a class="button secondary" href="#activation">Launch the Stack</a>
+          </div>
+        </div>
+        <div class="hero-orb"></div>
+      </section>
+
+      <section class="metrics-grid" id="metrics-grid"></section>
+
+      <section id="surfaces" class="panel">
+        <div class="section-head">
+          <p class="eyebrow">Color-Coded Surfaces</p>
+          <h3>One platform. Four buyer-facing entry points.</h3>
+        </div>
+        <div id="surfaces-grid" class="card-grid"></div>
+      </section>
+
+      <section id="infrastructure" class="panel">
+        <div class="section-head">
+          <p class="eyebrow">Infrastructure</p>
+          <h3>Repo-ready system layers</h3>
+        </div>
+        <div class="infra-grid">
+          <article class="infra-card blue">
+            <h4>Frontend</h4>
+            <p>Next.js 15 guest, staff, admin, and analytics surfaces.</p>
+          </article>
+          <article class="infra-card amber">
+            <h4>API + Agentic</h4>
+            <p>NestJS, Fastify, multilingual intent parsing, RAG, and sponsor injection.</p>
+          </article>
+          <article class="infra-card slate">
+            <h4>Data</h4>
+            <p>PostgreSQL 16, Prisma 6, pgvector, Redis 7, BullMQ.</p>
+          </article>
+          <article class="infra-card red">
+            <h4>Safety</h4>
+            <p>Deterministic emergency translations and operator escalation routes.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="journey" class="panel">
+        <div class="section-head">
+          <p class="eyebrow">Fan Journey</p>
+          <h3>How the demo lands in a sales meeting</h3>
+        </div>
+        <ol id="journey-list" class="journey-list"></ol>
+      </section>
+
+      <section id="flowcharts" class="panel">
+        <div class="section-head">
+          <p class="eyebrow">Flowcharts</p>
+          <h3>Rendered directly in GitHub Pages</h3>
+        </div>
+        <div class="mermaid">
+flowchart LR
+    Fan[Fan Opens Mobile PWA] --> Lang[Language Selected]
+    Lang --> Concierge[Agentic Concierge]
+    Concierge --> Ranker[Cultural Ranking + RAG]
+    Ranker --> Results[Map, Rewards, Sponsors]
+    Concierge --> Safety[Emergency Mode]
+    Safety --> Staff[Staff Escalation]
+        </div>
+        <div class="mermaid second-chart">
+flowchart TB
+    Web[Guest Web] --> API[NestJS API]
+    Staff[Staff Console] --> API
+    Admin[Admin Control] --> API
+    Revenue[Revenue Console] --> API
+    API --> PG[(PostgreSQL)]
+    API --> Redis[(Redis)]
+    API --> Azure[Translation / OCR / Speech]
+    API --> Maps[Mapbox / Overpass]
+        </div>
+      </section>
+
+      <section id="activation" class="panel activation-panel">
+        <div class="section-head">
+          <p class="eyebrow">Activation</p>
+          <h3>One command to prep the Atlanta FIFA demo</h3>
+        </div>
+        <pre><code>pnpm activate:fth</code></pre>
+        <ul class="activation-list">
+          <li>Applies the FTHTrading brand pack to the GitHub Pages demo.</li>
+          <li>Copies `.env.example` into `.env` if needed.</li>
+          <li>Starts PostgreSQL and Redis via Docker Compose.</li>
+          <li>Generates Prisma, migrates the database, and seeds Atlanta data.</li>
+          <li>Launches the monorepo dev stack and opens the key URLs.</li>
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="./assets/app.js"></script>
+</body>
+</html>
