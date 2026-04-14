@@ -42,3 +42,6 @@ prisma/migrations/
 # Cache
 .eslintcache
 .prettiercache
+
+# Next.js
+next-env.d.ts

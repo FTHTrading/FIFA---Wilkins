@@ -4,7 +4,7 @@
   "private": true,
   "description": "Wilkins Media Global Guest OS — guest-facing multilingual event app",
   "scripts": {
-    "dev": "next dev --port 3000",
+    "dev": "next dev --port 3010",
     "build": "next build",
     "start": "next start --port 3000",
     "lint": "next lint",
