@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, BadGatewayException } from '@nestjs/common';
 import { withRetry, fetchWithTimeout } from '../../../common/utils/retry';
 
 export interface MapboxSearchResult {
@@ -17,7 +17,7 @@ export class MapboxSearchProvider {
 
   private get token() {
     const token = process.env.MAPBOX_ACCESS_TOKEN ?? process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
-    if (!token) throw new Error('MAPBOX_ACCESS_TOKEN is not configured');
+    if (!token) throw new BadGatewayException('Mapbox access token not configured');
     return token;
   }
 
@@ -44,7 +44,7 @@ export class MapboxSearchProvider {
       () => fetchWithTimeout(`${this.baseUrl}/forward?${search.toString()}`, {}, 8_000),
       { attempts: 3, baseDelayMs: 300 },
     );
-    if (!response.ok) throw new Error(`Mapbox forward geocode failed: ${response.status}`);
+    if (!response.ok) throw new BadGatewayException('Mapbox geocoding service unavailable');
 
     const data = (await response.json()) as {
       features: Array<{

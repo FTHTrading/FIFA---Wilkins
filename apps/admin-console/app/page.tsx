@@ -15,10 +15,10 @@ export default function AdminConsolePage() {
     <main className="min-h-screen flex flex-col items-center justify-center p-6">
       <div className="max-w-2xl w-full space-y-8">
         <div className="text-center space-y-2">
-          <h1 className="text-3xl font-bold font-display tracking-tight">
+          <h1 className="text-3xl font-bold font-display tracking-tight text-white">
             Admin Console
           </h1>
-          <p className="text-slate-400">
+          <p className="text-brand-muted">
             Wilkins Media · Event Administration &amp; Analytics
           </p>
         </div>
@@ -28,13 +28,13 @@ export default function AdminConsolePage() {
             <Link
               key={s.href}
               href={s.href}
-              className="group rounded-xl border border-slate-800 bg-slate-900 hover:border-slate-700 transition-colors p-5"
+              className="group rounded-xl border border-brand-border bg-brand-surface hover:border-brand-gold/40 transition-colors p-5"
             >
               <div className="flex items-center gap-3 mb-2">
                 <span className={`h-2.5 w-2.5 rounded-full ${s.color}`} />
-                <span className="font-semibold text-lg">{s.label}</span>
+                <span className="font-semibold text-lg text-white">{s.label}</span>
               </div>
-              <p className="text-sm text-slate-400">{s.description}</p>
+              <p className="text-sm text-brand-muted">{s.description}</p>
             </Link>
           ))}
         </div>

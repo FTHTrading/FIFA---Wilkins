@@ -38,17 +38,17 @@ const TOP_INTENTS = [
 const TIER_SUMMARY = [
   { tier: 'Platinum', count: 4, revenue: 132_000, color: 'bg-amber-500/10 border-amber-500/30 text-amber-300' },
   { tier: 'Gold', count: 4, revenue: 62_400, color: 'bg-yellow-500/10 border-yellow-500/30 text-yellow-400' },
-  { tier: 'Silver', count: 4, revenue: 29_000, color: 'bg-slate-400/10 border-slate-400/30 text-slate-300' },
+  { tier: 'Silver', count: 4, revenue: 29_000, color: 'bg-brand-muted/10 border-brand-muted/30 text-brand-muted' },
 ];
 
 export default function DashboardPage() {
   return (
-    <main className="min-h-screen bg-slate-950 p-6">
+    <main className="min-h-screen bg-brand-black p-6">
       {/* Header with CTA */}
       <header className="mb-8 flex items-start justify-between">
         <div>
           <h1 className="text-2xl font-bold font-display text-white">Revenue Dashboard</h1>
-          <p className="text-slate-400 text-sm">Executive summary — monetization, reach & engagement</p>
+          <p className="text-brand-muted text-sm">Executive summary — monetization, reach & engagement</p>
         </div>
         <div className="flex items-center gap-2">
           <Link
@@ -70,7 +70,7 @@ export default function DashboardPage() {
       </header>
 
       {/* Hero revenue card */}
-      <div className="relative mb-8 rounded-2xl border border-green-500/20 bg-gradient-to-br from-green-950/40 via-slate-900 to-emerald-950/30 p-6 overflow-hidden">
+      <div className="relative mb-8 rounded-2xl border border-green-500/20 bg-gradient-to-br from-green-950/40 via-brand-surface to-emerald-950/30 p-6 overflow-hidden">
         <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent" />
         <div className="flex items-end justify-between">
           <div>
@@ -78,12 +78,12 @@ export default function DashboardPage() {
             <p className="text-5xl font-bold text-white font-display tracking-tight">
               ${TOTAL_REVENUE.toLocaleString()}
             </p>
-            <p className="mt-2 text-sm text-slate-400">
+            <p className="mt-2 text-sm text-brand-muted">
               {ACTIVE_CAMPAIGNS} campaigns · {ACTIVE_LANGUAGES} languages · {TOTAL_SESSIONS.toLocaleString()} sessions
             </p>
           </div>
           <div className="text-right">
-            <p className="text-xs text-slate-500 uppercase tracking-wide mb-1">Revenue / Session</p>
+            <p className="text-xs text-brand-muted/70 uppercase tracking-wide mb-1">Revenue / Session</p>
             <p className="text-2xl font-bold text-green-400">${REVENUE_PER_SESSION}</p>
           </div>
         </div>
@@ -97,12 +97,12 @@ export default function DashboardPage() {
           { label: 'Avg CTR', value: `${AVG_CTR}%`, icon: MousePointer, color: 'text-amber-400', bgColor: 'bg-amber-500/10' },
           { label: 'Text FIFA Inbound', value: TELECOM_INBOUND_SMS.toLocaleString(), icon: Sparkles, color: 'text-fuchsia-400', bgColor: 'bg-fuchsia-500/10' },
         ].map((stat) => (
-          <div key={stat.label} className="rounded-xl border border-slate-800 bg-slate-900 p-5 transition-all hover:border-slate-700">
+          <div key={stat.label} className="rounded-xl border border-brand-border bg-brand-surface p-5 transition-all hover:border-brand-gold/40">
             <div className="flex items-center gap-2 mb-2">
               <div className={`flex h-8 w-8 items-center justify-center rounded-lg ${stat.bgColor}`}>
                 <stat.icon className={`h-4 w-4 ${stat.color}`} />
               </div>
-              <p className="text-xs text-slate-500 uppercase tracking-wide">{stat.label}</p>
+              <p className="text-xs text-brand-muted/70 uppercase tracking-wide">{stat.label}</p>
             </div>
             <p className="text-3xl font-bold text-white">{stat.value}</p>
           </div>
@@ -123,8 +123,8 @@ export default function DashboardPage() {
       </div>
 
       {/* Top campaigns table */}
-      <div className="rounded-xl border border-slate-800 bg-slate-900 mb-8 overflow-hidden">
-        <div className="flex items-center justify-between px-5 py-4 border-b border-slate-800">
+      <div className="rounded-xl border border-brand-border bg-brand-surface mb-8 overflow-hidden">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-brand-border">
           <div className="flex items-center gap-2">
             <TrendingUp className="h-4 w-4 text-amber-400" />
             <h2 className="font-semibold text-white">Top Campaigns by Revenue</h2>
@@ -136,7 +136,7 @@ export default function DashboardPage() {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-left text-xs text-slate-500 uppercase tracking-wider border-b border-slate-800">
+              <tr className="text-left text-xs text-brand-muted/70 uppercase tracking-wider border-b border-brand-border">
                 <th className="px-5 py-3">Campaign</th>
                 <th className="px-5 py-3 text-right">Tier</th>
                 <th className="px-5 py-3 text-right">Revenue</th>
@@ -145,14 +145,14 @@ export default function DashboardPage() {
             </thead>
             <tbody>
               {TOP_CAMPAIGNS.map((c) => (
-                <tr key={c.name} className="border-b border-slate-800/50 hover:bg-slate-800/30 transition-colors">
+                <tr key={c.name} className="border-b border-brand-border/50 hover:bg-brand-border/30 transition-colors">
                   <td className="px-5 py-3 font-medium text-white">{c.name}</td>
                   <td className="px-5 py-3 text-right">
                     <span className={`text-xs font-semibold ${c.color}`}>{c.tier}</span>
                   </td>
                   <td className="px-5 py-3 text-right text-green-400 font-semibold">${c.revenue.toLocaleString()}</td>
                   <td className="px-5 py-3 text-right">
-                    <span className="text-slate-300">{c.roas}x</span>
+                    <span className="text-brand-text">{c.roas}x</span>
                   </td>
                 </tr>
               ))}
@@ -164,7 +164,7 @@ export default function DashboardPage() {
       {/* Bottom: Revenue by Language + Revenue by Intent */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Revenue by language */}
-        <div className="rounded-xl border border-slate-800 bg-slate-900 p-5">
+        <div className="rounded-xl border border-brand-border bg-brand-surface p-5">
           <div className="flex items-center gap-2 mb-4">
             <Globe className="h-4 w-4 text-blue-400" />
             <h2 className="font-semibold text-white">Revenue by Language</h2>
@@ -173,25 +173,25 @@ export default function DashboardPage() {
             {TOP_LANGUAGES.map((lang) => (
               <div key={lang.code}>
                 <div className="flex items-center justify-between text-sm mb-1">
-                  <span className="text-slate-300">
-                    {lang.flag} {lang.name} <span className="text-slate-600">({lang.code})</span>
+                  <span className="text-brand-text">
+                    {lang.flag} {lang.name} <span className="text-brand-muted/50">({lang.code})</span>
                   </span>
                   <span className="text-green-400 font-semibold">${lang.revenue.toLocaleString()}</span>
                 </div>
-                <div className="h-2 rounded-full bg-slate-800 overflow-hidden">
+                <div className="h-2 rounded-full bg-brand-border overflow-hidden">
                   <div
                     className="h-full rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 transition-all duration-500"
                     style={{ width: `${(lang.revenue / 31_200) * 100}%` }}
                   />
                 </div>
-                <p className="text-2xs text-slate-600 mt-0.5">{lang.sessions.toLocaleString()} sessions · {lang.pct}% of traffic</p>
+                <p className="text-2xs text-brand-muted/50 mt-0.5">{lang.sessions.toLocaleString()} sessions · {lang.pct}% of traffic</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* Revenue by intent */}
-        <div className="rounded-xl border border-slate-800 bg-slate-900 p-5">
+        <div className="rounded-xl border border-brand-border bg-brand-surface p-5">
           <div className="flex items-center gap-2 mb-4">
             <Zap className="h-4 w-4 text-amber-400" />
             <h2 className="font-semibold text-white">Revenue by AI Intent</h2>
@@ -200,22 +200,22 @@ export default function DashboardPage() {
             {TOP_INTENTS.map((intent) => (
               <div key={intent.intent}>
                 <div className="flex items-center justify-between text-sm mb-1">
-                  <span className="text-slate-300">{intent.intent}</span>
+                  <span className="text-brand-text">{intent.intent}</span>
                   <span className="text-green-400 font-semibold">${intent.revenue.toLocaleString()}</span>
                 </div>
-                <div className="h-2 rounded-full bg-slate-800 overflow-hidden">
+                <div className="h-2 rounded-full bg-brand-border overflow-hidden">
                   <div
                     className="h-full rounded-full bg-gradient-to-r from-amber-500 to-orange-400 transition-all duration-500"
                     style={{ width: `${(intent.revenue / 38_400) * 100}%` }}
                   />
                 </div>
-                <p className="text-2xs text-slate-600 mt-0.5">{intent.queries.toLocaleString()} queries · ${intent.avgRev}/query avg</p>
+                <p className="text-2xs text-brand-muted/50 mt-0.5">{intent.queries.toLocaleString()} queries · ${intent.avgRev}/query avg</p>
               </div>
             ))}
           </div>
           <Link
             href="/analytics"
-            className="mt-4 flex items-center justify-center gap-1.5 rounded-lg border border-slate-700 py-2 text-xs font-medium text-slate-400 transition-all hover:border-fuchsia-500/30 hover:text-fuchsia-300"
+            className="mt-4 flex items-center justify-center gap-1.5 rounded-lg border border-brand-border py-2 text-xs font-medium text-brand-muted transition-all hover:border-brand-gold/30 hover:text-brand-gold"
           >
             <BarChart3 className="h-3.5 w-3.5" />
             Explore full analytics

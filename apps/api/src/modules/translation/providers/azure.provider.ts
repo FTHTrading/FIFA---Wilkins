@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger, BadGatewayException } from '@nestjs/common';
 import type { ITranslationProvider, TranslationOutput } from '../interfaces/translation-provider.interface';
 
 /**
@@ -12,7 +12,10 @@ export class AzureTranslationProvider implements ITranslationProvider {
 
   private get key() {
     const k = process.env.AZURE_TRANSLATOR_KEY;
-    if (!k) throw new Error('AZURE_TRANSLATOR_KEY is not configured');
+    if (!k) {
+      this.logger.error('AZURE_TRANSLATOR_KEY is not configured');
+      throw new BadGatewayException('Translation service not configured');
+    }
     return k;
   }
 
@@ -42,7 +45,7 @@ export class AzureTranslationProvider implements ITranslationProvider {
     if (!response.ok) {
       const err = await response.text();
       this.logger.error(`Azure Translator API error: ${err}`);
-      throw new Error(`Translation failed: ${response.status}`);
+      throw new BadGatewayException('Translation service unavailable');
     }
 
     const data = (await response.json()) as Array<{

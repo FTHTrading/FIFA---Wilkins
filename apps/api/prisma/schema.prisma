@@ -36,6 +36,7 @@ model User {
 
   @@index([email])
   @@index([organizationId])
+  @@index([createdAt])
 }
 
 model GuestSession {
@@ -47,7 +48,7 @@ model GuestSession {
   ipHash       String?  // hashed, for rate limiting only
   startedAt    DateTime @default(now())
   lastSeenAt   DateTime @default(now()) @updatedAt
-  event        Event?   @relation(fields: [eventId], references: [id])
+  event        Event?   @relation(fields: [eventId], references: [id], onDelete: SetNull)
 
   conversations Conversation[]
   analyticsEvents AnalyticsEvent[]
@@ -58,6 +59,7 @@ model GuestSession {
 
   @@index([eventId])
   @@index([languageCode])
+  @@index([createdAt])
 }
 
 // ─── Organizations & Events ──────────────────────────────────────────────────
@@ -75,6 +77,8 @@ model Organization {
   users  User[]
   events Event[]
   campaigns SponsorCampaign[]
+
+  @@index([isActive])
 }
 
 enum EventStatus {
@@ -88,7 +92,7 @@ enum EventStatus {
 model Event {
   id             String      @id @default(cuid())
   organizationId String
-  organization   Organization @relation(fields: [organizationId], references: [id])
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   name           String
   slug           String      @unique
   description    String?
@@ -116,7 +120,7 @@ model Event {
 model EventDay {
   id        String   @id @default(cuid())
   eventId   String
-  event     Event    @relation(fields: [eventId], references: [id])
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
   date      DateTime @db.Date
   label     String?  // "Day 1", "Opening Ceremony", etc.
   matchInfo String?  // e.g. "USA vs Colombia, 5:00 PM ET"
@@ -133,7 +137,7 @@ model EventDay {
 model Venue {
   id          String   @id @default(cuid())
   eventId     String
-  event       Event    @relation(fields: [eventId], references: [id])
+  event       Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
   name        String
   description String?
   address     String?
@@ -173,7 +177,7 @@ enum POICategory {
 model VenuePOI {
   id          String      @id @default(cuid())
   venueId     String
-  venue       Venue       @relation(fields: [venueId], references: [id])
+  venue       Venue       @relation(fields: [venueId], references: [id], onDelete: Cascade)
   name        String
   nameI18n    Json?       // { es: "...", fr: "..." }
   category    POICategory
@@ -191,9 +195,9 @@ model VenuePOI {
 model VenueAlert {
   id        String   @id @default(cuid())
   eventId   String
-  event     Event    @relation(fields: [eventId], references: [id])
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
   venueId   String?
-  venue     Venue?   @relation(fields: [venueId], references: [id])
+  venue     Venue?   @relation(fields: [venueId], references: [id], onDelete: SetNull)
   severity  String   @default("info") // "critical" | "warning" | "info"
   title     String
   titleI18n Json?
@@ -242,6 +246,7 @@ model TranslationEntry {
   @@unique([key, sourceLang, targetLang, eventId])
   @@index([key])
   @@index([targetLang, status])
+  @@index([createdAt])
 }
 
 // ─── Emergency ───────────────────────────────────────────────────────────────
@@ -289,7 +294,7 @@ enum ConversationStatus {
 model Conversation {
   id             String             @id @default(cuid())
   guestSessionId String
-  guestSession   GuestSession       @relation(fields: [guestSessionId], references: [id])
+  guestSession   GuestSession       @relation(fields: [guestSessionId], references: [id], onDelete: Cascade)
   eventId        String?
   staffId        String?
   status         ConversationStatus @default(OPEN)
@@ -301,12 +306,13 @@ model Conversation {
 
   @@index([guestSessionId])
   @@index([eventId, status])
+  @@index([createdAt])
 }
 
 model Message {
   id             String       @id @default(cuid())
   conversationId String
-  conversation   Conversation @relation(fields: [conversationId], references: [id])
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
   senderType     String       // "guest" | "staff" | "system"
   senderId       String?
   originalText   String
@@ -363,9 +369,9 @@ enum CampaignStatus {
 model SponsorCampaign {
   id             String         @id @default(cuid())
   organizationId String
-  organization   Organization   @relation(fields: [organizationId], references: [id])
+  organization   Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   eventId        String
-  event          Event          @relation(fields: [eventId], references: [id])
+  event          Event          @relation(fields: [eventId], references: [id], onDelete: Cascade)
   name           String
   sponsorName    String
   logoUrl        String?
@@ -389,6 +395,8 @@ model SponsorCampaign {
   updatedAt      DateTime       @updatedAt
 
   @@index([eventId, status])
+  @@index([startsAt])
+  @@index([endsAt])
 }
 
 // ─── Analytics ───────────────────────────────────────────────────────────────
@@ -684,7 +692,7 @@ model RewardClaim {
   sessionId   String
   eventId     String
   badgeId     String
-  badge       RewardBadge @relation(fields: [badgeId], references: [id])
+  badge       RewardBadge @relation(fields: [badgeId], references: [id], onDelete: Cascade)
   claimedAt   DateTime @default(now())
   onChainTxId String?  // optional: on-chain mint tx for power users
 
@@ -957,4 +965,24 @@ model ChannelPreference {
   updatedAt        DateTime        @updatedAt
 
   @@index([telecomSessionId])
+}
+
+// ─── Audit Log ──────────────────────────────────────────────────────────────
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String?
+  action     String   // "campaign.create" | "venue.update" | "user.deactivate" | etc.
+  resource   String   // model name or resource path
+  resourceId String?
+  details    Json?    // diff or payload snapshot
+  ipAddress  String?
+  userAgent  String?
+  requestId  String?  // correlates with x-request-id header
+  createdAt  DateTime @default(now())
+
+  @@index([userId])
+  @@index([action])
+  @@index([resource, resourceId])
+  @@index([createdAt])
 }

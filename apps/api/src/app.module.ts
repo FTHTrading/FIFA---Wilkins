@@ -1,8 +1,9 @@
-import { Module } from '@nestjs/common';
+import { Module, MiddlewareConsumer, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { ThrottlerModule } from '@nestjs/throttler';
+import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { ScheduleModule } from '@nestjs/schedule';
 import { BullModule } from '@nestjs/bull';
+import { APP_GUARD } from '@nestjs/core';
 import { PrismaModule } from './common/prisma/prisma.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { EventsModule } from './modules/events/events.module';
@@ -17,6 +18,8 @@ import { MapsModule } from './modules/maps/maps.module';
 import { AgenticModule } from './modules/agentic/agentic.module';
 import { TelecomModule } from './modules/telecom/telecom.module';
 import { appConfig } from './common/config/app.config';
+import { RequestIdMiddleware } from './common/middleware/request-id.middleware';
+import { AuditService } from './common/services/audit.service';
 
 @Module({
   imports: [
@@ -62,5 +65,16 @@ import { appConfig } from './common/config/app.config';
     AgenticModule,
     TelecomModule,
   ],
+  providers: [
+    // Global throttle guard — applies to all routes
+    { provide: APP_GUARD, useClass: ThrottlerGuard },
+    // Audit logging — inject anywhere via constructor
+    AuditService,
+  ],
+  exports: [AuditService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(RequestIdMiddleware).forRoutes('*');
+  }
+}

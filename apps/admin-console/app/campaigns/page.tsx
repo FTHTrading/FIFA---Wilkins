@@ -194,11 +194,11 @@ export default function CampaignsPage() {
   });
 
   return (
-    <main className="min-h-screen bg-slate-950 p-6">
+    <main className="min-h-screen bg-brand-black p-6">
       <header className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-2xl font-bold font-display text-white">Campaign Manager</h1>
-          <p className="text-slate-400 text-sm">Sponsor campaigns, cultural targeting, and performance analytics</p>
+          <p className="text-brand-muted text-sm">Sponsor campaigns, cultural targeting, and performance analytics</p>
         </div>
         <button
           type="button"
@@ -210,7 +210,7 @@ export default function CampaignsPage() {
       </header>
 
       {showComposer && (
-        <section className="mb-8 rounded-xl border border-fuchsia-500/30 bg-slate-900 p-5">
+        <section className="mb-8 rounded-xl border border-brand-gold/30 bg-brand-surface p-5">
           <div className="mb-4 flex items-center gap-2">
             <SlidersHorizontal className="h-4 w-4 text-fuchsia-400" />
             <h2 className="font-semibold text-white">Campaign Composer</h2>
@@ -218,30 +218,30 @@ export default function CampaignsPage() {
           </div>
 
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-            <label className="text-sm text-slate-300">
+            <label className="text-sm text-brand-text">
               Campaign Name
               <input
                 value={draft.name}
                 onChange={(e) => setDraft((d) => ({ ...d, name: e.target.value }))}
-                className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white"
+                className="mt-1 w-full rounded-lg border border-brand-border bg-brand-black px-3 py-2 text-sm text-white"
               />
             </label>
 
-            <label className="text-sm text-slate-300">
+            <label className="text-sm text-brand-text">
               Sponsor
               <input
                 value={draft.sponsorName}
                 onChange={(e) => setDraft((d) => ({ ...d, sponsorName: e.target.value }))}
-                className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white"
+                className="mt-1 w-full rounded-lg border border-brand-border bg-brand-black px-3 py-2 text-sm text-white"
               />
             </label>
 
-            <label className="text-sm text-slate-300">
+            <label className="text-sm text-brand-text">
               Sponsor Tier
               <select
                 value={draft.tier}
                 onChange={(e) => setDraft((d) => ({ ...d, tier: e.target.value as SponsorTier }))}
-                className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white"
+                className="mt-1 w-full rounded-lg border border-brand-border bg-brand-black px-3 py-2 text-sm text-white"
               >
                 <option value="SMART_PLACEMENT">Smart Placement</option>
                 <option value="CULTURAL_CONCIERGE">Cultural Concierge</option>
@@ -249,12 +249,12 @@ export default function CampaignsPage() {
               </select>
             </label>
 
-            <label className="text-sm text-slate-300">
+            <label className="text-sm text-brand-text">
               Placement
               <select
                 value={draft.placement}
                 onChange={(e) => setDraft((d) => ({ ...d, placement: e.target.value }))}
-                className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white"
+                className="mt-1 w-full rounded-lg border border-brand-border bg-brand-black px-3 py-2 text-sm text-white"
               >
                 {Object.entries(PLACEMENT_LABELS).map(([value, label]) => (
                   <option key={value} value={value}>{label}</option>
@@ -262,12 +262,12 @@ export default function CampaignsPage() {
               </select>
             </label>
 
-            <label className="text-sm text-slate-300">
+            <label className="text-sm text-brand-text">
               Intent Target
               <select
                 value={draft.targetIntent}
                 onChange={(e) => setDraft((d) => ({ ...d, targetIntent: e.target.value }))}
-                className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white"
+                className="mt-1 w-full rounded-lg border border-brand-border bg-brand-black px-3 py-2 text-sm text-white"
               >
                 {TARGET_INTENTS.map((intent) => (
                   <option key={intent} value={intent}>{intent}</option>
@@ -275,12 +275,12 @@ export default function CampaignsPage() {
               </select>
             </label>
 
-            <label className="text-sm text-slate-300">
+            <label className="text-sm text-brand-text">
               Reward Object
               <select
                 value={draft.rewardObject}
                 onChange={(e) => setDraft((d) => ({ ...d, rewardObject: e.target.value as CampaignDraft['rewardObject'] }))}
-                className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white"
+                className="mt-1 w-full rounded-lg border border-brand-border bg-brand-black px-3 py-2 text-sm text-white"
               >
                 <option value="NONE">None</option>
                 <option value="COUPON">Coupon</option>
@@ -289,7 +289,7 @@ export default function CampaignsPage() {
               </select>
             </label>
 
-            <label className="text-sm text-slate-300 lg:col-span-2">
+            <label className="text-sm text-brand-text lg:col-span-2">
               Target Languages
               <div className="mt-2 flex flex-wrap gap-2">
                 {AVAILABLE_LANGUAGES.map((lang) => {
@@ -306,8 +306,8 @@ export default function CampaignsPage() {
                       }))}
                       className={`rounded-md border px-2 py-1 text-xs font-mono transition-colors ${
                         selected
-                          ? 'border-fuchsia-500 bg-fuchsia-500/10 text-fuchsia-200'
-                          : 'border-slate-700 bg-slate-950 text-slate-400 hover:border-slate-500'
+                          ? 'border-brand-gold bg-brand-gold/10 text-brand-gold'
+                          : 'border-brand-border bg-brand-black text-brand-muted hover:border-brand-muted'
                       }`}
                     >
                       {lang}
@@ -317,7 +317,7 @@ export default function CampaignsPage() {
               </div>
             </label>
 
-            <label className="text-sm text-slate-300">
+            <label className="text-sm text-brand-text">
               <span className="inline-flex items-center gap-1">
                 <MapPin className="h-3.5 w-3.5 text-cyan-400" /> Geo Radius ({draft.geoRadiusM}m)
               </span>
@@ -332,14 +332,14 @@ export default function CampaignsPage() {
               />
             </label>
 
-            <label className="text-sm text-slate-300">
+            <label className="text-sm text-brand-text">
               <span className="inline-flex items-center gap-1">
                 <Clock3 className="h-3.5 w-3.5 text-amber-400" /> Matchday Window
               </span>
               <select
                 value={draft.timeWindow}
                 onChange={(e) => setDraft((d) => ({ ...d, timeWindow: e.target.value as CampaignDraft['timeWindow'] }))}
-                className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white"
+                className="mt-1 w-full rounded-lg border border-brand-border bg-brand-black px-3 py-2 text-sm text-white"
               >
                 <option value="ALL_DAY">All Day</option>
                 <option value="PRE_MATCH">Pre-Match</option>
@@ -348,7 +348,7 @@ export default function CampaignsPage() {
               </select>
             </label>
 
-            <label className="text-sm text-slate-300 lg:col-span-2">
+            <label className="text-sm text-brand-text lg:col-span-2">
               Budget (USD)
               <input
                 type="number"
@@ -356,14 +356,14 @@ export default function CampaignsPage() {
                 step={100}
                 value={draft.budget}
                 onChange={(e) => setDraft((d) => ({ ...d, budget: Number(e.target.value) || 0 }))}
-                className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white"
+                className="mt-1 w-full rounded-lg border border-brand-border bg-brand-black px-3 py-2 text-sm text-white"
               />
             </label>
           </div>
 
-          <div className="mt-4 rounded-lg border border-slate-800 bg-slate-950 p-3 text-sm text-slate-300">
-            <p className="text-xs uppercase tracking-wider text-slate-500">Ranking Preview</p>
-            <p className="mt-1 font-mono text-xs text-slate-400">
+          <div className="mt-4 rounded-lg border border-brand-border bg-brand-black p-3 text-sm text-brand-text">
+            <p className="text-xs uppercase tracking-wider text-brand-muted/70">Ranking Preview</p>
+            <p className="mt-1 font-mono text-xs text-brand-muted">
               final_score = intent_match + cultural_match + proximity + trust + sponsor_priority + time_relevance
             </p>
             <p className="mt-2 text-sm">
@@ -381,14 +381,14 @@ export default function CampaignsPage() {
               {isSaving ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : saveResult === 'saved' ? <Check className="h-3.5 w-3.5" /> : null}
               {isSaving ? 'Saving…' : saveResult === 'saved' ? 'Saved!' : 'Save Draft'}
             </button>
-            <button type="button" className="rounded-lg border border-slate-700 px-4 py-2 text-sm font-medium text-slate-300 hover:bg-slate-800">
+            <button type="button" className="rounded-lg border border-brand-border px-4 py-2 text-sm font-medium text-brand-text hover:bg-brand-border">
               Preview Placement
             </button>
             {saveResult === 'error' && (
               <p className="text-xs text-red-400">Failed to save — check API connection</p>
             )}
             {!eventCtx && (
-              <p className="text-xs text-slate-500">Connect API to enable save</p>
+              <p className="text-xs text-brand-muted/70">Connect API to enable save</p>
             )}
           </div>
         </section>
@@ -402,12 +402,12 @@ export default function CampaignsPage() {
           { label: 'Avg CTR', value: `${avgCtr}%`, icon: TrendingUp, color: 'text-emerald-400', bg: 'bg-emerald-500/10' },
           { label: 'Total Revenue', value: `$${totalRevenue.toLocaleString()}`, icon: DollarSign, color: 'text-green-400', bg: 'bg-green-500/10' },
         ].map((stat) => (
-          <div key={stat.label} className="rounded-xl border border-slate-800 bg-slate-900 p-5">
+          <div key={stat.label} className="rounded-xl border border-brand-border bg-brand-surface p-5">
             <div className="flex items-center gap-2 mb-2">
               <div className={`flex h-8 w-8 items-center justify-center rounded-lg ${stat.bg}`}>
                 <stat.icon className={`h-4 w-4 ${stat.color}`} />
               </div>
-              <p className="text-xs text-slate-500 uppercase tracking-wide">{stat.label}</p>
+              <p className="text-xs text-brand-muted/70 uppercase tracking-wide">{stat.label}</p>
             </div>
             <p className="text-3xl font-bold text-white">{stat.value}</p>
           </div>
@@ -426,7 +426,7 @@ export default function CampaignsPage() {
               className={`rounded-xl border p-5 text-left transition-all ${
                 tierFilter === ts.tier
                   ? 'border-fuchsia-500 bg-fuchsia-500/5 ring-1 ring-fuchsia-500/30'
-                  : 'border-slate-800 bg-slate-900 hover:border-slate-700'
+                  : 'border-brand-border bg-brand-surface hover:border-brand-gold/40'
               }`}
             >
               <div className="flex items-center gap-2 mb-3">
@@ -438,11 +438,11 @@ export default function CampaignsPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-2xl font-bold text-white">{ts.count}</p>
-                  <p className="text-xs text-slate-500">campaigns</p>
+                  <p className="text-xs text-brand-muted/70">campaigns</p>
                 </div>
                 <div className="text-right">
                   <p className="text-lg font-semibold text-green-400">${ts.revenue.toLocaleString()}</p>
-                  <p className="text-xs text-slate-500">{ts.impressions.toLocaleString()} imp</p>
+                  <p className="text-xs text-brand-muted/70">{ts.impressions.toLocaleString()} imp</p>
                 </div>
               </div>
             </button>
@@ -451,20 +451,20 @@ export default function CampaignsPage() {
       </div>
 
       {/* ── Campaign Table ── */}
-      <div className="rounded-xl border border-slate-800 bg-slate-900 overflow-hidden mb-8">
-        <div className="flex items-center justify-between px-5 py-4 border-b border-slate-800">
+      <div className="rounded-xl border border-brand-border bg-brand-surface overflow-hidden mb-8">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-brand-border">
           <div className="flex items-center gap-2">
-            <Filter className="h-4 w-4 text-slate-400" />
+            <Filter className="h-4 w-4 text-brand-muted" />
             <h2 className="font-semibold text-white">
               {tierFilter === 'ALL' ? 'All Campaigns' : TIER_CONFIG[tierFilter].label}
             </h2>
           </div>
-          <span className="text-xs text-slate-500">{filtered.length} campaigns</span>
+          <span className="text-xs text-brand-muted/70">{filtered.length} campaigns</span>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-left text-xs text-slate-500 uppercase tracking-wider border-b border-slate-800">
+              <tr className="text-left text-xs text-brand-muted/70 uppercase tracking-wider border-b border-brand-border">
                 <th className="px-5 py-3">Campaign</th>
                 <th className="px-5 py-3">Tier</th>
                 <th className="px-5 py-3">Placement</th>
@@ -481,11 +481,11 @@ export default function CampaignsPage() {
                 const ctr = c.impressions > 0 ? ((c.clicks / c.impressions) * 100).toFixed(1) : '0';
                 const cfg = TIER_CONFIG[c.tier];
                 return (
-                  <tr key={c.id} className="border-b border-slate-800/50 hover:bg-slate-800/30 transition-colors">
+                  <tr key={c.id} className="border-b border-brand-border/50 hover:bg-brand-border/30 transition-colors">
                     <td className="px-5 py-3">
                       <div>
                         <p className="font-medium text-white">{c.name}</p>
-                        <p className="text-xs text-slate-500">{c.sponsorName}</p>
+                        <p className="text-xs text-brand-muted/70">{c.sponsorName}</p>
                       </div>
                     </td>
                     <td className="px-5 py-3">
@@ -493,29 +493,29 @@ export default function CampaignsPage() {
                         {cfg.label}
                       </span>
                     </td>
-                    <td className="px-5 py-3 text-slate-300 text-xs">
+                    <td className="px-5 py-3 text-brand-text text-xs">
                       {PLACEMENT_LABELS[c.placement] || c.placement}
                     </td>
                     <td className="px-5 py-3">
                       {c.targetLanguages.length > 0 ? (
                         <div className="flex flex-wrap gap-1">
                           {c.targetLanguages.slice(0, 4).map((l) => (
-                            <span key={l} className="inline-flex items-center rounded bg-slate-800 px-1.5 py-0.5 text-[10px] font-mono text-slate-400">
+                            <span key={l} className="inline-flex items-center rounded bg-brand-border px-1.5 py-0.5 text-[10px] font-mono text-brand-muted">
                               {l}
                             </span>
                           ))}
                           {c.targetLanguages.length > 4 && (
-                            <span className="text-[10px] text-slate-500">+{c.targetLanguages.length - 4}</span>
+                            <span className="text-[10px] text-brand-muted/70">+{c.targetLanguages.length - 4}</span>
                           )}
                         </div>
                       ) : (
-                        <span className="text-xs text-slate-600">All</span>
+                        <span className="text-xs text-brand-muted/50">All</span>
                       )}
                     </td>
-                    <td className="px-5 py-3 text-right text-slate-300">{c.impressions.toLocaleString()}</td>
-                    <td className="px-5 py-3 text-right text-slate-300">{c.clicks.toLocaleString()}</td>
+                    <td className="px-5 py-3 text-right text-brand-text">{c.impressions.toLocaleString()}</td>
+                    <td className="px-5 py-3 text-right text-brand-text">{c.clicks.toLocaleString()}</td>
                     <td className="px-5 py-3 text-right">
-                      <span className={`font-semibold ${Number(ctr) >= 10 ? 'text-green-400' : 'text-slate-300'}`}>
+                      <span className={`font-semibold ${Number(ctr) >= 10 ? 'text-green-400' : 'text-brand-text'}`}>
                         {ctr}%
                       </span>
                     </td>
@@ -537,7 +537,7 @@ export default function CampaignsPage() {
       {/* ── Challenges & Rewards Summary ── */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Active Challenges */}
-        <div className="rounded-xl border border-slate-800 bg-slate-900 p-5">
+        <div className="rounded-xl border border-brand-border bg-brand-surface p-5">
           <div className="flex items-center gap-2 mb-4">
             <Zap className="h-4 w-4 text-amber-400" />
             <h2 className="font-semibold text-white">Active Challenges</h2>
@@ -551,14 +551,14 @@ export default function CampaignsPage() {
               { name: 'Halftime Speed Run', type: 'Multi-Step', reward: '15 pts', completions: 2100 },
               { name: 'Mercedes-Benz Fan Quiz', type: 'Survey', reward: '50 pts + VIP Chance', completions: 678 },
             ].map((ch) => (
-              <div key={ch.name} className="flex items-center justify-between p-3 rounded-lg bg-slate-800/50">
+              <div key={ch.name} className="flex items-center justify-between p-3 rounded-lg bg-brand-border/50">
                 <div>
                   <p className="text-sm font-medium text-white">{ch.name}</p>
-                  <p className="text-xs text-slate-500">{ch.type} · {ch.reward}</p>
+                  <p className="text-xs text-brand-muted/70">{ch.type} · {ch.reward}</p>
                 </div>
                 <div className="text-right">
                   <p className="text-sm font-semibold text-amber-400">{ch.completions.toLocaleString()}</p>
-                  <p className="text-xs text-slate-500">completed</p>
+                  <p className="text-xs text-brand-muted/70">completed</p>
                 </div>
               </div>
             ))}
@@ -566,7 +566,7 @@ export default function CampaignsPage() {
         </div>
 
         {/* Reward Badges */}
-        <div className="rounded-xl border border-slate-800 bg-slate-900 p-5">
+        <div className="rounded-xl border border-brand-border bg-brand-surface p-5">
           <div className="flex items-center gap-2 mb-4">
             <Gift className="h-4 w-4 text-fuchsia-400" />
             <h2 className="font-semibold text-white">Reward Badges</h2>
@@ -574,21 +574,21 @@ export default function CampaignsPage() {
           <div className="grid grid-cols-2 gap-3">
             {[
               { icon: '🌍', name: 'Welcome Explorer', tier: 'Bronze', claimed: 8421, color: 'border-orange-800/50' },
-              { icon: '🍽️', name: 'Foodie Passport', tier: 'Silver', claimed: 2314, color: 'border-slate-400/30' },
+              { icon: '🍽️', name: 'Foodie Passport', tier: 'Silver', claimed: 2314, color: 'border-brand-muted/30' },
               { icon: '🤝', name: 'Cultural Ambassador', tier: 'Gold', claimed: 456, color: 'border-amber-500/50' },
               { icon: '🏟️', name: 'Stadium Navigator', tier: 'Bronze', claimed: 5890, color: 'border-orange-800/50' },
               { icon: '🦸', name: 'Emergency Hero', tier: 'Gold', claimed: 34, color: 'border-amber-500/50' },
-              { icon: '🚇', name: 'Transit Pro', tier: 'Silver', claimed: 1204, color: 'border-slate-400/30' },
-              { icon: '🥤', name: 'Coca-Cola Superfan', tier: 'Silver', claimed: 3421, color: 'border-slate-400/30' },
+              { icon: '🚇', name: 'Transit Pro', tier: 'Silver', claimed: 1204, color: 'border-brand-muted/30' },
+              { icon: '🥤', name: 'Coca-Cola Superfan', tier: 'Silver', claimed: 3421, color: 'border-brand-muted/30' },
               { icon: '👟', name: 'Adidas Quest Champion', tier: 'Platinum', claimed: 89, color: 'border-fuchsia-500/50' },
               { icon: '🗺️', name: 'City Explorer', tier: 'Gold', claimed: 678, color: 'border-amber-500/50' },
               { icon: '⚡', name: 'Halftime Hustler', tier: 'Bronze', claimed: 2100, color: 'border-orange-800/50' },
             ].map((b) => (
-              <div key={b.name} className={`flex items-center gap-3 p-3 rounded-lg bg-slate-800/50 border ${b.color}`}>
+              <div key={b.name} className={`flex items-center gap-3 p-3 rounded-lg bg-brand-border/50 border ${b.color}`}>
                 <span className="text-2xl">{b.icon}</span>
                 <div className="min-w-0">
                   <p className="text-sm font-medium text-white truncate">{b.name}</p>
-                  <p className="text-xs text-slate-500">{b.tier} · {b.claimed.toLocaleString()} claimed</p>
+                  <p className="text-xs text-brand-muted/70">{b.tier} · {b.claimed.toLocaleString()} claimed</p>
                 </div>
               </div>
             ))}

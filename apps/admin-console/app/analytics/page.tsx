@@ -170,11 +170,11 @@ export default function AnalyticsPage() {
   const revenuePerSession = (sim.totalRevenue / 12_220).toFixed(2);
 
   return (
-    <main className="min-h-screen bg-slate-950 p-6">
+    <main className="min-h-screen bg-brand-black p-6">
       <header className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-2xl font-bold font-display text-white">Revenue Analytics</h1>
-          <p className="text-slate-400 text-sm">Live sponsor revenue simulation — per campaign, language, intent, and zone</p>
+          <p className="text-brand-muted text-sm">Live sponsor revenue simulation — per campaign, language, intent, and zone</p>
         </div>
         <div className="flex items-center gap-2">
           <Activity className="h-4 w-4 text-green-400 animate-pulse" />
@@ -190,12 +190,12 @@ export default function AnalyticsPage() {
           { label: 'Avg CTR', value: `${avgCtr}%`, icon: TrendingUp, color: 'text-emerald-400', bg: 'bg-emerald-500/10', delta: '+0.4%' },
           { label: 'Revenue / Session', value: `$${revenuePerSession}`, icon: Users, color: 'text-amber-400', bg: 'bg-amber-500/10', delta: '+2.1%' },
         ].map((stat) => (
-          <div key={stat.label} className="rounded-xl border border-slate-800 bg-slate-900 p-5">
+          <div key={stat.label} className="rounded-xl border border-brand-border bg-brand-surface p-5">
             <div className="flex items-center gap-2 mb-2">
               <div className={`flex h-8 w-8 items-center justify-center rounded-lg ${stat.bg}`}>
                 <stat.icon className={`h-4 w-4 ${stat.color}`} />
               </div>
-              <p className="text-xs text-slate-500 uppercase tracking-wide">{stat.label}</p>
+              <p className="text-xs text-brand-muted/70 uppercase tracking-wide">{stat.label}</p>
             </div>
             <div className="flex items-end justify-between">
               <p className="text-3xl font-bold text-white">{stat.value}</p>
@@ -216,10 +216,10 @@ export default function AnalyticsPage() {
           { label: 'Active Campaigns', value: sim.campaigns.length.toString(), icon: '📣' },
           { label: 'Geo Zones', value: sim.zones.length.toString(), icon: '📍' },
         ].map((stat) => (
-          <div key={stat.label} className="rounded-xl border border-slate-800 bg-slate-900 p-4">
+          <div key={stat.label} className="rounded-xl border border-brand-border bg-brand-surface p-4">
             <div className="flex items-center gap-2">
               <span className="text-lg">{stat.icon}</span>
-              <p className="text-xs text-slate-500 uppercase tracking-wide">{stat.label}</p>
+              <p className="text-xs text-brand-muted/70 uppercase tracking-wide">{stat.label}</p>
             </div>
             <p className="text-2xl font-bold text-white mt-1">{stat.value}</p>
           </div>
@@ -227,7 +227,7 @@ export default function AnalyticsPage() {
       </div>
 
       {/* ── View Toggle ── */}
-      <div className="flex gap-1 mb-6 p-1 bg-slate-900 rounded-xl inline-flex">
+      <div className="flex gap-1 mb-6 p-1 bg-brand-surface rounded-xl inline-flex">
         {([
           { key: 'campaign' as RevenueView, label: 'By Campaign', icon: BarChart3 },
           { key: 'language' as RevenueView, label: 'By Language', icon: Globe },
@@ -238,7 +238,7 @@ export default function AnalyticsPage() {
             key={key}
             onClick={() => setView(key)}
             className={`flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
-              view === key ? 'bg-fuchsia-600 text-white' : 'text-slate-400 hover:text-white'
+              view === key ? 'bg-brand-gold text-brand-black' : 'text-brand-muted hover:text-white'
             }`}
           >
             <Icon className="h-3.5 w-3.5" />
@@ -249,18 +249,18 @@ export default function AnalyticsPage() {
 
       {/* ── Campaign Revenue Table ── */}
       {view === 'campaign' && (
-        <div className="rounded-xl border border-slate-800 bg-slate-900 overflow-hidden">
-          <div className="flex items-center justify-between px-5 py-4 border-b border-slate-800">
+        <div className="rounded-xl border border-brand-border bg-brand-surface overflow-hidden">
+          <div className="flex items-center justify-between px-5 py-4 border-b border-brand-border">
             <div className="flex items-center gap-2">
               <DollarSign className="h-4 w-4 text-green-400" />
               <h2 className="font-semibold text-white">Revenue by Campaign</h2>
             </div>
-            <span className="text-xs text-slate-500">{sim.campaigns.length} campaigns</span>
+            <span className="text-xs text-brand-muted/70">{sim.campaigns.length} campaigns</span>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="text-left text-xs text-slate-500 uppercase tracking-wider border-b border-slate-800">
+                <tr className="text-left text-xs text-brand-muted/70 uppercase tracking-wider border-b border-brand-border">
                   <th className="px-5 py-3">Campaign</th>
                   <th className="px-5 py-3">Tier</th>
                   <th className="px-5 py-3 text-right">Revenue</th>
@@ -276,10 +276,10 @@ export default function AnalyticsPage() {
                   .map((c) => {
                     const tc = TIER_COLORS[c.tier];
                     return (
-                      <tr key={c.id} className="border-b border-slate-800/50 hover:bg-slate-800/30 transition-colors">
+                      <tr key={c.id} className="border-b border-brand-border/50 hover:bg-brand-border/30 transition-colors">
                         <td className="px-5 py-3">
                           <p className="font-medium text-white">{c.name}</p>
-                          <p className="text-xs text-slate-500">{c.sponsor}</p>
+                          <p className="text-xs text-brand-muted/70">{c.sponsor}</p>
                         </td>
                         <td className="px-5 py-3">
                           <span className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${tc.bg} ${tc.text}`}>
@@ -287,11 +287,11 @@ export default function AnalyticsPage() {
                           </span>
                         </td>
                         <td className="px-5 py-3 text-right text-green-400 font-semibold">${c.revenue.toLocaleString()}</td>
-                        <td className="px-5 py-3 text-right text-slate-300">{c.impressions.toLocaleString()}</td>
-                        <td className="px-5 py-3 text-right text-slate-300">{c.clicks.toLocaleString()}</td>
-                        <td className="px-5 py-3 text-right text-slate-300">{c.couponsRedeemed.toLocaleString()}</td>
+                        <td className="px-5 py-3 text-right text-brand-text">{c.impressions.toLocaleString()}</td>
+                        <td className="px-5 py-3 text-right text-brand-text">{c.clicks.toLocaleString()}</td>
+                        <td className="px-5 py-3 text-right text-brand-text">{c.couponsRedeemed.toLocaleString()}</td>
                         <td className="px-5 py-3 text-right">
-                          <span className={c.roas >= 3 ? 'text-green-400 font-semibold' : 'text-slate-400'}>
+                          <span className={c.roas >= 3 ? 'text-green-400 font-semibold' : 'text-brand-muted'}>
                             {c.roas.toFixed(1)}x
                           </span>
                         </td>
@@ -306,7 +306,7 @@ export default function AnalyticsPage() {
 
       {/* ── Revenue by Language ── */}
       {view === 'language' && (
-        <div className="rounded-xl border border-slate-800 bg-slate-900 p-5">
+        <div className="rounded-xl border border-brand-border bg-brand-surface p-5">
           <div className="flex items-center gap-2 mb-5">
             <Globe className="h-4 w-4 text-blue-400" />
             <h2 className="font-semibold text-white">Revenue by Guest Language</h2>
@@ -324,15 +324,15 @@ export default function AnalyticsPage() {
                       <span className="flex items-center gap-2 text-white font-medium">
                         <span className="text-lg">{lang.flag}</span>
                         {lang.name}
-                        <span className="text-slate-600 font-mono text-xs">({lang.code})</span>
+                        <span className="text-brand-muted/50 font-mono text-xs">({lang.code})</span>
                       </span>
                       <div className="flex items-center gap-4 text-xs">
-                        <span className="text-slate-400">{lang.impressions.toLocaleString()} imp</span>
-                        <span className="text-slate-400">{lang.clicks.toLocaleString()} clicks</span>
+                        <span className="text-brand-muted">{lang.impressions.toLocaleString()} imp</span>
+                        <span className="text-brand-muted">{lang.clicks.toLocaleString()} clicks</span>
                         <span className="text-green-400 font-semibold">${lang.revenue.toLocaleString()}</span>
                       </div>
                     </div>
-                    <div className="h-3 rounded-full bg-slate-800 overflow-hidden">
+                    <div className="h-3 rounded-full bg-brand-border overflow-hidden">
                       <div
                         className="h-full rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 transition-all duration-700"
                         style={{ width: `${pct}%` }}
@@ -347,7 +347,7 @@ export default function AnalyticsPage() {
 
       {/* ── Revenue by Intent ── */}
       {view === 'intent' && (
-        <div className="rounded-xl border border-slate-800 bg-slate-900 p-5">
+        <div className="rounded-xl border border-brand-border bg-brand-surface p-5">
           <div className="flex items-center gap-2 mb-5">
             <Zap className="h-4 w-4 text-amber-400" />
             <h2 className="font-semibold text-white">Revenue by User Intent</h2>
@@ -368,12 +368,12 @@ export default function AnalyticsPage() {
                         {item.label}
                       </span>
                       <div className="flex items-center gap-4 text-xs">
-                        <span className="text-slate-400">{item.conversions.toLocaleString()} conv</span>
-                        <span className="text-slate-400">${cpc}/conv</span>
+                        <span className="text-brand-muted">{item.conversions.toLocaleString()} conv</span>
+                        <span className="text-brand-muted">${cpc}/conv</span>
                         <span className="text-green-400 font-semibold">${item.revenue.toLocaleString()}</span>
                       </div>
                     </div>
-                    <div className="h-3 rounded-full bg-slate-800 overflow-hidden">
+                    <div className="h-3 rounded-full bg-brand-border overflow-hidden">
                       <div
                         className="h-full rounded-full bg-gradient-to-r from-amber-500 to-orange-400 transition-all duration-700"
                         style={{ width: `${pct}%` }}
@@ -388,7 +388,7 @@ export default function AnalyticsPage() {
 
       {/* ── Revenue by Zone ── */}
       {view === 'zone' && (
-        <div className="rounded-xl border border-slate-800 bg-slate-900 p-5">
+        <div className="rounded-xl border border-brand-border bg-brand-surface p-5">
           <div className="flex items-center gap-2 mb-5">
             <MapPin className="h-4 w-4 text-emerald-400" />
             <h2 className="font-semibold text-white">Revenue by Geo Zone</h2>
@@ -397,16 +397,16 @@ export default function AnalyticsPage() {
             {sim.zones
               .sort((a, b) => b.revenue - a.revenue)
               .map((zone) => (
-                <div key={zone.zone} className="rounded-xl border border-slate-800 bg-slate-950 p-4">
+                <div key={zone.zone} className="rounded-xl border border-brand-border bg-brand-black p-4">
                   <div className="flex items-center justify-between mb-3">
                     <p className="text-sm font-semibold text-white">{zone.label}</p>
                     <p className="text-lg font-bold text-green-400">${zone.revenue.toLocaleString()}</p>
                   </div>
-                  <div className="flex items-center justify-between text-xs text-slate-400">
+                  <div className="flex items-center justify-between text-xs text-brand-muted">
                     <span>{zone.impressions.toLocaleString()} impressions</span>
                     <span>{zone.conversions.toLocaleString()} conversions</span>
                   </div>
-                  <div className="mt-2 h-2 rounded-full bg-slate-800 overflow-hidden">
+                  <div className="mt-2 h-2 rounded-full bg-brand-border overflow-hidden">
                     <div
                       className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-teal-400 transition-all duration-700"
                       style={{ width: `${Math.round((zone.revenue / 45000) * 100)}%` }}
@@ -427,14 +427,14 @@ export default function AnalyticsPage() {
           const tierCoupons = items.reduce((s, c) => s + c.couponsRedeemed, 0);
           const tc = TIER_COLORS[tier];
           return (
-            <div key={tier} className="rounded-xl border border-slate-800 bg-slate-900 p-5">
+            <div key={tier} className="rounded-xl border border-brand-border bg-brand-surface p-5">
               <div className="flex items-center gap-2 mb-3">
                 <span className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${tc.bg} ${tc.text}`}>
                   {TIER_LABELS[tier]}
                 </span>
               </div>
               <p className="text-3xl font-bold text-green-400">${tierRev.toLocaleString()}</p>
-              <div className="flex items-center gap-4 mt-2 text-xs text-slate-400">
+              <div className="flex items-center gap-4 mt-2 text-xs text-brand-muted">
                 <span>{items.length} campaigns</span>
                 <span>{tierImp.toLocaleString()} imp</span>
                 <span>{tierCoupons} coupons</span>

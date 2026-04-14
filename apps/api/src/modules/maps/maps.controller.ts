@@ -1,6 +1,7 @@
 import { Controller, Get, Query, Param } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { MapsService } from './maps.service';
+import { SearchPoisDto, OnlineSearchDto } from './dto/maps-search.dto';
 
 @ApiTags('maps')
 @Controller('maps')
@@ -15,27 +16,24 @@ export class MapsController {
   @Get('venues/:venueId/pois')
   getVenuePois(
     @Param('venueId') venueId: string,
-    @Query('lang') language?: string,
-    @Query('category') category?: string,
-    @Query('q') query?: string,
+    @Query() dto: SearchPoisDto,
   ) {
-    return this.mapsService.searchVenuePOIs({ venueId, language, category, query });
+    return this.mapsService.searchVenuePOIs({
+      venueId,
+      language: dto.lang,
+      category: dto.category,
+      query: dto.q,
+    });
   }
 
   @Get('online/search')
-  onlineSearch(
-    @Query('q') query: string,
-    @Query('lang') language?: string,
-    @Query('worldview') worldview?: string,
-    @Query('lat') latitude?: string,
-    @Query('lng') longitude?: string,
-  ) {
+  onlineSearch(@Query() dto: OnlineSearchDto) {
     return this.mapsService.searchOnlineContext({
-      query,
-      language,
-      worldview,
-      latitude: latitude ? Number(latitude) : undefined,
-      longitude: longitude ? Number(longitude) : undefined,
+      query: dto.q,
+      language: dto.lang,
+      worldview: dto.worldview,
+      latitude: dto.lat,
+      longitude: dto.lng,
     });
   }
 }

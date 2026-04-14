@@ -21,10 +21,13 @@
     "db:studio": "pnpm --filter @wilkins/api run db:studio"
   },
   "devDependencies": {
+    "@tailwindcss/forms": "^0.5.11",
+    "@tailwindcss/typography": "^0.5.19",
     "@types/minimatch": "5.1.2",
-    "turbo": "^2.3.3",
     "prettier": "^3.4.2",
     "rimraf": "^6.0.1",
+    "tailwindcss-animate": "^1.0.7",
+    "turbo": "^2.3.3",
     "typescript": "^5.7.3"
   },
   "engines": {

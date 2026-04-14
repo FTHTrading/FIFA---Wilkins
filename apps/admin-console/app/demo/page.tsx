@@ -150,13 +150,13 @@ export default function DemoPage() {
   const active = SCENARIOS.find((s) => s.sessionId === activeScenario) ?? null;
 
   return (
-    <main className="min-h-screen bg-slate-950 text-white p-6">
+    <main className="min-h-screen bg-brand-black text-white p-6">
       {/* Header */}
       <header className="mb-8 flex items-start justify-between">
         <div className="flex items-center gap-4">
           <Link
             href="/"
-            className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-800 hover:bg-slate-700 transition-colors"
+            className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-border hover:bg-brand-border/80 transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
           </Link>
@@ -165,17 +165,17 @@ export default function DemoPage() {
               <Sparkles className="h-5 w-5 text-fuchsia-400" />
               Demo Mode Controller
             </h1>
-            <p className="text-slate-400 text-sm mt-0.5">
+            <p className="text-brand-muted text-sm mt-0.5">
               6 multilingual guest personas · FIFA World Cup 2026 Atlanta
             </p>
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <label className="flex items-center gap-2 text-sm text-slate-400 cursor-pointer select-none">
+          <label className="flex items-center gap-2 text-sm text-brand-muted cursor-pointer select-none">
             <div
               onClick={() => setAutoPlay((v) => !v)}
               className={`relative h-5 w-9 rounded-full transition-colors cursor-pointer ${
-                autoPlay ? 'bg-fuchsia-600' : 'bg-slate-700'
+                autoPlay ? 'bg-brand-gold' : 'bg-brand-border'
               }`}
             >
               <span
@@ -189,7 +189,7 @@ export default function DemoPage() {
           <button
             type="button"
             onClick={resetDemo}
-            className="flex items-center gap-1.5 rounded-lg border border-slate-700 px-3 py-1.5 text-xs font-medium text-slate-400 hover:bg-slate-800 transition-colors"
+            className="flex items-center gap-1.5 rounded-lg border border-brand-border px-3 py-1.5 text-xs font-medium text-brand-muted hover:bg-brand-border transition-colors"
           >
             <RotateCcw className="h-3 w-3" />
             Reset
@@ -234,8 +234,8 @@ export default function DemoPage() {
           return (
             <div
               key={s.sessionId}
-              className={`rounded-xl border ${s.color} bg-slate-900 p-5 transition-all ${
-                isActive ? 'ring-1 ring-fuchsia-500/50 bg-slate-900/80' : ''
+              className={`rounded-xl border ${s.color} bg-brand-surface p-5 transition-all ${
+                isActive ? 'ring-1 ring-brand-gold/50 bg-brand-surface/80' : ''
               }`}
             >
               {/* Persona header */}
@@ -258,10 +258,10 @@ export default function DemoPage() {
               </div>
 
               {/* Role */}
-              <p className="text-xs text-slate-500 mb-2">{s.role}</p>
+              <p className="text-xs text-brand-muted/70 mb-2">{s.role}</p>
 
               {/* Description */}
-              <p className="text-xs text-slate-300 mb-3 leading-relaxed">{s.description}</p>
+              <p className="text-xs text-brand-text mb-3 leading-relaxed">{s.description}</p>
 
               {/* Intents */}
               <div className="flex flex-wrap gap-1 mb-3">
@@ -276,10 +276,10 @@ export default function DemoPage() {
               </div>
 
               {/* Cultural notes */}
-              <p className="text-[10px] text-slate-500 italic mb-4">{s.culturalNotes}</p>
+              <p className="text-[10px] text-brand-muted/70 italic mb-4">{s.culturalNotes}</p>
 
               {/* Actions */}
-              <div className="flex items-center gap-2 pt-3 border-t border-slate-800">
+              <div className="flex items-center gap-2 pt-3 border-t border-brand-border">
                 <button
                   type="button"
                   onClick={() => activateScenario(s)}
@@ -306,12 +306,12 @@ export default function DemoPage() {
                   type="button"
                   onClick={() => copyUrl(s)}
                   title="Copy direct demo URL"
-                  className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-700 bg-slate-800 hover:bg-slate-700 transition-colors"
+                  className="flex h-8 w-8 items-center justify-center rounded-lg border border-brand-border bg-brand-border hover:bg-brand-border/80 transition-colors"
                 >
                   {isCopied ? (
                     <Check className="h-3.5 w-3.5 text-green-400" />
                   ) : (
-                    <Copy className="h-3.5 w-3.5 text-slate-400" />
+                    <Copy className="h-3.5 w-3.5 text-brand-muted" />
                   )}
                 </button>
 
@@ -320,9 +320,9 @@ export default function DemoPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   title="Open guest view"
-                  className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-700 bg-slate-800 hover:bg-slate-700 transition-colors"
+                  className="flex h-8 w-8 items-center justify-center rounded-lg border border-brand-border bg-brand-border hover:bg-brand-border/80 transition-colors"
                 >
-                  <Eye className="h-3.5 w-3.5 text-slate-400" />
+                  <Eye className="h-3.5 w-3.5 text-brand-muted" />
                 </a>
               </div>
             </div>
@@ -331,31 +331,31 @@ export default function DemoPage() {
       </div>
 
       {/* How It Works */}
-      <section className="mt-8 rounded-xl border border-slate-800 bg-slate-900 p-5">
-        <h2 className="text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+      <section className="mt-8 rounded-xl border border-brand-border bg-brand-surface p-5">
+        <h2 className="text-sm font-semibold text-brand-text mb-3 flex items-center gap-2">
           <Zap className="h-4 w-4 text-amber-400" />
           How Demo Mode Works
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-slate-400">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-brand-muted">
           <div className="flex items-start gap-3">
             <span className="flex h-6 w-6 items-center justify-center rounded-full bg-fuchsia-500/20 text-fuchsia-300 text-[10px] font-bold shrink-0">1</span>
             <div>
-              <p className="font-medium text-slate-300 mb-0.5">Activate a Persona</p>
-              <p>Sets <code className="bg-slate-800 px-1 rounded text-amber-300">wilkins_demo_session</code> in localStorage so the guest web app loads that persona&apos;s state.</p>
+              <p className="font-medium text-brand-text mb-0.5">Activate a Persona</p>
+              <p>Sets <code className="bg-brand-border px-1 rounded text-amber-300">wilkins_demo_session</code> in localStorage so the guest web app loads that persona&apos;s state.</p>
             </div>
           </div>
           <div className="flex items-start gap-3">
             <span className="flex h-6 w-6 items-center justify-center rounded-full bg-fuchsia-500/20 text-fuchsia-300 text-[10px] font-bold shrink-0">2</span>
             <div>
-              <p className="font-medium text-slate-300 mb-0.5">Open Guest View</p>
-              <p>Opens <code className="bg-slate-800 px-1 rounded text-amber-300">localhost:3000?demo=1</code> pre-configured with that session ID, language, and event context.</p>
+              <p className="font-medium text-brand-text mb-0.5">Open Guest View</p>
+              <p>Opens <code className="bg-brand-border px-1 rounded text-amber-300">localhost:3000?demo=1</code> pre-configured with that session ID, language, and event context.</p>
             </div>
           </div>
           <div className="flex items-start gap-3">
             <span className="flex h-6 w-6 items-center justify-center rounded-full bg-fuchsia-500/20 text-fuchsia-300 text-[10px] font-bold shrink-0">3</span>
             <div>
-              <p className="font-medium text-slate-300 mb-0.5">Share Direct URL</p>
-              <p>Use <code className="bg-slate-800 px-1 rounded text-amber-300">Copy URL</code> to share a deep link with partners — includes session + language params for instant demo launch.</p>
+              <p className="font-medium text-brand-text mb-0.5">Share Direct URL</p>
+              <p>Use <code className="bg-brand-border px-1 rounded text-amber-300">Copy URL</code> to share a deep link with partners — includes session + language params for instant demo launch.</p>
             </div>
           </div>
         </div>

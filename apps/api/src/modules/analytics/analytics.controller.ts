@@ -3,6 +3,8 @@ import { AuthGuard } from '@nestjs/passport';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { AnalyticsService } from './analytics.service';
 import { IsString, IsOptional } from 'class-validator';
+import { Roles } from '@/common/decorators/roles.decorator';
+import { RolesGuard } from '@/common/guards/roles.guard';
 
 class TrackEventDto {
   @IsString() type!: string;
@@ -23,7 +25,8 @@ export class AnalyticsController {
   }
 
   @ApiBearerAuth()
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles('SUPER_ADMIN', 'ADMIN', 'EDITOR', 'SPONSOR_MANAGER')
   @Get('summary')
   getSummary(@Query('eventId') eventId: string) {
     return this.analyticsService.getSummary(eventId);

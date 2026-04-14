@@ -1,7 +1,11 @@
-import { Controller, Get, Post, Put, Param, Query, Body, HttpCode, HttpStatus } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiQuery } from '@nestjs/swagger';
+import { Controller, Get, Post, Put, Param, Query, Body, HttpCode, HttpStatus, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { ApiTags, ApiOperation, ApiQuery, ApiBearerAuth } from '@nestjs/swagger';
 import { CampaignsService } from './campaigns.service';
 import { CreateCampaignDto } from './dto/create-campaign.dto';
+import { ClaimBadgeDto, RedeemCouponDto } from './dto/campaign-actions.dto';
+import { Roles } from '@/common/decorators/roles.decorator';
+import { RolesGuard } from '@/common/guards/roles.guard';
 
 @ApiTags('campaigns')
 @Controller('campaigns')
@@ -25,6 +29,9 @@ export class CampaignsController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles('SUPER_ADMIN', 'ADMIN', 'SPONSOR_MANAGER')
   @ApiOperation({ summary: 'Create a new sponsor campaign (admin)' })
   createCampaign(@Body() body: CreateCampaignDto) {
     return this.campaignsService.createCampaign({
@@ -35,14 +42,14 @@ export class CampaignsController {
   }
 
   @Post(':id/impression')
-  @HttpCode(HttpStatus.OK)
+  @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({ summary: 'Record a campaign impression' })
   impression(@Param('id') id: string) {
     return this.campaignsService.recordImpression(id);
   }
 
   @Post(':id/click')
-  @HttpCode(HttpStatus.OK)
+  @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({ summary: 'Record a campaign click' })
   click(@Param('id') id: string) {
     return this.campaignsService.recordClick(id);
@@ -62,7 +69,7 @@ export class CampaignsController {
   @ApiOperation({ summary: 'Claim a reward badge for a guest session' })
   claimBadge(
     @Param('badgeId') badgeId: string,
-    @Body() body: { sessionId: string; eventId: string },
+    @Body() body: ClaimBadgeDto,
   ) {
     return this.campaignsService.claimBadge(body.sessionId, body.eventId, badgeId);
   }
@@ -90,16 +97,7 @@ export class CampaignsController {
   @Post('coupons/redeem')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Redeem a coupon code' })
-  redeemCoupon(
-    @Body()
-    body: {
-      sessionId: string;
-      eventId: string;
-      couponCode: string;
-      campaignId?: string;
-      challengeId?: string;
-    },
-  ) {
+  redeemCoupon(@Body() body: RedeemCouponDto) {
     return this.campaignsService.recordCouponRedemption(
       body.sessionId,
       body.eventId,

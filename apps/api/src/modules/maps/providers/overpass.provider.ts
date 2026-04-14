@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, BadGatewayException } from '@nestjs/common';
 import { withRetry, fetchWithTimeout } from '../../../common/utils/retry';
 
 export interface OverpassPoi {
@@ -48,7 +48,7 @@ out body;
       { attempts: 2, baseDelayMs: 500 },
     );
 
-    if (!response.ok) throw new Error(`Overpass query failed: ${response.status}`);
+    if (!response.ok) throw new BadGatewayException('Overpass API unavailable');
 
     const json = (await response.json()) as {
       elements: Array<{

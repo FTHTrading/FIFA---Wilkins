@@ -8,12 +8,7 @@ export const metadata: Metadata = {
   title: { default: 'Wilkins Media Global Guest OS', template: '%s — Wilkins Media' },
 };
 
-interface GuestLayoutProps {
-  children: React.ReactNode;
-  params: { lang?: string };
-}
-
-export default function GuestLayout({ children }: GuestLayoutProps) {
+export default function GuestLayout({ children }: { children: React.ReactNode }) {
   return (
     <GuestSessionProvider>
       <div className="flex min-h-screen flex-col bg-brand-black">
