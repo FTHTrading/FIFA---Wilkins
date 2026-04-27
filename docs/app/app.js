@@ -427,16 +427,40 @@ function buildPhraseList(){
     </div>`;
   }).join('');
 }
+// Broadcaster-quality voice via Deepgram Aura (Cloudflare Worker proxy).
+// Falls back to native Web Speech if the worker is unreachable.
+const VOICE_API = (window.WILKINS_VOICE_API || 'https://tap-fifa-voice.kevanbtc.workers.dev') + '/tts';
+let __voiceAudio = null;
 function speakPhrase(key, l){
   const p = PHRASES.find(x=>x.key===key);
   const text = p[l] || p.en;
+  speak(text, l);
+}
+function speak(text, l){
+  if (!text) return;
+  // Stop any prior playback (Deepgram or Web Speech)
+  try { if (__voiceAudio) { __voiceAudio.pause(); __voiceAudio = null; } } catch(e){}
+  try { if ('speechSynthesis' in window) speechSynthesis.cancel(); } catch(e){}
+
+  const url = `${VOICE_API}?lang=${encodeURIComponent(l||'en')}&text=${encodeURIComponent(text)}`;
+  const audio = new Audio(url);
+  audio.crossOrigin = 'anonymous';
+  audio.preload = 'auto';
+  __voiceAudio = audio;
+  // If Deepgram fails, fall back to Web Speech
+  audio.addEventListener('error', () => fallbackSpeak(text, l));
+  audio.play().catch(() => fallbackSpeak(text, l));
+}
+function fallbackSpeak(text, l){
   if (!('speechSynthesis' in window)) { alert(text); return; }
   const u = new SpeechSynthesisUtterance(text);
   const map = {en:'en-US',es:'es-ES',pt:'pt-BR',fr:'fr-FR',de:'de-DE',it:'it-IT',ar:'ar-SA',zh:'zh-CN',ja:'ja-JP',ko:'ko-KR'};
   u.lang = map[l] || 'en-US';
+  u.rate = 0.95; u.pitch = 1.0;
   speechSynthesis.cancel();
   speechSynthesis.speak(u);
 }
+window.speak = speak;
 function openModal(){ document.getElementById('phraseModal').classList.add('show'); buildPhraseList(); }
 function closeModal(){ document.getElementById('phraseModal').classList.remove('show'); }
 window.closeModal = closeModal; window.speakPhrase = speakPhrase;
@@ -539,6 +563,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
     lang = e.target.value;
     try { localStorage.setItem('tapfifa.lang', lang); } catch(_){}
     applyLang();
+    // Broadcaster greeting on language switch
+    const g = I18N[lang];
+    speak(`${g.hello}. ${g.heroSub || ''}`.trim(), lang);
   });
   // restore preference
   try { const saved = localStorage.getItem('tapfifa.lang'); if (saved && I18N[saved]) { lang = saved; document.getElementById('lang').value = saved; } } catch(_){}

@@ -1,0 +1,12 @@
+name = "tap-fifa-voice"
+main = "worker.js"
+compatibility_date = "2025-04-01"
+account_id = "07bcc4a189ef176261b818409c95891f"
+
+[vars]
+# Public — CORS origin allow-list (comma separated)
+ALLOW_ORIGIN = "https://fthtrading.github.io,http://localhost:3000,http://localhost:8080"
+
+# Secrets (set via: wrangler secret put DEEPGRAM_KEY)
+# DEEPGRAM_KEY      — primary
+# DEEPGRAM_KEY_ALT  — failover
