@@ -55,11 +55,11 @@ const SAFE_PINS = [
 
 // Unicorn waypoints — visible mascot beacons families/kids can follow
 const UNICORN_PINS = [
-  { id:'uc-gateA',  name:'🦄 Unicorn Beacon — Gate A',         lat:33.7560, lng:-84.4012 },
-  { id:'uc-gateD',  name:'🦄 Unicorn Beacon — Gate D',         lat:33.7548, lng:-84.4001 },
-  { id:'uc-rides',  name:'🦄 Unicorn Ride Pickup — West Lot',  lat:33.7553, lng:-84.4040 },
-  { id:'uc-marta',  name:'🦄 Unicorn Greeter — Five Points',   lat:33.7540, lng:-84.3915 },
-  { id:'uc-airport',name:'🦄 Unicorn Greeter — ATL Arrivals',  lat:33.6407, lng:-84.4277 }
+  { id:'uc-gateA',  name:'Tap Safety Beacon — Gate A',         lat:33.7560, lng:-84.4012 },
+  { id:'uc-gateD',  name:'Tap Safety Beacon — Gate D',         lat:33.7548, lng:-84.4001 },
+  { id:'uc-rides',  name:'Verified Pickup Zone — West Lot',      lat:33.7553, lng:-84.4040 },
+  { id:'uc-marta',  name:'Tap Safety Greeter — Five Points',     lat:33.7540, lng:-84.3915 },
+  { id:'uc-airport',name:'Tap Safety Greeter — ATL Arrivals',    lat:33.6407, lng:-84.4277 }
 ];
 
 // =========================================================
@@ -503,16 +503,36 @@ function initMap(){
     L.marker([s.lat,s.lng], { icon: divIcon('🛡️','#22c55e') })
       .addTo(map).bindPopup(`<b>${s.name}</b>`);
   });
-  // Unicorn beacons — follow-the-unicorn wayfinding
+  // Tap Safety Beacons — branded SVG pin markers (gradient teardrop, no emoji)
   UNICORN_PINS.forEach(u=>{
-    L.marker([u.lat,u.lng], { icon: divIcon('🦄','#ec4899') })
-      .addTo(map).bindPopup(`<b>${u.name}</b><br><span style="color:#9ca3af;font-size:.78rem">Verified safe partner · Live-tracked</span>`);
+    L.marker([u.lat,u.lng], { icon: brandedPin(), title: u.name, alt: u.name, keyboard:true })
+      .addTo(map).bindPopup(`<b>${u.name}</b><br><span style="color:#9ca3af;font-size:.78rem">Marked safe-zone beacon · Wilkins Safe Line</span>`);
   });
 }
 function divIcon(emoji, color){
   return L.divIcon({
     html:`<div style="background:${color};color:#fff;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:.95rem;box-shadow:0 4px 12px rgba(0,0,0,.5);border:2px solid rgba(255,255,255,.4)">${emoji}</div>`,
     className:'', iconSize:[30,30], iconAnchor:[15,15]
+  });
+}
+// Branded gradient pin for safety beacons. Inline SVG with unique gradient id per call
+// (Leaflet panes can dedup ids; using inline gradient avoids <use href> resolution issues).
+let __pinSeq = 0;
+function brandedPin(){
+  const gid = 'tapPinG_' + (++__pinSeq);
+  return L.divIcon({
+    className:'',
+    iconSize:[36,40],
+    iconAnchor:[18,38],
+    popupAnchor:[0,-32],
+    html:`<div style="width:36px;height:40px;display:grid;place-items:center;filter:drop-shadow(0 4px 8px rgba(0,0,0,.55))">
+      <svg viewBox="0 0 24 26" width="36" height="40" aria-hidden="true">
+        <defs><linearGradient id="${gid}" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#f472b6"/><stop offset=".55" stop-color="#a855f7"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>
+        <path fill="url(#${gid})" stroke="rgba(255,255,255,.85)" stroke-width="1" d="M12 1a8 8 0 00-8 8c0 6 8 16 8 16s8-10 8-16a8 8 0 00-8-8z"/>
+        <circle cx="12" cy="9" r="3" fill="#0a0203"/>
+        <circle cx="12" cy="9" r="1.4" fill="#22d3ee"/>
+      </svg>
+    </div>`
   });
 }
 
@@ -617,28 +637,58 @@ document.addEventListener('DOMContentLoaded', ()=>{
 });
 
 // =========================================================
-// 6. UNICORN SAFETY GUIDE — mascot wayfinding for kids/families/non-readers
+// 6. TAP SAFETY COMPANION — branded family-safety wayfinding
+//    (formerly "Unicorn Safety Guide" — keeps mascot, professional copy)
 // =========================================================
+//
+// Copy guidelines:
+// - Calm, concise, no overpromises ("trained safety partner is on the way")
+// - Direct people to uniformed staff + emergency button + verified ride checklist
+// - All ride providers shown are PLACEHOLDERS until ops/security verifies
+//
 const UNICORN_I18N = {
-  en:{ucT:'Follow the Unicorn to Safety',ucSub:'Lost? Scared? Tap a unicorn — we’ll guide you.',ucListen:'Listen',ucRide:'Unicorn Ride',ucZone:'Safe Zone',ucGuide:'Walk With Me',ucStrip:'Verified safe partners · Background-checked drivers · Live-tracked',rideH:'Unicorn Ride — Verified Safe',rideSub:'Background-checked drivers · Live GPS shared with Wilkins Safe Line · One-tap 911 in app.',rideWarn:'<strong>Stay safe:</strong> Always confirm the driver’s name, plate, and unicorn code before getting in. Never accept a ride from someone who approaches you first.',ucSpeak:'You are safe. Follow the unicorn signs to the nearest safe zone. If you are lost, stay where you are and tap the unicorn for help. A trained Wilkins Media safety partner is on the way.',zoneSpeak:'Walk toward the nearest unicorn flag. Safe zones have purple lights and a pink unicorn banner. A safety host will meet you there.',guideSpeak:'Stay with me. I will speak directions out loud. If anything feels wrong, tap the red emergency button.'},
-  es:{ucT:'Sigue al Unicornio a la Seguridad',ucSub:'¿Perdido? ¿Asustado? Toca un unicornio — te guiamos.',ucListen:'Escuchar',ucRide:'Viaje Unicornio',ucZone:'Zona Segura',ucGuide:'Camina Conmigo',ucStrip:'Socios verificados · Conductores con antecedentes · Rastreo en vivo',rideH:'Viaje Unicornio — Verificado Seguro',rideSub:'Conductores verificados · GPS en vivo compartido con Wilkins · 911 con un toque.',rideWarn:'<strong>Mantente seguro:</strong> Siempre confirma el nombre, placa y código unicornio del conductor. Nunca aceptes un viaje de alguien que se te acerca primero.',ucSpeak:'Estás a salvo. Sigue las señales del unicornio hasta la zona segura más cercana. Si estás perdido, quédate donde estás y toca el unicornio para pedir ayuda. Un socio de seguridad de Wilkins Media va en camino.',zoneSpeak:'Camina hacia la bandera del unicornio más cercana. Las zonas seguras tienen luces moradas y una pancarta rosa del unicornio.',guideSpeak:'Quédate conmigo. Te diré las direcciones en voz alta. Si algo te incomoda, toca el botón rojo de emergencia.'},
-  pt:{ucT:'Siga o Unicórnio até a Segurança',ucSub:'Perdido? Assustado? Toque num unicórnio — nós guiamos.',ucListen:'Ouvir',ucRide:'Corrida Unicórnio',ucZone:'Zona Segura',ucGuide:'Caminhe Comigo',ucStrip:'Parceiros verificados · Motoristas checados · Rastreio em tempo real',rideH:'Corrida Unicórnio — Verificada Segura',rideSub:'Motoristas verificados · GPS ao vivo · 911 com um toque.',rideWarn:'<strong>Fique seguro:</strong> Sempre confirme nome, placa e código do unicórnio do motorista. Nunca aceite carona de quem se aproxima primeiro.',ucSpeak:'Você está seguro. Siga os sinais do unicórnio até a zona segura mais próxima. Se estiver perdido, fique parado e toque no unicórnio para pedir ajuda.',zoneSpeak:'Caminhe até a bandeira do unicórnio mais próxima. As zonas seguras têm luzes roxas e um banner rosa.',guideSpeak:'Fique comigo. Vou falar as direções em voz alta. Se algo parecer errado, toque no botão vermelho de emergência.'},
-  fr:{ucT:'Suis la Licorne vers la Sécurité',ucSub:'Perdu ? Effrayé ? Touche une licorne — on te guide.',ucListen:'Écouter',ucRide:'Trajet Licorne',ucZone:'Zone Sûre',ucGuide:'Marche Avec Moi',ucStrip:'Partenaires vérifiés · Chauffeurs contrôlés · Suivi en direct',rideH:'Trajet Licorne — Vérifié Sûr',rideSub:'Chauffeurs vérifiés · GPS partagé en direct · 911 en un geste.',rideWarn:'<strong>Reste prudent :</strong> Confirme toujours le nom, la plaque et le code licorne du chauffeur. N’accepte jamais une course d’un inconnu qui t’aborde.',ucSpeak:'Tu es en sécurité. Suis les panneaux licorne jusqu’à la zone sûre la plus proche. Si tu es perdu, reste sur place et touche la licorne.',zoneSpeak:'Marche vers le drapeau licorne le plus proche. Les zones sûres ont des lumières violettes et une bannière rose.',guideSpeak:'Reste avec moi. Je vais te donner les directions à voix haute. Si quelque chose te dérange, touche le bouton rouge.'},
-  de:{ucT:'Folge dem Einhorn in Sicherheit',ucSub:'Verloren? Ängstlich? Tippe ein Einhorn an — wir führen dich.',ucListen:'Hören',ucRide:'Einhorn-Fahrt',ucZone:'Sichere Zone',ucGuide:'Geh Mit Mir',ucStrip:'Geprüfte Partner · Gecheckte Fahrer · Live-Tracking',rideH:'Einhorn-Fahrt — Verifiziert Sicher',rideSub:'Geprüfte Fahrer · Live-GPS · 911 per Tipp.',rideWarn:'<strong>Bleib sicher:</strong> Bestätige immer Name, Kennzeichen und Einhorn-Code. Steig nie zu jemandem ein, der dich anspricht.',ucSpeak:'Du bist sicher. Folge den Einhorn-Schildern zur nächsten sicheren Zone. Wenn du verloren bist, bleib wo du bist und tippe das Einhorn an.',zoneSpeak:'Gehe zur nächsten Einhorn-Flagge. Sichere Zonen haben lila Lichter und ein rosa Banner.',guideSpeak:'Bleib bei mir. Ich sage dir die Richtungen laut. Wenn etwas nicht stimmt, tippe den roten Notfallknopf.'},
-  it:{ucT:'Segui l’Unicorno verso la Sicurezza',ucSub:'Perso? Spaventato? Tocca un unicorno — ti guidiamo.',ucListen:'Ascolta',ucRide:'Corsa Unicorno',ucZone:'Zona Sicura',ucGuide:'Cammina Con Me',ucStrip:'Partner verificati · Autisti controllati · Tracciamento dal vivo',rideH:'Corsa Unicorno — Verificata Sicura',rideSub:'Autisti verificati · GPS in tempo reale · 911 con un tocco.',rideWarn:'<strong>Resta al sicuro:</strong> Conferma sempre nome, targa e codice unicorno. Non accettare passaggi da chi ti avvicina.',ucSpeak:'Sei al sicuro. Segui i cartelli dell’unicorno fino alla zona sicura. Se sei perso, resta fermo e tocca l’unicorno.',zoneSpeak:'Cammina verso la bandiera unicorno più vicina. Le zone sicure hanno luci viola e uno striscione rosa.',guideSpeak:'Resta con me. Dirò le indicazioni a voce alta. Se qualcosa non va, tocca il pulsante rosso.'},
-  ar:{ucT:'اتبع وحيد القرن إلى الأمان',ucSub:'هل ضللت الطريق؟ خائف؟ اضغط على وحيد القرن — سنرشدك.',ucListen:'استمع',ucRide:'رحلة وحيد القرن',ucZone:'منطقة آمنة',ucGuide:'سر معي',ucStrip:'شركاء موثوقون · سائقون موثقون · تتبع مباشر',rideH:'رحلة وحيد القرن — موثقة وآمنة',rideSub:'سائقون موثقون · GPS مباشر · 911 بضغطة واحدة.',rideWarn:'<strong>ابق آمناً:</strong> تأكد دائمًا من اسم السائق ولوحة السيارة ورمز وحيد القرن. لا تقبل توصيلة من شخص يقترب منك أولاً.',ucSpeak:'أنت بأمان. اتبع لافتات وحيد القرن إلى أقرب منطقة آمنة. إذا ضللت الطريق، ابقَ في مكانك واضغط على وحيد القرن.',zoneSpeak:'سر نحو أقرب علم لوحيد القرن. المناطق الآمنة بها أضواء أرجوانية ولافتة وردية.',guideSpeak:'ابقَ معي. سأخبرك بالاتجاهات بصوت عالٍ. إذا شعرت بأي خطر، اضغط الزر الأحمر.'},
-  zh:{ucT:'跟随独角兽到安全区',ucSub:'迷路了？害怕？点一下独角兽——我们带你走。',ucListen:'收听',ucRide:'独角兽专车',ucZone:'安全区',ucGuide:'陪你走',ucStrip:'认证合作伙伴 · 背景核查司机 · 实时追踪',rideH:'独角兽专车 — 认证安全',rideSub:'背景核查司机 · GPS实时共享 · 一键报警。',rideWarn:'<strong>保持安全：</strong>上车前请务必确认司机姓名、车牌和独角兽代码。不要接受主动靠近你的人提供的搭乘。',ucSpeak:'你很安全。跟随独角兽指示牌前往最近的安全区。如果迷路，请留在原地并点击独角兽求助。',zoneSpeak:'走向最近的独角兽旗帜。安全区有紫色灯光和粉色横幅。',guideSpeak:'跟着我。我会大声说出方向。如果感觉不对，请按红色紧急按钮。'},
-  ja:{ucT:'ユニコーンについて安全な場所へ',ucSub:'迷子？怖い？ユニコーンをタップ — 案内します。',ucListen:'聞く',ucRide:'ユニコーンライド',ucZone:'安全ゾーン',ucGuide:'一緒に歩こう',ucStrip:'認証パートナー · 身元確認済みドライバー · ライブ追跡',rideH:'ユニコーンライド — 認証済み安全',rideSub:'認証済みドライバー · GPSライブ共有 · ワンタップ911。',rideWarn:'<strong>安全のため：</strong>必ずドライバー名・ナンバー・ユニコーンコードを確認してください。声をかけてきた人の車には絶対に乗らないでください。',ucSpeak:'あなたは安全です。ユニコーンの標識をたどって最寄りの安全ゾーンへ向かってください。迷子になったらその場でユニコーンをタップしてください。',zoneSpeak:'最寄りのユニコーンの旗まで歩いてください。安全ゾーンには紫の照明とピンクのバナーがあります。',guideSpeak:'私と一緒にいてください。声で道順を伝えます。何かおかしいと感じたら赤い緊急ボタンを押してください。'},
-  ko:{ucT:'유니콘을 따라 안전한 곳으로',ucSub:'길을 잃었나요? 무섭나요? 유니콘을 누르세요 — 안내해 드릴게요.',ucListen:'듣기',ucRide:'유니콘 라이드',ucZone:'안전 구역',ucGuide:'함께 걷기',ucStrip:'인증 파트너 · 신원 확인된 기사 · 실시간 추적',rideH:'유니콘 라이드 — 인증된 안전',rideSub:'신원 확인 기사 · 실시간 GPS · 원터치 911.',rideWarn:'<strong>안전 수칙:</strong> 탑승 전 기사 이름, 번호판, 유니콘 코드를 반드시 확인하세요. 먼저 다가오는 사람의 차는 절대 타지 마세요.',ucSpeak:'당신은 안전합니다. 유니콘 표지판을 따라 가장 가까운 안전 구역으로 가세요. 길을 잃었다면 그 자리에 머물고 유니콘을 누르세요.',zoneSpeak:'가장 가까운 유니콘 깃발 쪽으로 걸어가세요. 안전 구역에는 보라색 조명과 분홍색 배너가 있습니다.',guideSpeak:'저와 함께 있어요. 방향을 소리내어 알려드릴게요. 이상하면 빨간 긴급 버튼을 누르세요.'}
+  en:{
+    ucT:'Tap Safety Companion', ucSub:'Lost or unsure? Follow the unicorn to a marked safe zone.',
+    ucListen:'Listen', ucRide:'Verified Ride', ucZone:'Safe Zone', ucGuide:'Walk With Me',
+    ucStrip:'Family Safety Guide · Multilingual · Connects to Wilkins Safe Line',
+    rideH:'Verified Ride Checklist',
+    rideSub:'Before entering any vehicle, confirm every step. Stay with your group. Your safety overrides convenience.',
+    rideOptionsH:'Safe Ride Options',
+    rideDisclaimer:'Ride providers, shuttle details, and codes shown here are placeholders. Final partners and verification codes must be approved by Wilkins Media event operations and venue security before public launch.',
+    rideWarn:'<strong>Stay safe:</strong> Confirm the driver’s name, license plate, pickup zone, and route before entering. Never accept a ride from someone who approaches you first. Share your trip with a trusted contact.',
+    rideShare:'Share Trip', rideBack:'Return to Map', rideSos:'Emergency · Call 911',
+    ride1:'Match the driver’s name to the one in your app.',
+    ride2:'Match the license plate to the one in your app.',
+    ride3:'Stand inside the marked pickup zone — never accept a ride at the curb from a stranger.',
+    ride4:'Confirm the route on your phone before the trip starts.',
+    ride5:'Share your live trip with a trusted contact or the Wilkins Safe Line.',
+    ride6:'If anything feels wrong, exit at a public, staffed area and tap the emergency button.',
+    ucSpeak:'You are safe. Walk to a marked safe zone or ask any uniformed staff member for help. Stay in well-lit, busy areas. If this is an emergency, tap the red 911 button.',
+    zoneSpeak:'A safe zone is shown on your map. Walk along marked routes. Look for staff in marked uniforms. Stay with your group.',
+    guideSpeak:'I will speak directions out loud. Walk at your normal pace. Stay on marked paths and stay near other people. If anything feels wrong, tap the red 911 button.'
+  },
+  es:{ucT:'Compañero de Seguridad Tap',ucSub:'¿Perdido o inseguro? Sigue al unicornio hasta una zona segura señalizada.',ucListen:'Escuchar',ucRide:'Viaje Verificado',ucZone:'Zona Segura',ucGuide:'Camina Conmigo',ucStrip:'Guía de Seguridad Familiar · Multilingüe · Conecta con Wilkins Safe Line',rideH:'Lista de Verificación de Viaje',rideSub:'Antes de subir a cualquier vehículo, confirma cada paso. Permanece con tu grupo.',rideOptionsH:'Opciones de Viaje Seguro',rideDisclaimer:'Los proveedores y códigos mostrados son ejemplos. Los socios finales deben ser aprobados por operaciones de Wilkins Media y seguridad del recinto antes del lanzamiento público.',rideWarn:'<strong>Mantente seguro:</strong> Confirma nombre del conductor, placa, zona de recogida y ruta antes de subir. Nunca aceptes un viaje de alguien que se te acerca primero. Comparte tu viaje con un contacto de confianza.',rideShare:'Compartir viaje',rideBack:'Volver al mapa',rideSos:'Emergencia · 911',ride1:'Verifica que el nombre del conductor coincida con el de tu app.',ride2:'Verifica que la placa coincida con la de tu app.',ride3:'Espera dentro de la zona de recogida señalada — nunca aceptes un viaje en la acera de un desconocido.',ride4:'Confirma la ruta en tu teléfono antes de iniciar el viaje.',ride5:'Comparte tu viaje en vivo con un contacto de confianza o con Wilkins Safe Line.',ride6:'Si algo se siente mal, sal en un lugar público con personal y toca el botón de emergencia.',ucSpeak:'Estás a salvo. Camina hacia una zona segura señalizada o pide ayuda a cualquier miembro del personal uniformado. Permanece en áreas iluminadas y concurridas. Si es una emergencia, toca el botón rojo de 911.',zoneSpeak:'Se muestra una zona segura en tu mapa. Camina por rutas señalizadas. Busca al personal uniformado. Permanece con tu grupo.',guideSpeak:'Diré las indicaciones en voz alta. Camina a tu ritmo normal. Permanece en caminos señalizados y cerca de otras personas. Si algo no está bien, toca el botón rojo de 911.'},
+  pt:{ucT:'Companheiro de Segurança Tap',ucSub:'Perdido ou inseguro? Siga o unicórnio até uma zona segura sinalizada.',ucListen:'Ouvir',ucRide:'Corrida Verificada',ucZone:'Zona Segura',ucGuide:'Caminhe Comigo',ucStrip:'Guia de Segurança Familiar · Multilíngue · Conecta com Wilkins Safe Line',rideH:'Checklist de Corrida Verificada',rideSub:'Antes de entrar em qualquer veículo, confirme cada passo. Fique com seu grupo.',rideOptionsH:'Opções de Corrida Segura',rideDisclaimer:'Provedores e códigos mostrados aqui são placeholders. Os parceiros finais precisam ser aprovados pelas operações da Wilkins Media e pela segurança do local antes do lançamento público.',rideWarn:'<strong>Fique seguro:</strong> Confirme nome do motorista, placa, zona de embarque e rota antes de entrar. Nunca aceite carona de quem se aproxima primeiro. Compartilhe sua viagem com alguém de confiança.',rideShare:'Compartilhar viagem',rideBack:'Voltar ao mapa',rideSos:'Emergência · 911',ride1:'Confirme se o nome do motorista corresponde ao do app.',ride2:'Confirme se a placa corresponde à do app.',ride3:'Aguarde dentro da zona de embarque sinalizada.',ride4:'Confirme a rota no seu telefone antes da viagem começar.',ride5:'Compartilhe sua viagem ao vivo com um contato de confiança.',ride6:'Se algo parecer errado, saia em um local público com equipe e use o botão de emergência.',ucSpeak:'Você está seguro. Caminhe até uma zona segura sinalizada ou peça ajuda a qualquer funcionário uniformizado. Permaneça em áreas iluminadas e movimentadas. Se for emergência, toque o botão vermelho 911.',zoneSpeak:'Uma zona segura está marcada no seu mapa. Caminhe por rotas sinalizadas. Procure funcionários uniformizados.',guideSpeak:'Vou falar as direções em voz alta. Caminhe no seu ritmo normal. Fique em caminhos sinalizados e próximo de outras pessoas. Se algo estiver errado, toque o botão vermelho 911.'},
+  fr:{ucT:'Compagnon Sécurité Tap',ucSub:'Perdu ou hésitant ? Suis la licorne jusqu’à une zone sûre signalée.',ucListen:'Écouter',ucRide:'Trajet Vérifié',ucZone:'Zone Sûre',ucGuide:'Marche Avec Moi',ucStrip:'Guide Sécurité Famille · Multilingue · Relié à la Wilkins Safe Line',rideH:'Checklist Trajet Vérifié',rideSub:'Avant de monter dans un véhicule, confirme chaque étape. Reste avec ton groupe.',rideOptionsH:'Options de Trajet Sûr',rideDisclaimer:'Les fournisseurs et codes affichés sont des exemples. Les partenaires finaux doivent être approuvés par les opérations Wilkins Media et la sécurité du site avant le lancement public.',rideWarn:'<strong>Reste prudent :</strong> Confirme le nom du chauffeur, la plaque, la zone d’embarquement et l’itinéraire avant de monter. N’accepte jamais une course d’un inconnu qui t’aborde. Partage ton trajet avec un contact de confiance.',rideShare:'Partager le trajet',rideBack:'Retour à la carte',rideSos:'Urgence · 911',ride1:'Vérifie que le nom du chauffeur correspond à celui de l’app.',ride2:'Vérifie que la plaque correspond à celle de l’app.',ride3:'Attends dans la zone d’embarquement signalée.',ride4:'Confirme l’itinéraire avant le départ.',ride5:'Partage ton trajet en direct avec un contact de confiance.',ride6:'Si quelque chose te dérange, descends dans un endroit public avec du personnel et touche le bouton d’urgence.',ucSpeak:'Tu es en sécurité. Marche vers une zone sûre signalée ou demande de l’aide à un membre du personnel en uniforme. Reste dans des zones éclairées et fréquentées. En cas d’urgence, touche le bouton rouge 911.',zoneSpeak:'Une zone sûre est indiquée sur ta carte. Marche le long des itinéraires signalés. Cherche le personnel en uniforme.',guideSpeak:'Je vais énoncer les directions à voix haute. Marche à ton rythme normal. Reste sur les chemins signalés. Si quelque chose te dérange, touche le bouton rouge 911.'},
+  de:{ucT:'Tap-Sicherheitsbegleiter',ucSub:'Verloren oder unsicher? Folge dem Einhorn zu einer markierten sicheren Zone.',ucListen:'Hören',ucRide:'Verifizierte Fahrt',ucZone:'Sichere Zone',ucGuide:'Geh Mit Mir',ucStrip:'Familien-Sicherheitsleitfaden · Mehrsprachig · Mit Wilkins Safe Line verbunden',rideH:'Checkliste Verifizierte Fahrt',rideSub:'Bevor du in ein Fahrzeug einsteigst, bestätige jeden Schritt. Bleib bei deiner Gruppe.',rideOptionsH:'Sichere Fahrtoptionen',rideDisclaimer:'Hier gezeigte Anbieter und Codes sind Platzhalter. Endgültige Partner müssen vor dem öffentlichen Start von Wilkins Media Operations und der Veranstaltungssicherheit freigegeben werden.',rideWarn:'<strong>Bleib sicher:</strong> Bestätige Fahrername, Kennzeichen, Abholzone und Route vor dem Einsteigen. Steig nie zu jemandem ein, der dich anspricht. Teile deine Fahrt mit einem Vertrauten.',rideShare:'Fahrt teilen',rideBack:'Zurück zur Karte',rideSos:'Notruf · 911',ride1:'Prüfe, ob der Name des Fahrers mit der App übereinstimmt.',ride2:'Prüfe, ob das Kennzeichen mit der App übereinstimmt.',ride3:'Warte in der markierten Abholzone.',ride4:'Bestätige die Route vor Fahrtbeginn.',ride5:'Teile deine Live-Fahrt mit einem Vertrauten.',ride6:'Wenn etwas nicht stimmt, steig an einem öffentlichen Ort mit Personal aus und nutze den Notfallknopf.',ucSpeak:'Du bist sicher. Gehe zu einer markierten sicheren Zone oder bitte uniformiertes Personal um Hilfe. Bleib in beleuchteten, belebten Bereichen. Im Notfall drücke den roten 911-Knopf.',zoneSpeak:'Eine sichere Zone wird auf deiner Karte angezeigt. Gehe entlang markierter Routen. Halte nach uniformiertem Personal Ausschau.',guideSpeak:'Ich sage dir die Richtungen laut. Gehe in deinem normalen Tempo. Bleib auf markierten Wegen und in der Nähe anderer Menschen. Wenn etwas nicht stimmt, drücke den roten 911-Knopf.'},
+  it:{ucT:'Compagno di Sicurezza Tap',ucSub:'Perso o insicuro? Segui l’unicorno fino a una zona sicura segnalata.',ucListen:'Ascolta',ucRide:'Corsa Verificata',ucZone:'Zona Sicura',ucGuide:'Cammina Con Me',ucStrip:'Guida Sicurezza Famiglia · Multilingue · Collegata alla Wilkins Safe Line',rideH:'Checklist Corsa Verificata',rideSub:'Prima di salire su un veicolo, conferma ogni passaggio. Resta con il tuo gruppo.',rideOptionsH:'Opzioni di Corsa Sicura',rideDisclaimer:'Provider e codici mostrati sono segnaposto. I partner finali devono essere approvati dalle operations di Wilkins Media e dalla sicurezza dell’evento prima del lancio pubblico.',rideWarn:'<strong>Resta al sicuro:</strong> Conferma nome dell’autista, targa, zona di salita e percorso prima di salire. Non accettare passaggi da chi ti avvicina. Condividi il viaggio con un contatto fidato.',rideShare:'Condividi corsa',rideBack:'Torna alla mappa',rideSos:'Emergenza · 911',ride1:'Verifica che il nome dell’autista coincida con quello in app.',ride2:'Verifica che la targa coincida con quella in app.',ride3:'Attendi nella zona di salita segnalata.',ride4:'Conferma il percorso prima della partenza.',ride5:'Condividi la corsa in tempo reale con un contatto fidato.',ride6:'Se qualcosa non va, scendi in un luogo pubblico con personale e usa il pulsante di emergenza.',ucSpeak:'Sei al sicuro. Cammina verso una zona sicura segnalata o chiedi aiuto a personale in divisa. Resta in zone illuminate e affollate. In caso di emergenza, tocca il pulsante rosso 911.',zoneSpeak:'Una zona sicura è indicata sulla tua mappa. Cammina lungo i percorsi segnalati. Cerca personale in divisa.',guideSpeak:'Dirò le indicazioni a voce alta. Cammina al tuo passo normale. Resta su percorsi segnalati e vicino ad altre persone. Se qualcosa non va, tocca il pulsante rosso 911.'},
+  ar:{ucT:'مرافق سلامة Tap',ucSub:'هل ضللت الطريق؟ اتبع وحيد القرن إلى منطقة آمنة معلَّمة.',ucListen:'استمع',ucRide:'رحلة موثقة',ucZone:'منطقة آمنة',ucGuide:'سر معي',ucStrip:'دليل سلامة العائلة · متعدد اللغات · متصل بخط Wilkins Safe',rideH:'قائمة فحص الرحلة الموثقة',rideSub:'قبل ركوب أي مركبة، تأكد من كل خطوة. ابقَ مع مجموعتك.',rideOptionsH:'خيارات رحلة آمنة',rideDisclaimer:'مزودو الرحلات والرموز المعروضة هنا للعرض فقط. يجب اعتماد الشركاء النهائيين من قبل عمليات Wilkins Media وأمن الموقع قبل الإطلاق العام.',rideWarn:'<strong>ابق آمناً:</strong> تأكد من اسم السائق، اللوحة، منطقة الركوب والمسار قبل الصعود. لا تقبل توصيلة من شخص يقترب منك أولاً. شارك رحلتك مع شخص تثق به.',rideShare:'مشاركة الرحلة',rideBack:'العودة للخريطة',rideSos:'طوارئ · 911',ride1:'تأكد من تطابق اسم السائق مع التطبيق.',ride2:'تأكد من تطابق رقم اللوحة مع التطبيق.',ride3:'انتظر داخل منطقة الركوب المحددة.',ride4:'تأكد من المسار قبل بدء الرحلة.',ride5:'شارك رحلتك المباشرة مع شخص تثق به.',ride6:'إذا شعرت بأي خطر، انزل في مكان عام به موظفون واستخدم زر الطوارئ.',ucSpeak:'أنت بأمان. سر إلى منطقة آمنة معلَّمة أو اطلب المساعدة من أي موظف بالزي الرسمي. ابقَ في الأماكن المضاءة والمزدحمة. في حالة الطوارئ، اضغط الزر الأحمر 911.',zoneSpeak:'تظهر منطقة آمنة على خريطتك. سر على المسارات المحددة. ابحث عن الموظفين بالزي الرسمي.',guideSpeak:'سأقول لك الاتجاهات بصوت عالٍ. سر بإيقاعك العادي. ابقَ على المسارات المحددة وقرب الناس. إذا شعرت بأي خطر، اضغط الزر الأحمر 911.'},
+  zh:{ucT:'Tap 安全伙伴',ucSub:'迷路或不确定？跟随独角兽到标记的安全区。',ucListen:'收听',ucRide:'验证乘车',ucZone:'安全区',ucGuide:'陪你走',ucStrip:'家庭安全指南 · 多语言 · 连接 Wilkins Safe Line',rideH:'验证乘车检查清单',rideSub:'上车前请确认每一步。与你的同伴在一起。',rideOptionsH:'安全乘车选项',rideDisclaimer:'此处显示的乘车提供商和代码仅为占位示例。最终合作伙伴必须由 Wilkins Media 运营和场馆安保在公开发布前批准。',rideWarn:'<strong>保持安全：</strong>上车前请确认司机姓名、车牌、上车点和路线。不要接受主动靠近你的人提供的搭乘。与可信联系人分享行程。',rideShare:'分享行程',rideBack:'返回地图',rideSos:'紧急 · 911',ride1:'核对司机姓名与App一致。',ride2:'核对车牌与App一致。',ride3:'在标记的上车区内等待。',ride4:'出发前确认路线。',ride5:'与可信联系人共享实时行程。',ride6:'若感觉不对，请在有工作人员的公共场所下车，并使用紧急按钮。',ucSpeak:'你很安全。请走到标记的安全区，或向任何穿制服的工作人员求助。停留在明亮、人多的地方。如遇紧急情况，请按红色 911 按钮。',zoneSpeak:'你的地图上显示了一个安全区。请沿标记的路线行走。寻找穿制服的工作人员。',guideSpeak:'我会大声说出方向。按正常速度行走。请走在标记的路径上并靠近他人。如果感觉不对，按红色 911 按钮。'},
+  ja:{ucT:'Tap セーフティ・コンパニオン',ucSub:'迷子や不安なときは、ユニコーンに従って表示された安全ゾーンへ。',ucListen:'聞く',ucRide:'認証ライド',ucZone:'安全ゾーン',ucGuide:'一緒に歩こう',ucStrip:'家族向け安全ガイド · 多言語 · Wilkins Safe Line に接続',rideH:'認証ライド・チェックリスト',rideSub:'乗車前にすべての項目を確認してください。グループから離れないでください。',rideOptionsH:'安全なライド選択肢',rideDisclaimer:'ここに表示されるライドプロバイダおよびコードはプレースホルダーです。最終的なパートナーは公開前に Wilkins Media オペレーションと会場警備の承認が必要です。',rideWarn:'<strong>安全のため：</strong>乗車前に運転手の名前、ナンバープレート、乗車エリア、ルートを必ず確認してください。声をかけてきた人の車には絶対に乗らないでください。信頼できる連絡先と乗車を共有してください。',rideShare:'乗車を共有',rideBack:'地図に戻る',rideSos:'緊急 · 911',ride1:'運転手の名前がアプリと一致するか確認。',ride2:'ナンバープレートがアプリと一致するか確認。',ride3:'指定された乗車エリア内で待つ。',ride4:'出発前にルートを確認。',ride5:'信頼できる連絡先にライブの行程を共有。',ride6:'違和感があれば、係員のいる公共の場所で降り、緊急ボタンを使用してください。',ucSpeak:'あなたは安全です。マークされた安全ゾーンへ向かうか、制服を着たスタッフに助けを求めてください。明るく人通りの多い場所にとどまってください。緊急時は赤い 911 ボタンを押してください。',zoneSpeak:'地図に安全ゾーンが表示されています。表示されたルートを歩いてください。制服のスタッフを探してください。',guideSpeak:'声で道順を伝えます。通常のペースで歩いてください。表示された道を歩き、他の人の近くにいてください。何かおかしいと感じたら赤い 911 ボタンを押してください。'},
+  ko:{ucT:'Tap 안전 동반자',ucSub:'길을 잃었거나 불안하면, 유니콘을 따라 표시된 안전 구역으로 가세요.',ucListen:'듣기',ucRide:'검증된 라이드',ucZone:'안전 구역',ucGuide:'함께 걷기',ucStrip:'가족 안전 가이드 · 다국어 · Wilkins Safe Line 연결',rideH:'검증된 라이드 체크리스트',rideSub:'차량에 탑승하기 전에 모든 단계를 확인하세요. 일행과 함께 있으세요.',rideOptionsH:'안전한 라이드 옵션',rideDisclaimer:'여기에 표시된 라이드 제공자와 코드는 플레이스홀더입니다. 최종 파트너는 공개 출시 전 Wilkins Media 운영 및 행사 보안의 승인을 받아야 합니다.',rideWarn:'<strong>안전 수칙:</strong> 탑승 전 기사 이름, 번호판, 픽업 구역, 경로를 반드시 확인하세요. 먼저 다가오는 사람의 차는 절대 타지 마세요. 신뢰할 수 있는 연락처와 여정을 공유하세요.',rideShare:'여정 공유',rideBack:'지도로 돌아가기',rideSos:'긴급 · 911',ride1:'기사 이름이 앱과 일치하는지 확인.',ride2:'번호판이 앱과 일치하는지 확인.',ride3:'지정된 픽업 구역에서 대기.',ride4:'출발 전 경로 확인.',ride5:'신뢰할 수 있는 사람과 실시간 여정 공유.',ride6:'이상하면 직원이 있는 공공장소에서 하차하고 긴급 버튼을 사용하세요.',ucSpeak:'당신은 안전합니다. 표시된 안전 구역으로 걸어가거나 제복을 입은 직원에게 도움을 요청하세요. 밝고 사람이 많은 곳에 머물러 있으세요. 긴급 상황에서는 빨간 911 버튼을 누르세요.',zoneSpeak:'지도에 안전 구역이 표시됩니다. 표시된 경로를 따라 걸어가세요. 제복 입은 직원을 찾아보세요.',guideSpeak:'방향을 소리내어 알려드릴게요. 평소 속도로 걸으세요. 표시된 길에서 다른 사람들 가까이 머무르세요. 이상하면 빨간 911 버튼을 누르세요.'}
 };
 
-// Verified safe ride partners — Atlanta. Replace with real promo codes / deep links per partner.
+// SAFE RIDE OPTIONS — placeholders. Verified-pickup-zone-only references; no third-party deep links
+// or promo codes until ops/security signs off. URLs use `tel:` to Wilkins Safe Line so the user
+// always lands on a staffed channel rather than an unverified external app.
 const RIDE_OPTIONS = [
-  { id:'uber-unicorn',  name:'Uber · Unicorn Code',     sub:'Open Uber with safety code WILKINS-UNICORN', badge:'VERIFIED', icon:'🚗', url:'https://m.uber.com/looking?promoCode=WILKINS-UNICORN' },
-  { id:'lyft-unicorn',  name:'Lyft · Wilkins Safe Ride', sub:'Background-checked driver, live shared trip', badge:'VERIFIED', icon:'🚙', url:'https://lyft.com/ride?id=lyft&partner=WILKINS' },
-  { id:'marta-shuttle', name:'MARTA Match-Day Shuttle',  sub:'Free with ticket · Five Points → Stadium',     badge:'OFFICIAL', icon:'🚇', url:'tel:14048483000' },
-  { id:'wilkins-walk',  name:'Wilkins Walking Escort',   sub:'Trained host walks you door-to-door',          badge:'STAFF',    icon:'👥', url:'tel:18888273432' }
+  { id:'rideshare-zone',  name:'Rideshare · Verified Pickup Zone', sub:'Open your rideshare app, then walk to the marked Wilkins pickup zone before getting in.', badge:'PLACEHOLDER', icon:'ride', url:'tel:18888273432' },
+  { id:'official-shuttle', name:'Match-Day Shuttle (Official)',     sub:'Routes and times to be confirmed by venue operations.', badge:'PLACEHOLDER', icon:'ride', url:'tel:18888273432' },
+  { id:'wilkins-walk',    name:'Wilkins Walking Escort',            sub:'Trained host walks you from a safe zone to your gate.',  badge:'STAFF',       icon:'guide', url:'tel:18888273432' },
+  { id:'staffed-transit', name:'Staffed Transit Hub',                sub:'Use only stations with visible uniformed staff and CCTV.', badge:'GUIDANCE',  icon:'zone', url:'tel:18888273432' }
 ];
+
+const RIDE_CHECKLIST_KEYS = ['ride1','ride2','ride3','ride4','ride5','ride6'];
 
 function ucT(k){ return (UNICORN_I18N[lang] && UNICORN_I18N[lang][k]) || UNICORN_I18N.en[k]; }
 function applyUnicornLang(){
@@ -646,27 +696,67 @@ function applyUnicornLang(){
     const k = el.dataset.i18n;
     if (UNICORN_I18N.en && UNICORN_I18N.en[k] != null) el.innerHTML = ucT(k);
   });
+  // Also keep aria-labels updated for screen readers
+  const map = {
+    ucSpeakBtn:'ucListen', ucRideBtn:'ucRide', ucZoneBtn:'ucZone', ucGuideBtn:'ucGuide',
+    rideShareBtn:'rideShare', rideBackBtn:'rideBack'
+  };
+  Object.entries(map).forEach(([id,k])=>{
+    const el = document.getElementById(id);
+    if (el && UNICORN_I18N.en[k]) el.setAttribute('aria-label', stripTags(ucT(k)));
+  });
+}
+function stripTags(s){ return String(s).replace(/<[^>]+>/g,''); }
+
+function buildRideChecklist(){
+  const el = document.getElementById('rideChecklist'); if (!el) return;
+  el.innerHTML = RIDE_CHECKLIST_KEYS.map((k,i)=>`<li><span class="num" aria-hidden="true">${i+1}</span><span>${ucT(k)}</span></li>`).join('');
 }
 function buildRideOptions(){
   const wrap = document.getElementById('rideOptions'); if (!wrap) return;
   wrap.innerHTML = RIDE_OPTIONS.map(r=>`
-    <a class="opt" href="${r.url}" target="_blank" rel="noreferrer">
-      <div class="ic">${r.icon}</div>
+    <a class="opt" href="${r.url}" rel="noreferrer" aria-label="${stripTags(r.name)} — ${stripTags(r.sub)}">
+      <div class="ic" aria-hidden="true"><svg><use href="#icon-${r.icon}"/></svg></div>
       <div class="body">
         <div class="t">${r.name} <span class="badge">${r.badge}</span></div>
         <div class="s">${r.sub}</div>
       </div>
     </a>`).join('');
 }
-function openRide(){ buildRideOptions(); document.getElementById('rideModal').classList.add('show'); speak(ucT('ucSpeak'), lang); }
-function closeRide(){ document.getElementById('rideModal').classList.remove('show'); try{if(__voiceAudio)__voiceAudio.pause();}catch(_){} }
+
+let __rideLastFocus = null;
+function openRide(){
+  buildRideChecklist();
+  buildRideOptions();
+  const m = document.getElementById('rideModal');
+  __rideLastFocus = document.activeElement;
+  m.classList.add('show');
+  speak(ucT('ucSpeak'), lang);
+  // Move focus into sheet for keyboard users
+  setTimeout(()=>{ const x = m.querySelector('.x'); if (x) x.focus(); }, 30);
+}
+function closeRide(){
+  document.getElementById('rideModal').classList.remove('show');
+  try{ if (__voiceAudio) __voiceAudio.pause(); }catch(_){}
+  try{ if (__rideLastFocus) __rideLastFocus.focus(); }catch(_){}
+}
 window.closeRide = closeRide;
+
+async function shareTrip(){
+  const text = 'I am using the Tap FIFA Safety Companion. If you do not hear back, contact Wilkins Safe Line: 1-888-827-3432.';
+  try{
+    if (navigator.share){ await navigator.share({title:'Tap FIFA · Trip share', text}); return; }
+  }catch(_){ /* user cancelled */ }
+  try{ await navigator.clipboard.writeText(text); alert('Trip-share message copied. Send it to a trusted contact.'); }
+  catch(_){ window.location.href = 'sms:?body=' + encodeURIComponent(text); }
+}
 
 function wireUnicorn(){
   applyUnicornLang();
-  // Re-apply unicorn translations whenever language changes
   const langSel = document.getElementById('lang');
-  if (langSel) langSel.addEventListener('change', ()=>setTimeout(applyUnicornLang,0));
+  if (langSel) langSel.addEventListener('change', ()=>setTimeout(()=>{
+    applyUnicornLang(); buildRideChecklist(); buildRideOptions();
+  },0));
 
   const speakBtn = document.getElementById('ucSpeakBtn');
   const rideBtn  = document.getElementById('ucRideBtn');
@@ -684,6 +774,16 @@ function wireUnicorn(){
     document.getElementById('map').scrollIntoView({behavior:'smooth',block:'center'});
   });
 
+  const shareBtn = document.getElementById('rideShareBtn');
+  const backBtn  = document.getElementById('rideBackBtn');
+  if (shareBtn) shareBtn.addEventListener('click', shareTrip);
+  if (backBtn)  backBtn.addEventListener('click',  ()=>{ closeRide(); document.getElementById('map').scrollIntoView({behavior:'smooth',block:'center'}); });
+
   const rm = document.getElementById('rideModal');
   if (rm) rm.addEventListener('click', e=>{ if (e.target.id==='rideModal') closeRide(); });
+
+  // Esc closes ride sheet
+  document.addEventListener('keydown', e=>{
+    if (e.key === 'Escape' && rm && rm.classList.contains('show')) closeRide();
+  });
 }

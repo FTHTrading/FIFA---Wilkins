@@ -125,36 +125,102 @@
   [dir="rtl"] .sos .arrow{transform:scaleX(-1)}
   [dir="rtl"] .map-head .badge{margin-left:0;margin-right:auto}
 
-  /* ══ Unicorn Safety Guide — mascot wayfinding for kids/families/non-readers ══ */
-  .unicorn{margin:14px 16px;background:linear-gradient(135deg,#ec4899 0%,#8b5cf6 50%,#06b6d4 100%);border-radius:18px;padding:16px 16px 14px;position:relative;overflow:hidden;box-shadow:0 18px 40px rgba(139,92,246,.35)}
-  .unicorn::before{content:"";position:absolute;inset:-20%;background:radial-gradient(circle at 20% 30%,rgba(255,255,255,.25),transparent 40%),radial-gradient(circle at 80% 70%,rgba(255,255,255,.18),transparent 45%);pointer-events:none}
-  .unicorn-head{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
-  .unicorn-mascot{width:56px;height:56px;border-radius:14px;background:rgba(255,255,255,.22);display:grid;place-items:center;font-size:2.1rem;animation:bounce 2.4s ease-in-out infinite;box-shadow:inset 0 1px rgba(255,255,255,.4),0 8px 18px rgba(0,0,0,.25);flex-shrink:0}
-  @keyframes bounce{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-6px) rotate(3deg)}}
-  .unicorn h3{margin:0 0 2px;font-size:1.05rem;font-weight:800}
-  .unicorn .uc-sub{margin:0;font-size:.8rem;opacity:.95}
-  .unicorn-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px;position:relative;z-index:1}
-  .uc-btn{background:rgba(255,255,255,.92);color:#5b21b6;border-radius:12px;padding:10px 6px;font-weight:800;font-size:.78rem;display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;text-align:center;transition:.15s;border:0;cursor:pointer}
-  .uc-btn:active{transform:scale(.96)}
-  .uc-btn .uc-ic{font-size:1.4rem}
-  .uc-btn.ride{background:linear-gradient(180deg,#fff,#fce7f3);color:#9d174d}
-  .uc-btn.zone{background:linear-gradient(180deg,#fff,#dbeafe);color:#1e40af}
-  .uc-btn.guide{background:linear-gradient(180deg,#fff,#dcfce7);color:#166534}
-  .uc-strip{margin-top:10px;font-size:.72rem;color:rgba(255,255,255,.92);display:flex;align-items:center;gap:6px;position:relative;z-index:1}
-  .uc-strip .dot{width:6px;height:6px;border-radius:50%;background:#86efac;box-shadow:0 0 8px #86efac;animation:blink 1.4s infinite}
-  @keyframes blink{50%{opacity:.3}}
+  /* ══ Tap Safety Companion — branded mascot wayfinding for kids/families/non-readers ══ */
+  .companion{margin:14px 16px;background:
+    radial-gradient(120% 120% at 0% 0%, rgba(6,182,212,.35), transparent 55%),
+    radial-gradient(120% 120% at 100% 100%, rgba(236,72,153,.35), transparent 55%),
+    linear-gradient(180deg,#1a0822,#120517);
+    border:1px solid rgba(139,92,246,.35);border-radius:18px;padding:16px 16px 14px;position:relative;overflow:hidden;box-shadow:0 18px 40px rgba(15,5,30,.55), inset 0 1px rgba(255,255,255,.06)}
+  .companion::before{content:"";position:absolute;inset:-1px;border-radius:18px;pointer-events:none;background:linear-gradient(135deg,rgba(6,182,212,.55),rgba(236,72,153,.55));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;padding:1px;opacity:.6}
+  .companion-head{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+  .companion-mascot{width:56px;height:56px;border-radius:14px;background:linear-gradient(160deg,#1a0e2e 0%,#0a0414 100%);display:grid;place-items:center;flex-shrink:0;border:1px solid rgba(139,92,246,.45);box-shadow:0 0 18px rgba(6,182,212,.35), inset 0 1px rgba(255,255,255,.08)}
+  .companion-mascot svg{width:34px;height:34px;display:block;filter:drop-shadow(0 0 6px rgba(6,182,212,.55));animation:floaty 4s ease-in-out infinite}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+  .companion-meta{flex:1;min-width:0}
+  .companion h3{margin:0 0 2px;font-size:1.05rem;font-weight:800;letter-spacing:.01em}
+  .companion .cmp-sub{margin:0;font-size:.8rem;color:#cbd5f5;opacity:.95}
+  .companion-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px;position:relative;z-index:1}
+  .cmp-btn{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:11px 6px 9px;font-weight:700;font-size:.78rem;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;transition:.15s;cursor:pointer;min-height:64px}
+  .cmp-btn:hover{background:rgba(255,255,255,.1)}
+  .cmp-btn:active{transform:scale(.97)}
+  .cmp-btn:focus-visible{outline:2px solid #06b6d4;outline-offset:2px}
+  .cmp-btn svg{width:22px;height:22px}
+  .cmp-btn.ride{border-color:rgba(236,72,153,.5);box-shadow:inset 0 0 0 1px rgba(236,72,153,.15)}
+  .cmp-btn.zone{border-color:rgba(6,182,212,.55);box-shadow:inset 0 0 0 1px rgba(6,182,212,.15)}
+  .cmp-btn.guide{border-color:rgba(139,92,246,.55);box-shadow:inset 0 0 0 1px rgba(139,92,246,.15)}
+  .cmp-btn.listen{flex-direction:row;gap:6px;padding:8px 10px;min-height:0;max-width:96px;align-self:center}
+  .cmp-strip{margin-top:10px;font-size:.72rem;color:#cbd5f5;display:flex;align-items:center;gap:6px;position:relative;z-index:1}
+  .cmp-strip .dot{width:6px;height:6px;border-radius:50%;background:#22d3ee;box-shadow:0 0 8px #22d3ee;animation:pulse-dot 1.6s infinite}
+  @keyframes pulse-dot{50%{opacity:.35}}
 
-  /* Unicorn ride sheet */
+  /* Verified Ride Checklist sheet */
+  .ride-sheet h2{display:flex;align-items:center;gap:8px;font-size:1.1rem}
+  .ride-sheet h2 svg{width:24px;height:24px;flex-shrink:0}
+  .ride-checklist{margin:6px 0 12px;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+  .ride-checklist li{display:flex;align-items:flex-start;gap:10px;background:#1a0606;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:.86rem;line-height:1.4}
+  .ride-checklist li .num{width:22px;height:22px;border-radius:50%;background:rgba(6,182,212,.18);color:#7dd3fc;border:1px solid rgba(6,182,212,.4);font-size:.72rem;font-weight:800;display:grid;place-items:center;flex-shrink:0;font-variant-numeric:tabular-nums}
+  .ride-options-h{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin:14px 0 6px}
   .ride-sheet .opt{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;background:#1a0606;border:1px solid var(--line);margin-bottom:8px;text-decoration:none;color:#fff}
-  .ride-sheet .opt .ic{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,#ec4899,#8b5cf6);display:grid;place-items:center;font-size:1.4rem;flex-shrink:0}
+  .ride-sheet .opt:focus-visible{outline:2px solid #06b6d4;outline-offset:2px}
+  .ride-sheet .opt .ic{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,#0c4a6e,#3b0764);display:grid;place-items:center;flex-shrink:0;border:1px solid rgba(139,92,246,.4)}
+  .ride-sheet .opt .ic svg{width:22px;height:22px}
   .ride-sheet .opt .body{flex:1;min-width:0}
   .ride-sheet .opt .t{font-weight:700;font-size:.95rem}
   .ride-sheet .opt .s{color:var(--ink-3);font-size:.76rem}
-  .ride-sheet .opt .badge{font-size:.65rem;background:rgba(34,197,94,.2);color:#86efac;border:1px solid rgba(34,197,94,.4);padding:2px 7px;border-radius:6px;font-weight:700;margin-left:6px}
+  .ride-sheet .opt .badge{font-size:.62rem;background:rgba(245,158,11,.18);color:#fcd34d;border:1px solid rgba(245,158,11,.4);padding:2px 7px;border-radius:6px;font-weight:700;margin-left:6px;letter-spacing:.04em}
   .ride-sheet .warn{background:linear-gradient(180deg,#7f1d1d,#450a0a);border:1px solid rgba(239,68,68,.5);border-radius:12px;padding:12px;font-size:.82rem;line-height:1.5;margin-top:8px}
+  .ride-disclaimer{margin-top:10px;padding:10px 12px;border-radius:10px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.35);color:#fcd34d;font-size:.74rem;line-height:1.45}
+  .ride-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+  .ride-actions .ra{padding:11px 10px;border-radius:10px;font-weight:700;font-size:.82rem;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+  .ride-actions .ra.share{background:rgba(6,182,212,.16);color:#7dd3fc;border:1px solid rgba(6,182,212,.45)}
+  .ride-actions .ra.back{background:rgba(139,92,246,.16);color:#c4b5fd;border:1px solid rgba(139,92,246,.45)}
+  .ride-actions .ra.sos{grid-column:span 2;background:linear-gradient(180deg,#ef4444,#b91c1c);color:#fff;border:0}
+  .ride-actions .ra svg{width:16px;height:16px}
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    .companion-mascot svg, .cmp-strip .dot, .sos::before{animation:none !important}
+  }
+  /* High-contrast tweaks */
+  @media (prefers-contrast: more){
+    .companion{border-color:#fff}
+    .cmp-btn{background:#000;border-color:#fff}
+  }
 </style>
 </head>
 <body>
+
+<!-- SVG sprite — branded Tap Safety icons. Hidden, referenced via <use href="#id"> -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="tapGradCyan" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <linearGradient id="tapGradPink" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f472b6"/><stop offset="1" stop-color="#8b5cf6"/>
+    </linearGradient>
+
+    <!-- Mascot: stylized unicorn silhouette — clean lines, no childish features -->
+    <symbol id="icon-mascot" viewBox="0 0 64 64">
+      <path fill="url(#tapGradCyan)" d="M50 12l-3 9-7-2 5 9-9 1 7 6-3 8 9-3 5 9 2-9 9-3-9-3v-9l-7-2 1-11z" opacity=".0"/>
+      <g fill="none" stroke="url(#tapGradCyan)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 46c0-10 7-18 17-18 4 0 7 1 9 3l8-3-2 7 5 4-7 1c0 8-6 14-13 14-3 0-5-1-7-2l-6 4 1-6c-3-1-5-2-5-4z"/>
+        <path d="M40 26l8-14 1 12"/>
+        <circle cx="36" cy="36" r="1.4" fill="#22d3ee" stroke="none"/>
+      </g>
+    </symbol>
+
+    <symbol id="icon-speaker" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 9v6h4l5 4V5L8 9H4zm12 .5a3.5 3.5 0 010 5M19 7a7 7 0 010 10"/></symbol>
+    <symbol id="icon-ride" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 14l1-5a3 3 0 013-2h8a3 3 0 013 2l1 5v4h-2v-2H6v2H4zM7 14h10M7 18h.01M17 18h.01"/></symbol>
+    <symbol id="icon-zone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 2l3 6 6 1-4.5 4.5L18 20l-6-3-6 3 1.5-6.5L3 9l6-1z"/></symbol>
+    <symbol id="icon-guide" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 21l4-2 5 2 5-3M9 4l3 6 5-2-2 6"/><circle cx="9" cy="4" r="1.6" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="icon-pin" viewBox="0 0 24 24"><path fill="url(#tapGradPink)" d="M12 2a8 8 0 00-8 8c0 6 8 12 8 12s8-6 8-12a8 8 0 00-8-8z"/><circle cx="12" cy="10" r="3" fill="#0a0203"/></symbol>
+    <symbol id="icon-share" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M16 6l-4-4-4 4M12 2v13M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/></symbol>
+    <symbol id="icon-back" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15 18l-6-6 6-6"/></symbol>
+    <symbol id="icon-sos" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 2L2 21h20L12 2zM12 9v5M12 18h.01"/></symbol>
+  </defs>
+</svg>
+
 <div class="app">
 
   <!-- TOP -->
@@ -198,36 +264,38 @@
     <div class="arrow">→</div>
   </a>
 
-  <!-- UNICORN SAFETY GUIDE — follow-the-unicorn wayfinding for kids, families, non-readers -->
-  <section class="unicorn" aria-label="Unicorn Safety Guide">
-    <div class="unicorn-head">
-      <div class="unicorn-mascot" aria-hidden="true">🦄</div>
-      <div style="flex:1;min-width:0">
-        <h3 data-i18n="ucT">Follow the Unicorn to Safety</h3>
-        <p class="uc-sub" data-i18n="ucSub">Lost? Scared? Tap a unicorn — we’ll guide you.</p>
+  <!-- TAP SAFETY COMPANION — branded family-safety wayfinding for kids, families, non-readers -->
+  <section class="companion" aria-labelledby="cmpHeading">
+    <div class="companion-head">
+      <div class="companion-mascot" aria-hidden="true">
+        <svg role="img" aria-label="Tap Safety mascot"><use href="#icon-mascot"/></svg>
       </div>
-      <button class="uc-btn" style="max-width:84px" id="ucSpeakBtn" aria-label="Hear instructions">
-        <span class="uc-ic">🔊</span>
+      <div class="companion-meta">
+        <h3 id="cmpHeading" data-i18n="ucT">Tap Safety Companion</h3>
+        <p class="cmp-sub" data-i18n="ucSub">Lost or unsure? Follow the unicorn to the nearest safe zone.</p>
+      </div>
+      <button class="cmp-btn listen" id="ucSpeakBtn" type="button" aria-label="Hear safety instructions in your selected language">
+        <svg aria-hidden="true"><use href="#icon-speaker"/></svg>
         <span data-i18n="ucListen">Listen</span>
       </button>
     </div>
-    <div class="unicorn-actions">
-      <button class="uc-btn ride" id="ucRideBtn">
-        <span class="uc-ic">🚗</span>
-        <span data-i18n="ucRide">Unicorn Ride</span>
+    <div class="companion-actions" role="group" aria-label="Safety quick actions">
+      <button class="cmp-btn ride" id="ucRideBtn" type="button" aria-label="Open verified ride checklist">
+        <svg aria-hidden="true"><use href="#icon-ride"/></svg>
+        <span data-i18n="ucRide">Verified Ride</span>
       </button>
-      <button class="uc-btn zone" id="ucZoneBtn">
-        <span class="uc-ic">✨</span>
+      <button class="cmp-btn zone" id="ucZoneBtn" type="button" aria-label="Find nearest safe zone on the map">
+        <svg aria-hidden="true"><use href="#icon-zone"/></svg>
         <span data-i18n="ucZone">Safe Zone</span>
       </button>
-      <button class="uc-btn guide" id="ucGuideBtn">
-        <span class="uc-ic">👣</span>
+      <button class="cmp-btn guide" id="ucGuideBtn" type="button" aria-label="Hear walking guidance">
+        <svg aria-hidden="true"><use href="#icon-guide"/></svg>
         <span data-i18n="ucGuide">Walk With Me</span>
       </button>
     </div>
-    <div class="uc-strip">
-      <span class="dot"></span>
-      <span data-i18n="ucStrip">Verified safe partners · Background-checked drivers · Live-tracked</span>
+    <div class="cmp-strip" role="status">
+      <span class="dot" aria-hidden="true"></span>
+      <span data-i18n="ucStrip">Family Safety Guide · Multilingual · Connects to Wilkins Safe Line</span>
     </div>
   </section>
 
@@ -324,14 +392,39 @@
   </div>
 </div>
 
-<!-- UNICORN RIDE MODAL -->
-<div class="modal" id="rideModal" role="dialog" aria-modal="true">
+<!-- VERIFIED RIDE CHECKLIST MODAL -->
+<div class="modal" id="rideModal" role="dialog" aria-modal="true" aria-labelledby="rideHeading">
   <div class="sheet ride-sheet" style="position:relative">
-    <button class="x" onclick="closeRide()">✕</button>
-    <h2>🦄 <span data-i18n="rideH">Unicorn Ride — Verified Safe</span></h2>
-    <p style="color:var(--ink-3);margin:0 0 12px;font-size:.85rem" data-i18n="rideSub">Background-checked drivers · Live GPS shared with Wilkins Safe Line · One-tap 911 in app.</p>
+    <button class="x" type="button" aria-label="Close ride checklist" onclick="closeRide()">✕</button>
+    <h2 id="rideHeading">
+      <svg aria-hidden="true"><use href="#icon-ride"/></svg>
+      <span data-i18n="rideH">Verified Ride Checklist</span>
+    </h2>
+    <p style="color:var(--ink-3);margin:0 0 12px;font-size:.85rem" data-i18n="rideSub">Before you enter any vehicle, confirm every step. Stay with your group. Your safety overrides any rider/driver convenience.</p>
+
+    <ol class="ride-checklist" id="rideChecklist" aria-label="Pre-ride safety checklist"></ol>
+
+    <div class="ride-options-h" data-i18n="rideOptionsH">Safe Ride Options</div>
     <div id="rideOptions"></div>
-    <div class="warn" data-i18n="rideWarn"><strong>Stay safe:</strong> Always confirm the driver’s name, plate, and unicorn code before getting in. Never accept a ride from someone who approaches you first.</div>
+
+    <div class="ride-disclaimer" data-i18n="rideDisclaimer">Ride providers, shuttle details, and codes shown here are placeholders. Final partners and verification codes must be approved by Wilkins Media event operations and venue security before public launch.</div>
+
+    <div class="warn" data-i18n="rideWarn"><strong>Stay safe:</strong> Confirm the driver’s name, license plate, pickup zone, and route before entering. Never accept a ride from someone who approaches you first. Share your trip with a trusted contact.</div>
+
+    <div class="ride-actions">
+      <button type="button" class="ra share" id="rideShareBtn" aria-label="Share live trip">
+        <svg aria-hidden="true"><use href="#icon-share"/></svg>
+        <span data-i18n="rideShare">Share Trip</span>
+      </button>
+      <button type="button" class="ra back" id="rideBackBtn" aria-label="Return to map">
+        <svg aria-hidden="true"><use href="#icon-back"/></svg>
+        <span data-i18n="rideBack">Return to Map</span>
+      </button>
+      <a href="tel:911" class="ra sos" aria-label="Call 911 emergency">
+        <svg aria-hidden="true"><use href="#icon-sos"/></svg>
+        <span data-i18n="rideSos">Emergency · Call 911</span>
+      </a>
+    </div>
   </div>
 </div>
 
