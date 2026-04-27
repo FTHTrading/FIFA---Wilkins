@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+<meta name="theme-color" content="#0a0203" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<title>Tap FIFA — Atlanta 2026 · Wilkins Media Guest OS</title>
+<link rel="manifest" href="./manifest.webmanifest" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23ef4444'/%3E%3Ctext x='32' y='44' font-size='38' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='700'%3E◆%3C/text%3E%3C/svg%3E" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0a0203; --surface:#150607; --surface-2:#1f0a0c; --line:rgba(239,68,68,.22);
+    --red:#ef4444; --red-2:#dc2626; --red-soft:#fca5a5; --amber:#f59e0b;
+    --green:#22c55e; --blue:#3b82f6; --violet:#7c3aed;
+    --ink:#fff; --ink-2:#fecaca; --ink-3:#a1a1aa;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;-webkit-tap-highlight-color:transparent}
+  body{min-height:100vh;min-height:100dvh;overflow-x:hidden}
+  button{font:inherit;color:inherit;cursor:pointer;border:0;background:transparent}
+  a{color:inherit}
+  .app{display:flex;flex-direction:column;min-height:100dvh;max-width:560px;margin:0 auto;background:var(--bg);position:relative}
+
+  /* Top bar */
+  .top{display:flex;align-items:center;gap:10px;padding:12px 14px;background:linear-gradient(180deg,#1a0606,#0a0203);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+  .top .logo{width:34px;height:34px;border-radius:9px;background:var(--red);display:grid;place-items:center;font-weight:800;color:#fff;box-shadow:0 8px 20px rgba(239,68,68,.35)}
+  .top .title{font-weight:800;letter-spacing:.02em}
+  .top .sub{font-size:.7rem;color:var(--ink-3);margin-top:-2px}
+  .top .lang{margin-left:auto;display:flex;align-items:center;gap:6px;background:#1f0a0c;border:1px solid var(--line);padding:6px 10px;border-radius:999px;font-weight:600;font-size:.85rem}
+  .top .lang select{appearance:none;background:transparent;color:#fff;border:0;outline:0;font-weight:600;padding-right:4px}
+
+  /* Hero */
+  .hero{padding:18px 16px 6px}
+  .hello{font-size:1.45rem;font-weight:800;line-height:1.2}
+  .hello small{display:block;font-size:.86rem;color:var(--ink-3);font-weight:500;margin-top:6px}
+
+  /* Emergency button (always pulses) */
+  .sos{margin:14px 16px;background:linear-gradient(180deg,#ef4444,#b91c1c);border-radius:18px;padding:18px 18px;display:flex;align-items:center;gap:14px;box-shadow:0 18px 40px rgba(239,68,68,.45),inset 0 1px rgba(255,255,255,.18);position:relative;overflow:hidden}
+  .sos::before{content:"";position:absolute;inset:-2px;border-radius:20px;border:2px solid rgba(255,255,255,.4);animation:pulse 1.6s infinite}
+  @keyframes pulse{0%{transform:scale(1);opacity:.9}100%{transform:scale(1.06);opacity:0}}
+  .sos .icon{width:46px;height:46px;border-radius:12px;background:rgba(255,255,255,.18);display:grid;place-items:center;font-size:1.6rem}
+  .sos .t{font-weight:800;font-size:1.05rem}
+  .sos .s{font-size:.78rem;opacity:.9}
+  .sos .arrow{margin-left:auto;font-size:1.3rem;opacity:.85}
+
+  /* Quick intents */
+  .intents{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:6px 16px 4px}
+  .intent{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 12px;display:flex;flex-direction:column;gap:4px;text-align:left;transition:.15s}
+  .intent:active{transform:scale(.98)}
+  .intent .e{font-size:1.4rem}
+  .intent .t{font-weight:700;font-size:.95rem}
+  .intent .s{color:var(--ink-3);font-size:.77rem}
+
+  /* Sponsor card (POS slot) */
+  .sponsor{margin:14px 16px 4px;border-radius:16px;background:linear-gradient(135deg,#7c3aed 0%,#c026d3 100%);padding:14px 16px;display:flex;align-items:center;gap:12px;position:relative;overflow:hidden}
+  .sponsor::after{content:"SPONSORED";position:absolute;top:8px;right:10px;font-size:.65rem;font-weight:700;letter-spacing:.18em;background:rgba(0,0,0,.3);padding:3px 7px;border-radius:6px}
+  .sponsor .badge{width:46px;height:46px;border-radius:11px;background:rgba(255,255,255,.18);display:grid;place-items:center;font-size:1.5rem}
+  .sponsor h4{margin:0 0 2px;font-size:.98rem}
+  .sponsor p{margin:0;font-size:.78rem;opacity:.9}
+  .sponsor .cta{margin-left:auto;background:#fff;color:#5b21b6;padding:8px 12px;border-radius:10px;font-weight:700;font-size:.78rem;text-decoration:none;white-space:nowrap}
+
+  /* Map */
+  .map-wrap{margin:14px 16px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#000}
+  .map-head{padding:10px 14px;background:var(--surface-2);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line)}
+  .map-head .t{font-weight:700;font-size:.95rem}
+  .map-head .badge{margin-left:auto;font-size:.7rem;padding:3px 8px;border-radius:999px;background:rgba(34,197,94,.18);color:#86efac;border:1px solid rgba(34,197,94,.4);font-weight:700}
+  #map{height:330px;width:100%;background:#0a0203}
+  .leaflet-container{background:#0a0203 !important}
+  .map-controls{padding:10px 14px;background:var(--surface);display:grid;grid-template-columns:1fr 1fr;gap:8px;border-top:1px solid var(--line)}
+  .ctrl{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:.8rem;display:flex;flex-direction:column;gap:2px;text-align:left}
+  .ctrl label{font-size:.65rem;color:var(--ink-3);text-transform:uppercase;letter-spacing:.1em}
+  .ctrl select{appearance:none;background:transparent;color:#fff;border:0;outline:0;font-weight:600;padding:0;font-size:.85rem;width:100%}
+  .route-btn{grid-column:span 2;background:var(--red);color:#fff;border-radius:10px;padding:11px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px}
+  .route-info{grid-column:span 2;font-size:.78rem;color:var(--ink-2);background:#1a0606;border:1px solid var(--line);border-radius:10px;padding:8px 10px;display:none}
+  .route-info.show{display:block}
+
+  /* Numbers list */
+  .numbers{margin:14px 16px;background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .numbers h3{margin:0;padding:12px 14px;font-size:.85rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red-soft);border-bottom:1px solid var(--line);background:linear-gradient(180deg,#1a0606,transparent)}
+  .num{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.04);text-decoration:none}
+  .num:last-child{border-bottom:0}
+  .num .ic{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-size:1.1rem;flex-shrink:0}
+  .num .ic.red{background:rgba(239,68,68,.18);color:#fca5a5}
+  .num .ic.amber{background:rgba(245,158,11,.18);color:#fcd34d}
+  .num .ic.blue{background:rgba(59,130,246,.18);color:#93c5fd}
+  .num .ic.green{background:rgba(34,197,94,.18);color:#86efac}
+  .num .body{flex:1;min-width:0}
+  .num .t{font-weight:700;font-size:.92rem}
+  .num .s{font-size:.74rem;color:var(--ink-3)}
+  .num .digits{font-weight:800;font-size:1rem;color:#fff;font-variant-numeric:tabular-nums}
+
+  /* Phrase modal */
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);display:none;align-items:flex-end;justify-content:center;z-index:50}
+  .modal.show{display:flex}
+  .sheet{width:100%;max-width:560px;background:var(--surface);border-top:2px solid var(--red);border-radius:22px 22px 0 0;padding:18px 18px 28px;max-height:85dvh;overflow:auto}
+  .sheet h2{margin:0 0 4px}
+  .sheet .x{position:absolute;top:14px;right:18px;background:rgba(255,255,255,.1);width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:1.1rem}
+  .sheet .row{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid rgba(255,255,255,.06)}
+  .sheet .row:first-of-type{border-top:0}
+  .sheet .row .flag{width:28px;text-align:center}
+  .sheet .row .lang{flex:1;font-weight:600}
+  .sheet .row .speak{background:rgba(59,130,246,.2);color:#93c5fd;border:1px solid rgba(59,130,246,.4);padding:6px 10px;border-radius:8px;font-size:.78rem;font-weight:600}
+  .sheet .phrase{font-size:1rem;line-height:1.45;margin:6px 0 4px}
+  .sheet .ph-sub{color:var(--ink-3);font-size:.8rem}
+
+  /* Footer / install */
+  .install{margin:14px 16px 22px;background:var(--surface-2);border:1px dashed var(--line);border-radius:14px;padding:12px 14px;font-size:.78rem;color:var(--ink-2);display:flex;align-items:center;gap:10px}
+  .install .ic{font-size:1.2rem}
+  .foot{padding:14px 16px 28px;text-align:center;color:var(--ink-3);font-size:.72rem}
+  .foot strong{color:var(--ink-2)}
+
+  /* RTL */
+  [dir="rtl"] .top .lang{margin-left:0;margin-right:auto}
+  [dir="rtl"] .sponsor .cta{margin-left:0;margin-right:auto}
+  [dir="rtl"] .sos .arrow{transform:scaleX(-1)}
+  [dir="rtl"] .map-head .badge{margin-left:0;margin-right:auto}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- TOP -->
+  <header class="top">
+    <div class="logo">◆</div>
+    <div>
+      <div class="title">Tap FIFA</div>
+      <div class="sub" data-i18n="topSub">Atlanta 2026 · Wilkins Media</div>
+    </div>
+    <label class="lang" aria-label="Language">
+      <span id="flag">🇺🇸</span>
+      <select id="lang">
+        <option value="en" data-flag="🇺🇸">English</option>
+        <option value="es" data-flag="🇪🇸">Español</option>
+        <option value="pt" data-flag="🇧🇷">Português</option>
+        <option value="fr" data-flag="🇫🇷">Français</option>
+        <option value="de" data-flag="🇩🇪">Deutsch</option>
+        <option value="it" data-flag="🇮🇹">Italiano</option>
+        <option value="ar" data-flag="🇸🇦">العربية</option>
+        <option value="zh" data-flag="🇨🇳">中文</option>
+        <option value="ja" data-flag="🇯🇵">日本語</option>
+        <option value="ko" data-flag="🇰🇷">한국어</option>
+      </select>
+    </label>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1 class="hello"><span data-i18n="hello">Welcome</span> 👋
+      <small data-i18n="heroSub">Live multilingual guest support, safety, and wayfinding for FIFA Atlanta.</small>
+    </h1>
+  </section>
+
+  <!-- EMERGENCY -->
+  <a class="sos" href="tel:911" id="sosBtn">
+    <div class="icon">🚨</div>
+    <div>
+      <div class="t" data-i18n="sosT">Emergency — Tap to call 911</div>
+      <div class="s" data-i18n="sosS">Always works · GPS sent to staff</div>
+    </div>
+    <div class="arrow">→</div>
+  </a>
+
+  <!-- INTENTS -->
+  <div class="intents">
+    <button class="intent" data-action="food">
+      <span class="e">🍕</span>
+      <span class="t" data-i18n="iFood">Food from home</span>
+      <span class="s" data-i18n="iFoodS">Cultural cuisine near you</span>
+    </button>
+    <button class="intent" data-action="route">
+      <span class="e">🚇</span>
+      <span class="t" data-i18n="iRoute">Hotel → Seat</span>
+      <span class="s" data-i18n="iRouteS">Door-to-door directions</span>
+    </button>
+    <button class="intent" data-action="rewards">
+      <span class="e">🎁</span>
+      <span class="t" data-i18n="iRewards">My rewards</span>
+      <span class="s" data-i18n="iRewardsS">Badges &amp; perks</span>
+    </button>
+    <button class="intent" data-action="phrases">
+      <span class="e">💬</span>
+      <span class="t" data-i18n="iPhrases">Safety phrases</span>
+      <span class="s" data-i18n="iPhrasesS">10 languages</span>
+    </button>
+  </div>
+
+  <!-- SPONSOR (POS slot) -->
+  <div class="sponsor" id="sponsorCard" data-campaign="default">
+    <div class="badge">🏟️</div>
+    <div>
+      <h4 id="spnT">MARTA Free Match-Day Pass</h4>
+      <p id="spnP">Tap to scan · Skip the line at Five Points</p>
+    </div>
+    <a class="cta" href="#" id="spnCta" data-i18n="spnCta">Activate</a>
+  </div>
+
+  <!-- MAP -->
+  <div class="map-wrap">
+    <div class="map-head">
+      <div>🗺️</div>
+      <div class="t" data-i18n="mapT">Hotel → Seat Wayfinding</div>
+      <span class="badge" data-i18n="mapLive">LIVE</span>
+    </div>
+    <div id="map"></div>
+    <div class="map-controls">
+      <div class="ctrl">
+        <label data-i18n="from">From (hotel)</label>
+        <select id="hotelSel"></select>
+      </div>
+      <div class="ctrl">
+        <label data-i18n="to">To (gate / seat)</label>
+        <select id="gateSel"></select>
+      </div>
+      <button class="route-btn" id="routeBtn">
+        <span>🧭</span><span data-i18n="routeBtn">Get directions</span>
+      </button>
+      <div class="route-info" id="routeInfo"></div>
+    </div>
+  </div>
+
+  <!-- NUMBERS -->
+  <section class="numbers">
+    <h3 data-i18n="numbersH">Safety &amp; Help · 24/7</h3>
+    <a class="num" href="tel:911"><div class="ic red">🚑</div><div class="body"><div class="t" data-i18n="n911">Police · Fire · Medical</div><div class="s" data-i18n="n911S">Life-safety emergency</div></div><div class="digits">911</div></a>
+    <a class="num" href="tel:18883737888"><div class="ic red">🛡️</div><div class="body"><div class="t" data-i18n="nNHTH">National Trafficking Hotline</div><div class="s" data-i18n="nNHTHS">Voice · 200+ languages</div></div><div class="digits">1-888-373-7888</div></a>
+    <a class="num" href="sms:233733&body=HELP"><div class="ic red">💬</div><div class="body"><div class="t" data-i18n="nBeFree">Text "HELP" to BeFree</div><div class="s" data-i18n="nBeFreeS">Confidential SMS support</div></div><div class="digits">233733</div></a>
+    <a class="num" href="tel:18888273432"><div class="ic amber">📞</div><div class="body"><div class="t" data-i18n="nWilkins">Wilkins Safe Line</div><div class="s" data-i18n="nWilkinsS">10-language fan support</div></div><div class="digits">1-888-827-3432</div></a>
+    <a class="num" href="tel:18002221222"><div class="ic green">☠️</div><div class="body"><div class="t" data-i18n="nPoison">Poison Control</div><div class="s" data-i18n="nPoisonS">Free · 24/7</div></div><div class="digits">1-800-222-1222</div></a>
+    <a class="num" href="tel:988"><div class="ic blue">🧠</div><div class="body"><div class="t" data-i18n="nCrisis">Suicide &amp; Crisis Lifeline</div><div class="s" data-i18n="nCrisisS">Voice · Text · Chat</div></div><div class="digits">988</div></a>
+    <a class="num" href="tel:14045773434"><div class="ic blue">👮</div><div class="body"><div class="t" data-i18n="nApd">Atlanta Police (Non-Emergency)</div><div class="s" data-i18n="nApdS">Reports · Lost &amp; found</div></div><div class="digits">404-577-3434</div></a>
+    <a class="num" href="tel:14048483000"><div class="ic blue">🚇</div><div class="body"><div class="t" data-i18n="nMarta">MARTA Customer Service</div><div class="s" data-i18n="nMartaS">Transit info · Lost items</div></div><div class="digits">404-848-5000</div></a>
+  </section>
+
+  <!-- INSTALL HINT -->
+  <div class="install">
+    <span class="ic">📲</span>
+    <span data-i18n="install">Add to Home Screen for instant offline access — Share menu → Add to Home Screen.</span>
+  </div>
+
+  <div class="foot">
+    <div data-i18n="footMain"><strong>Tap FIFA</strong> by Wilkins Media × FTH Trading</div>
+    <div data-i18n="footSub" style="margin-top:4px">Built for Atlanta · FIFA World Cup 2026 · Safety always overrides sponsor logic.</div>
+  </div>
+</div>
+
+<!-- PHRASE MODAL -->
+<div class="modal" id="phraseModal" role="dialog" aria-modal="true">
+  <div class="sheet" style="position:relative">
+    <button class="x" onclick="closeModal()">✕</button>
+    <h2 data-i18n="phraseH">Emergency Phrases</h2>
+    <p style="color:var(--ink-3);margin:0 0 10px;font-size:.85rem" data-i18n="phraseSub">Show this screen to staff or police.</p>
+    <div id="phraseList"></div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="./app.js"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').catch(()=>{});
+  }
+</script>
+</body>
+</html>

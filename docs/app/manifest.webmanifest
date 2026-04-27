@@ -1,0 +1,33 @@
+{
+  "name": "Tap FIFA — Atlanta 2026",
+  "short_name": "Tap FIFA",
+  "description": "Live multilingual safety, wayfinding & guest support for FIFA World Cup Atlanta 2026. Built by Wilkins Media × FTH Trading.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0a0203",
+  "theme_color": "#0a0203",
+  "lang": "en",
+  "dir": "auto",
+  "categories": ["travel", "navigation", "lifestyle", "utilities"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='42' fill='%23ef4444'/><text x='96' y='130' font-size='110' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='800'>%E2%97%86</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='112' fill='%23ef4444'/><text x='256' y='350' font-size='300' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='800'>%E2%97%86</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    { "name": "Emergency 911", "url": "./?intent=911", "description": "One-tap call to 911" },
+    { "name": "Hotel → Seat", "url": "./?intent=route", "description": "Map directions to your gate" },
+    { "name": "Safety Phrases", "url": "./?intent=phrases", "description": "Translated emergency phrases" }
+  ]
+}
