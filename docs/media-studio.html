@@ -4,45 +4,270 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Media Studio — Tap FIFA by Wilkins Media</title>
-  <meta name="description" content="Simple media studio overview for Tap FIFA by Wilkins Media." />
+  <meta name="description" content="Image and video generation pipeline for Tap FIFA. Local engines (ComfyUI, Blender, FFmpeg) and remote provider (Cloudflare Workers AI)." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./assets/styles.css" />
 </head>
 <body>
+
+<!-- ═══ HERO ═══ -->
 <header class="hero hero-compact" id="hero">
-  <div class="hero-bg"><div class="hero-grid-lines"></div><div class="hero-orb orb-1"></div></div>
+  <div class="hero-bg">
+    <div class="hero-grid-lines"></div>
+    <div class="hero-orb orb-1"></div>
+    <div class="hero-orb orb-2"></div>
+  </div>
   <nav class="top-nav">
-    <div class="nav-brand"><a href="./" class="nav-brand-link"><span class="nav-logo">◆</span><span class="nav-title">Tap FIFA</span></a></div>
-    <div class="nav-links"><a href="./">Home</a><a href="./platform.html">Platform</a><a href="./architecture.html">Architecture</a><a href="./media-studio.html" class="nav-active">Media Studio</a><a href="./demand-model.html">Demand Model</a><a href="./sales-kit.html">Sales Kit</a></div>
+    <div class="nav-brand">
+      <a href="./" class="nav-brand-link"><span class="nav-logo">◆</span><span class="nav-title">Tap FIFA</span></a>
+    </div>
+    <div class="nav-links">
+      <a href="./">Home</a>
+      <a href="./platform.html">Platform</a>
+      <a href="./architecture.html">Architecture</a>
+      <a href="./media-studio.html" class="nav-active">Media Studio</a>
+      <a href="./demand-model.html">Demand Model</a>
+      <a href="./sales-kit.html">Sales Kit</a>
+    </div>
     <a class="nav-cta" href="https://github.com/FTHTrading/FIFA---Wilkins" target="_blank" rel="noreferrer">Open Repo</a>
   </nav>
+
   <div class="hero-content">
-    <div class="hero-eyebrow"><span class="pulse-dot"></span><span>MEDIA STUDIO MADE SIMPLE</span></div>
+    <div class="hero-eyebrow">
+      <span class="pulse-dot"></span>
+      <span>IMAGE &amp; VIDEO GENERATION · LOCAL + REMOTE ENGINES</span>
+    </div>
     <h1 class="hero-title">Media Studio</h1>
-    <p class="hero-subtitle">We generate event visuals fast, in the right format, for web, social, print, and stadium screens.</p>
+    <p class="hero-subtitle">The media generation pipeline behind Tap FIFA — local engines for production-grade rendering, a remote AI provider for on-demand generation, and export profiles for every distribution channel.</p>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-card"><span class="stat-value">3</span><span class="stat-label">Local Engines</span></div>
+    <div class="stat-card"><span class="stat-value">1</span><span class="stat-label">Remote Provider</span></div>
+    <div class="stat-card"><span class="stat-value">5</span><span class="stat-label">Export Profiles</span></div>
+    <div class="stat-card"><span class="stat-value">GPU</span><span class="stat-label">Accelerated</span></div>
   </div>
 </header>
 
-<section class="section" id="tools">
-  <div class="section-header"><span class="section-eyebrow">Tools</span><h2>What We Use</h2></div>
-  <div class="built-grid">
-    <div class="glass-card built-card"><h4>ComfyUI</h4><p>Creates AI images from prompt-based templates.</p></div>
-    <div class="glass-card built-card"><h4>Blender</h4><p>Builds and renders 3D scenes for premium visuals.</p></div>
-    <div class="glass-card built-card"><h4>FFmpeg</h4><p>Packages final image/video outputs for delivery.</p></div>
+<!-- ═══ LOCAL ENGINES ═══ -->
+<section class="section" id="local-engines">
+  <div class="section-header">
+    <span class="section-eyebrow">Local Engines</span>
+    <h2>On-Premise Rendering Stack</h2>
+    <p class="section-desc">Three local engines handle the heavy lifting — AI image generation, 3D scene rendering, and video encoding — all running on-device with GPU acceleration.</p>
+  </div>
+
+  <div class="engine-grid">
+    <div class="glass-card engine-card">
+      <div class="engine-icon">🎨</div>
+      <h3>ComfyUI</h3>
+      <div class="engine-role">AI Image Generation</div>
+      <p>Template-driven workflows with queue-based execution. The orchestrator submits prompts to ComfyUI's API, polls queue and history for completion, and retrieves generated images.</p>
+      <div class="engine-details">
+        <div class="detail-row"><span class="detail-label">Interface</span><span class="detail-value">REST API — queue &amp; history polling</span></div>
+        <div class="detail-row"><span class="detail-label">Workflows</span><span class="detail-value">Template-driven, JSON-defined</span></div>
+        <div class="detail-row"><span class="detail-label">Acceleration</span><span class="detail-value">CUDA GPU (RTX 5090)</span></div>
+      </div>
+    </div>
+
+    <div class="glass-card engine-card">
+      <div class="engine-icon">🧊</div>
+      <h3>Blender</h3>
+      <div class="engine-role">3D Scene Rendering</div>
+      <p>Headless scene rendering for stadium visualizations, venue layouts, and promotional 3D assets. Automated via command-line with Python scripting.</p>
+      <div class="engine-details">
+        <div class="detail-row"><span class="detail-label">Mode</span><span class="detail-value">Headless / command-line</span></div>
+        <div class="detail-row"><span class="detail-label">Output</span><span class="detail-value">Scene renders, 3D compositions</span></div>
+        <div class="detail-row"><span class="detail-label">Scripting</span><span class="detail-value">Python automation</span></div>
+      </div>
+    </div>
+
+    <div class="glass-card engine-card">
+      <div class="engine-icon">🎬</div>
+      <h3>FFmpeg</h3>
+      <div class="engine-role">Encode &amp; Sequence</div>
+      <p>Video encoding, image sequencing, format conversion, and post-processing. Handles the final mile from rendered frames to distribution-ready media.</p>
+      <div class="engine-details">
+        <div class="detail-row"><span class="detail-label">Capabilities</span><span class="detail-value">Encode, sequence, transcode</span></div>
+        <div class="detail-row"><span class="detail-label">Formats</span><span class="detail-value">MP4, WebM, GIF, image sequences</span></div>
+        <div class="detail-row"><span class="detail-label">Pipeline</span><span class="detail-value">Post-processing &amp; assembly</span></div>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="section section-dark" id="outputs">
-  <div class="section-header"><span class="section-eyebrow">Outputs</span><h2>Where Content Goes</h2></div>
-  <div class="built-grid">
-    <div class="glass-card built-card"><h4>Web + Social</h4><p>Optimized assets for quick online publishing.</p></div>
-    <div class="glass-card built-card"><h4>Print + Venue</h4><p>High-quality assets for signage and billboards.</p></div>
-    <div class="glass-card built-card"><h4>Archive</h4><p>Original source outputs kept for reuse.</p></div>
+<!-- ═══ EXPORT PROFILES ═══ -->
+<section class="section section-dark" id="export-profiles">
+  <div class="section-header">
+    <span class="section-eyebrow">Export Profiles</span>
+    <h2>One Asset. Every Channel.</h2>
+    <p class="section-desc">Generated media is automatically exported in the right format for every distribution channel — from web to stadium billboards.</p>
+  </div>
+
+  <div class="profiles-grid">
+    <div class="glass-card profile-card">
+      <div class="profile-icon">🌐</div>
+      <h4>Web</h4>
+      <p>Optimized for web delivery. WebP/AVIF compression, responsive sizes, lazy-load friendly.</p>
+    </div>
+    <div class="glass-card profile-card">
+      <div class="profile-icon">📱</div>
+      <h4>Social</h4>
+      <p>Platform-specific crops and aspect ratios for Instagram, X, TikTok, and Stories formats.</p>
+    </div>
+    <div class="glass-card profile-card">
+      <div class="profile-icon">🖨️</div>
+      <h4>Print</h4>
+      <p>High-resolution CMYK-ready exports for tickets, programs, press materials, and signage.</p>
+    </div>
+    <div class="glass-card profile-card">
+      <div class="profile-icon">🏟️</div>
+      <h4>Billboard</h4>
+      <p>Ultra-resolution exports for stadium LED boards, fan festival screens, and venue displays.</p>
+    </div>
+    <div class="glass-card profile-card">
+      <div class="profile-icon">📦</div>
+      <h4>Original</h4>
+      <p>Full-quality source files preserved for archival, re-editing, and downstream pipelines.</p>
+    </div>
   </div>
 </section>
 
-<footer class="site-footer"><div class="footer-content"><div class="footer-brand"><span class="nav-logo">◆</span><span>Tap FIFA by Wilkins Media</span></div><p class="footer-text">Built by <strong>FTH Trading × Wilkins Media Group</strong>.</p></div></footer>
+<!-- ═══ REMOTE PROVIDER — CLOUDFLARE WORKERS AI ═══ -->
+<section class="section" id="remote-provider">
+  <div class="section-header">
+    <span class="section-eyebrow">Remote Provider</span>
+    <h2>Cloudflare Workers AI</h2>
+    <p class="section-desc">On-demand AI generation at the edge. Image generation via Cloudflare's inference API, integrated into the orchestrator as a remote provider alongside the local engine stack.</p>
+  </div>
+
+  <div class="provider-layout">
+    <div class="glass-panel provider-panel">
+      <h3>API Endpoints</h3>
+      <div class="endpoint-list">
+        <div class="endpoint-item">
+          <div class="endpoint-method get">GET</div>
+          <div class="endpoint-path">/v1/providers/cloudflare/status</div>
+          <div class="endpoint-desc">Health check — returns provider readiness and model availability.</div>
+        </div>
+        <div class="endpoint-item">
+          <div class="endpoint-method post">POST</div>
+          <div class="endpoint-path">/v1/providers/cloudflare/run</div>
+          <div class="endpoint-desc">Execute generation — sends prompt to Cloudflare Workers AI, returns result.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass-panel provider-panel">
+      <h3>Security Model</h3>
+      <div class="security-items">
+        <div class="security-item">
+          <span class="security-icon">🔒</span>
+          <div>
+            <strong>Credentials via env vars only</strong>
+            <p>Cloudflare API tokens and account ID are loaded from environment variables — never hardcoded, never committed.</p>
+          </div>
+        </div>
+        <div class="security-item">
+          <span class="security-icon">💾</span>
+          <div>
+            <strong>Binary outputs saved to disk</strong>
+            <p>Generated images are saved to <code>output/providers/cloudflare/</code> on the local filesystem.</p>
+          </div>
+        </div>
+        <div class="security-item">
+          <span class="security-icon">📄</span>
+          <div>
+            <strong>JSON outputs returned directly</strong>
+            <p>Text and structured responses are returned inline via the API response body.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ACTIVATION ═══ -->
+<section class="section section-dark" id="activation">
+  <div class="section-header">
+    <span class="section-eyebrow">Activation</span>
+    <h2>Start the Media Studio</h2>
+    <p class="section-desc">Two steps to bring the media pipeline online — configure the Cloudflare provider, then launch the orchestrator.</p>
+  </div>
+
+  <div class="activation-block">
+    <div class="activation-steps">
+      <div class="step">
+        <span class="step-num">1</span>
+        <div>
+          <strong>Configure Cloudflare Workers AI</strong>
+          <pre class="code-inline"><code>.\scripts\setup-cloudflare-workers-ai.ps1</code></pre>
+          <span class="step-note">Sets up API tokens and account credentials in .env</span>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <div>
+          <strong>Launch the Orchestrator</strong>
+          <pre class="code-inline"><code>python -m uvicorn apps.orchestrator.main:app --port 8400 --reload</code></pre>
+          <span class="step-note">Starts the media orchestrator on port 8400</span>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <div>
+          <strong>Verify provider status</strong>
+          <pre class="code-inline"><code>GET /v1/providers/cloudflare/status</code></pre>
+          <span class="step-note">Confirm Cloudflare provider is connected and ready</span>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">4</span>
+        <div>
+          <strong>Run generation</strong>
+          <pre class="code-inline"><code>POST /v1/providers/cloudflare/run</code></pre>
+          <span class="step-note">Submit prompts and receive generated media</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ IMPORTANT CONSTRAINT ═══ -->
+<section class="section" id="constraints">
+  <div class="section-header">
+    <span class="section-eyebrow">Important</span>
+    <h2>Current Capabilities</h2>
+  </div>
+
+  <div class="constraint-layout">
+    <div class="glass-panel constraint-card constraint-green">
+      <div class="constraint-status">✅ READY</div>
+      <h3>Image Generation</h3>
+      <p>Immediately useful. Both local engines (ComfyUI) and the remote Cloudflare Workers AI provider can generate images today. Export profiles handle all downstream formatting.</p>
+    </div>
+    <div class="glass-panel constraint-card constraint-amber">
+      <div class="constraint-status">⏳ PENDING</div>
+      <h3>Video Generation</h3>
+      <p>The video generation route is enabled and wired. However, the local stack (Blender + FFmpeg) remains the primary video pipeline until the Cloudflare video model contract is finalized.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <span class="nav-logo">◆</span>
+      <span>Tap FIFA by Wilkins Media</span>
+    </div>
+    <p class="footer-text">Built by <strong>FTH Trading × Wilkins Media Group</strong> for Atlanta 2026.</p>
+    <p class="footer-text muted">The Atlanta World Cup guest and sponsor operating system around the real match slate, real visitor flows, real venue ecosystem, and real monetization moments.</p>
+    <a class="btn btn-outline btn-sm" href="https://github.com/FTHTrading/FIFA---Wilkins" target="_blank" rel="noreferrer">GitHub Repository →</a>
+  </div>
+</footer>
+
 </body>
 </html>
