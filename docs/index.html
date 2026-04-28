@@ -28,8 +28,8 @@
     </div>
     <div class="nav-links">
       <a href="./" class="nav-active">Home</a>
-      <a href="#safety" style="color:#fca5a5;">🚨 Safety</a>
-      <a href="./app/" style="color:#86efac;font-weight:700;">▶ Launch App</a>
+      <a href="#safety" class="nav-safety"><svg class="icon-inline" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 6v6c0 5.5 3.8 10.7 8 12 4.2-1.3 8-6.5 8-12V6L12 2z"/></svg> Safety</a>
+      <a href="./app/" class="nav-launch">&#9654; Launch App</a>
       <a href="./platform.html">Platform</a>
       <a href="./architecture.html">Architecture</a>
       <a href="./media-studio.html">Media Studio</a>
@@ -83,6 +83,13 @@
   </div>
 </header>
 
+<!-- ═══ PLATFORM OVERVIEW IMAGE ═══ -->
+<div class="section section-dark" style="padding-top:0;padding-bottom:0;">
+  <div class="asset-panel">
+    <img src="./assets/tap-fifa/hero-overview.png" alt="Tap FIFA platform overview — all four command surfaces" loading="lazy" />
+  </div>
+</div>
+
 <!-- ═══ BILLBOARDS — WHAT IT LOOKS LIKE ═══ -->
 <section class="section" id="billboards">
   <div class="section-header">
@@ -94,7 +101,7 @@
   <div class="billboard-grid">
     <!-- Phone: Guest App -->
     <div class="billboard-frame phone-frame">
-      <div class="frame-label">📱 Guest App · Port 3000</div>
+      <div class="frame-label">Guest App · Port 3000</div>
       <div class="frame-screen phone-screen">
         <div class="screen-bar">
           <span class="screen-signal">🇪🇸</span>
@@ -119,7 +126,7 @@
 
     <!-- Dashboard: Revenue Console -->
     <div class="billboard-frame dash-frame">
-      <div class="frame-label">📊 Revenue Console · Port 3003</div>
+      <div class="frame-label">Revenue Console · Port 3003</div>
       <div class="frame-screen dash-screen">
         <div class="dash-header">Revenue Dashboard — Match Day 3: Spain vs. South Africa</div>
         <div class="dash-metrics">
@@ -142,7 +149,7 @@
 
     <!-- Wide: Stadium LED Board -->
     <div class="billboard-frame wide-frame">
-      <div class="frame-label">🏟️ Stadium LED Board — Gate A Entry</div>
+      <div class="frame-label">Stadium LED Board — Gate A Entry</div>
       <div class="frame-screen led-screen">
         <div class="led-flag">🇲🇦</div>
         <div class="led-text">MARHABA! WELCOME MOROCCO FANS</div>
@@ -153,7 +160,7 @@
 
     <!-- Staff Console -->
     <div class="billboard-frame tablet-frame">
-      <div class="frame-label">🎧 Staff Console · Port 3002</div>
+      <div class="frame-label">Staff Console · Port 3002</div>
       <div class="frame-screen staff-screen">
         <div class="staff-queue">
           <div class="queue-item urgent">
@@ -188,47 +195,47 @@
   <div class="event-flow">
     <div class="flow-track">
       <div class="flow-node">
-        <div class="node-dot"><span>✈️</span></div>
+        <div class="node-dot"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4z"/></svg></div>
         <div class="node-label">Fan Arrives Atlanta</div>
       </div>
       <div class="flow-line"><div class="flow-pulse"></div></div>
       <div class="flow-node">
-        <div class="node-dot"><span>📱</span></div>
+        <div class="node-dot"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 2h14a2 2 0 012 2v16a2 2 0 01-2 2H5a2 2 0 01-2-2V4a2 2 0 012-2z"/></svg></div>
         <div class="node-label">Opens Tap FIFA</div>
       </div>
       <div class="flow-line"><div class="flow-pulse"></div></div>
       <div class="flow-node">
-        <div class="node-dot"><span>🌍</span></div>
+        <div class="node-dot"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c-2 4.5-2 13.5 0 18M12 3c2 4.5 2 13.5 0 18"/></svg></div>
         <div class="node-label">Language Detected</div>
       </div>
       <div class="flow-line"><div class="flow-pulse"></div></div>
       <div class="flow-node">
-        <div class="node-dot"><span>🎯</span></div>
+        <div class="node-dot"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
         <div class="node-label">Intent Classified</div>
       </div>
       <div class="flow-line"><div class="flow-pulse"></div></div>
       <div class="flow-node">
-        <div class="node-dot"><span>🧬</span></div>
+        <div class="node-dot"><svg aria-hidden="true" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
         <div class="node-label">Cultural Match</div>
       </div>
       <div class="flow-line"><div class="flow-pulse"></div></div>
       <div class="flow-node">
-        <div class="node-dot"><span>💰</span></div>
+        <div class="node-dot"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M15.5 9h-5a2.5 2.5 0 000 5H14a2.5 2.5 0 010 5H9"/></svg></div>
         <div class="node-label">Sponsor Injected</div>
       </div>
       <div class="flow-line"><div class="flow-pulse"></div></div>
       <div class="flow-node">
-        <div class="node-dot"><span>🎁</span></div>
+        <div class="node-dot"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 12v10H4V12M22 7H2v5h20V7zM12 22V7M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg></div>
         <div class="node-label">Offer Delivered</div>
       </div>
       <div class="flow-line"><div class="flow-pulse"></div></div>
       <div class="flow-node">
-        <div class="node-dot"><span>✅</span></div>
+        <div class="node-dot"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14M22 4L12 14.01l-3-3"/></svg></div>
         <div class="node-label">Fan Redeems</div>
       </div>
       <div class="flow-line"><div class="flow-pulse"></div></div>
       <div class="flow-node">
-        <div class="node-dot"><span>📊</span></div>
+        <div class="node-dot"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div>
         <div class="node-label">Revenue Tracked</div>
       </div>
     </div>
@@ -245,42 +252,42 @@
 
   <div class="cap-grid">
     <div class="cap-card">
-      <span class="cap-icon">🤖</span>
+      <span class="cap-icon ci-ai"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M7 11H4M7 14H4M17 11h3M17 14h3M10 7V4M14 7V4M10 17v3M14 17v3"/></svg></span>
       <div>
         <h4>AI Concierge + RAG</h4>
         <p>15 MCP tools, pgvector retrieval, intent classification, cultural ranking, and sponsor injection — with trace metadata on every response.</p>
       </div>
     </div>
     <div class="cap-card">
-      <span class="cap-icon">🌍</span>
+      <span class="cap-icon ci-globe"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c-2 4.5-2 13.5 0 18M12 3c2 4.5 2 13.5 0 18"/></svg></span>
       <div>
         <h4>10-Language Fan OS</h4>
         <p>Multilingual PWA with real-time intent detection, cultural food discovery, venue wayfinding, rewards, and emergency safety mode.</p>
       </div>
     </div>
     <div class="cap-card">
-      <span class="cap-icon">💰</span>
+      <span class="cap-icon ci-money"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M15.5 9h-5a2.5 2.5 0 000 5H14a2.5 2.5 0 010 5H9"/></svg></span>
       <div>
         <h4>3-Tier Sponsor Engine</h4>
         <p>Smart Placement (CPM), Cultural Concierge (CPC), and Reward Engine (Rev Share). 12 seeded campaigns with full attribution.</p>
       </div>
     </div>
     <div class="cap-card">
-      <span class="cap-icon">🚨</span>
+      <span class="cap-icon ci-safety"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 6v6c0 5.5 3.8 10.7 8 12 4.2-1.3 8-6.5 8-12V6L12 2z"/><path d="M12 8v5M12 15.5v.5"/></svg></span>
       <div>
         <h4>Deterministic Emergency</h4>
         <p>8 approved phrases across all languages. Safety always outranks sponsor logic. No hallucination. No override.</p>
       </div>
     </div>
     <div class="cap-card">
-      <span class="cap-icon">📞</span>
+      <span class="cap-icon ci-phone"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg></span>
       <div>
         <h4>Telecom Pipeline</h4>
         <p>Telnyx SMS/Voice integration. Inbound message processing, language detection, outbound delivery, and session tracking.</p>
       </div>
     </div>
     <div class="cap-card">
-      <span class="cap-icon">🏗️</span>
+      <span class="cap-icon ci-stack"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L22 8.5L12 15L2 8.5L12 2z"/><path d="M2 14.5L12 21L22 14.5"/><path d="M2 10.5L12 17L22 10.5"/></svg></span>
       <div>
         <h4>Production Stack</h4>
         <p>Next.js 15 · NestJS · Prisma 6 · PostgreSQL 16 + pgvector · Redis 7 · BullMQ · Turborepo · Docker Compose.</p>
@@ -290,128 +297,121 @@
 </section>
 
 <!-- ═══ LAUNCH-APP CTA ═══ -->
-<section style="padding:42px 24px;background:linear-gradient(135deg,#22c55e 0%,#0891b2 70%,#3b82f6 100%);text-align:center;">
-  <div style="max-width:760px;margin:0 auto;">
-    <div style="font-size:.78rem;letter-spacing:.18em;font-weight:700;color:rgba(255,255,255,.85);margin-bottom:8px;">▶ LIVE NOW · WORKING APP</div>
-    <h2 style="font-size:clamp(1.6rem,4vw,2.4rem);margin:0 0 12px;color:#fff;line-height:1.15;">Tap FIFA — Atlanta Guest OS</h2>
-    <p style="color:rgba(255,255,255,.92);font-size:1.05rem;line-height:1.5;margin:0 0 22px;">10 languages · One-tap 911 &amp; trafficking hotlines · Hotel→Seat live maps · MARTA wayfinding · Sponsor / POS slots · Offline PWA. Open it on your phone — install to home screen.</p>
-    <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
-      <a href="./app/" style="background:#fff;color:#065f46;padding:14px 26px;border-radius:14px;font-weight:800;text-decoration:none;font-size:1rem;box-shadow:0 12px 30px rgba(0,0,0,.25);">▶ Launch the App</a>
-      <a href="./app/" target="_blank" rel="noreferrer" style="background:rgba(0,0,0,.25);color:#fff;padding:14px 22px;border-radius:14px;font-weight:700;text-decoration:none;font-size:1rem;border:1px solid rgba(255,255,255,.4);">Open in new tab ↗</a>
+<section class="cta-launch">
+  <div class="cta-launch-inner">
+    <div class="cta-launch-eyebrow">&#9654; LIVE NOW · WORKING APP</div>
+    <h2>Tap FIFA — Atlanta Guest OS</h2>
+    <p class="cta-launch-desc">10 languages · One-tap 911 &amp; trafficking hotlines · Hotel→Seat live maps · MARTA wayfinding · Sponsor / POS slots · Offline PWA. Open it on your phone — install to home screen.</p>
+    <div class="cta-launch-btns">
+      <a href="./app/" class="cta-btn-primary">&#9654; Launch the App</a>
+      <a href="./app/" target="_blank" rel="noreferrer" class="cta-btn-secondary">Open in new tab ↗</a>
     </div>
-    <div style="margin-top:14px;color:rgba(255,255,255,.85);font-size:.82rem;">🇺🇸 🇪🇸 🇧🇷 🇫🇷 🇩🇪 🇮🇹 🇸🇦 🇨🇳 🇯🇵 🇰🇷 — Built for Wilkins Media × FTH Trading</div>
+    <div class="cta-launch-flags">🇺🇸 🇪🇸 🇧🇷 🇫🇷 🇩🇪 🇮🇹 🇸🇦 🇨🇳 🇯🇵 🇰🇷 — Built for Wilkins Media × FTH Trading</div>
   </div>
 </section>
 
 <!-- ═══ ATLANTA SAFETY & ANTI-TRAFFICKING OPS ═══ -->
-<section class="section safety-section" id="safety" style="background:linear-gradient(180deg,#1a0606 0%,#0a0203 100%);border-top:1px solid rgba(239,68,68,.35);border-bottom:1px solid rgba(239,68,68,.35);">
+<section class="section safety-section" id="safety">
   <div class="section-header">
-    <span class="section-eyebrow" style="color:#fca5a5;letter-spacing:.18em;">🚨 EMERGENCY · ATLANTA SAFETY OPS</span>
-    <h2 style="color:#fff;">Anti-Trafficking & Fan Safety — FIFA Atlanta 2026</h2>
+    <span class="section-eyebrow eyebrow-safety">EMERGENCY · ATLANTA SAFETY OPS</span>
+    <h2>Anti-Trafficking &amp; Fan Safety — FIFA Atlanta 2026</h2>
     <p class="section-desc" style="color:#fecaca;max-width:780px;margin:0 auto;">Live ops layer for the Atlanta FIFA moment. Field documentation, deterministic emergency phrases in 10 languages, gate/transit positioning, and a 24/7 hotline integrated directly into the Tap FIFA guest app and staff console.</p>
   </div>
 
   <!-- Hotline + 911 banner -->
-  <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin:0 auto 36px;max-width:1100px;">
-    <a href="tel:18888273432" style="flex:1 1 280px;background:#ef4444;color:#fff;padding:20px 24px;border-radius:14px;text-decoration:none;font-weight:700;display:flex;flex-direction:column;align-items:center;box-shadow:0 0 0 1px rgba(255,255,255,.1),0 10px 30px rgba(239,68,68,.4);">
-      <span style="font-size:.78rem;letter-spacing:.18em;opacity:.9;">24/7 SAFE LINE</span>
-      <span style="font-size:1.7rem;margin-top:4px;">1-888-827-3432</span>
-      <span style="font-size:.85rem;opacity:.85;margin-top:2px;">Tap to call · 10 languages</span>
+  <div class="hotline-grid">
+    <a href="tel:18888273432" class="hotline-primary">
+      <span class="hotline-eyebrow">24/7 SAFE LINE</span>
+      <span class="hotline-number">1-888-827-3432</span>
+      <span class="hotline-sub">Tap to call · 10 languages</span>
     </a>
-    <a href="tel:911" style="flex:1 1 200px;background:#0a0203;color:#fff;padding:20px 24px;border-radius:14px;text-decoration:none;font-weight:700;display:flex;flex-direction:column;align-items:center;border:1px solid rgba(239,68,68,.6);">
-      <span style="font-size:.78rem;letter-spacing:.18em;color:#fca5a5;">LIFE-SAFETY EMERGENCY</span>
-      <span style="font-size:1.7rem;margin-top:4px;">911</span>
-      <span style="font-size:.85rem;opacity:.7;margin-top:2px;">Always overrides app flow</span>
+    <a href="tel:911" class="hotline-outline">
+      <span class="hotline-eyebrow hotline-eyebrow-red">LIFE-SAFETY EMERGENCY</span>
+      <span class="hotline-number">911</span>
+      <span class="hotline-sub hotline-sub-dim">Always overrides app flow</span>
     </a>
-    <a href="sms:233733&body=HELP" style="flex:1 1 200px;background:#0a0203;color:#fff;padding:20px 24px;border-radius:14px;text-decoration:none;font-weight:700;display:flex;flex-direction:column;align-items:center;border:1px solid rgba(239,68,68,.4);">
-      <span style="font-size:.78rem;letter-spacing:.18em;color:#fca5a5;">TEXT BeFree</span>
-      <span style="font-size:1.7rem;margin-top:4px;">233733</span>
-      <span style="font-size:.85rem;opacity:.7;margin-top:2px;">National Trafficking Hotline</span>
+    <a href="sms:233733&body=HELP" class="hotline-sms">
+      <span class="hotline-eyebrow hotline-eyebrow-red">TEXT BeFree</span>
+      <span class="hotline-number">233733</span>
+      <span class="hotline-sub hotline-sub-dim">National Trafficking Hotline</span>
     </a>
   </div>
 
   <!-- Hero videos -->
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:18px;max-width:1200px;margin:0 auto 32px;">
-    <figure style="margin:0;border-radius:14px;overflow:hidden;background:#000;border:1px solid rgba(239,68,68,.3);">
-      <video src="./assets/media/atl-safety-01-video.mp4" autoplay muted loop playsinline controls preload="metadata" style="width:100%;display:block;"></video>
-      <figcaption style="padding:12px 16px;color:#fecaca;font-size:.85rem;">Field walkthrough · Mercedes-Benz Stadium gate perimeter — staff briefing on positioning of safe-zones and rapid-extraction routes.</figcaption>
+  <div class="safety-video-grid">
+    <figure class="safety-video-figure">
+      <video src="./assets/media/atl-safety-01-video.mp4" autoplay muted loop playsinline controls preload="metadata"></video>
+      <figcaption>Field walkthrough · Mercedes-Benz Stadium gate perimeter — staff briefing on positioning of safe-zones and rapid-extraction routes.</figcaption>
     </figure>
-    <figure style="margin:0;border-radius:14px;overflow:hidden;background:#000;border:1px solid rgba(239,68,68,.3);">
-      <video src="./assets/media/atl-safety-02-video.mp4" autoplay muted loop playsinline controls preload="metadata" style="width:100%;display:block;"></video>
-      <figcaption style="padding:12px 16px;color:#fecaca;font-size:.85rem;">MARTA &amp; transit corridor sweep — high-risk pickup pattern surveillance and Wilkins / FTH safety asset placement.</figcaption>
+    <figure class="safety-video-figure">
+      <video src="./assets/media/atl-safety-02-video.mp4" autoplay muted loop playsinline controls preload="metadata"></video>
+      <figcaption>MARTA &amp; transit corridor sweep — high-risk pickup pattern surveillance and Wilkins / FTH safety asset placement.</figcaption>
     </figure>
   </div>
 
   <!-- Positioning grid -->
-  <div style="max-width:1200px;margin:0 auto;">
-    <h3 style="color:#fff;text-align:center;margin:0 0 8px;font-size:1.5rem;">Asset Positioning · Atlanta Match-Day Footprint</h3>
-    <p style="text-align:center;color:#fca5a5;margin:0 0 24px;font-size:.95rem;">Photo-documented locations of safe-zone signage, hotline placards, and rapid-response staffing across the FIFA Atlanta venues.</p>
+  <div class="safety-assets-wrap">
+    <h3>Asset Positioning · Atlanta Match-Day Footprint</h3>
+    <p>Photo-documented locations of safe-zone signage, hotline placards, and rapid-response staffing across the FIFA Atlanta venues.</p>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;">
-
-      <figure style="margin:0;border-radius:12px;overflow:hidden;background:#1a0606;border:1px solid rgba(239,68,68,.25);">
-        <img src="./assets/media/atl-safety-03-photo.jpg" alt="Gate signage placement" loading="lazy" style="width:100%;height:240px;object-fit:cover;display:block;">
-        <figcaption style="padding:10px 12px;color:#fecaca;font-size:.82rem;"><strong style="color:#fff;">Gate C · North Approach</strong><br>Hotline placard, multilingual phrase card.</figcaption>
+    <div class="safety-photo-grid">
+      <figure class="safety-photo-figure">
+        <img src="./assets/media/atl-safety-03-photo.jpg" alt="Gate signage placement" loading="lazy">
+        <figcaption><strong>Gate C · North Approach</strong><br>Hotline placard, multilingual phrase card.</figcaption>
       </figure>
-
-      <figure style="margin:0;border-radius:12px;overflow:hidden;background:#1a0606;border:1px solid rgba(239,68,68,.25);">
-        <img src="./assets/media/atl-safety-04-photo.jpg" alt="Pickup zone positioning" loading="lazy" style="width:100%;height:240px;object-fit:cover;display:block;">
-        <figcaption style="padding:10px 12px;color:#fecaca;font-size:.82rem;"><strong style="color:#fff;">Rideshare Pickup · West Lot</strong><br>Verified-driver QR + staff badge check.</figcaption>
+      <figure class="safety-photo-figure">
+        <img src="./assets/media/atl-safety-04-photo.jpg" alt="Pickup zone positioning" loading="lazy">
+        <figcaption><strong>Rideshare Pickup · West Lot</strong><br>Verified-driver QR + staff badge check.</figcaption>
       </figure>
-
-      <figure style="margin:0;border-radius:12px;overflow:hidden;background:#1a0606;border:1px solid rgba(239,68,68,.25);">
-        <img src="./assets/media/atl-safety-05-photo.jpg" alt="Lost youth station" loading="lazy" style="width:100%;height:240px;object-fit:cover;display:block;">
-        <figcaption style="padding:10px 12px;color:#fecaca;font-size:.82rem;"><strong style="color:#fff;">Lost-Person Station · Concourse 200</strong><br>Photo-tag intake, Code Adam protocol.</figcaption>
+      <figure class="safety-photo-figure">
+        <img src="./assets/media/atl-safety-05-photo.jpg" alt="Lost youth station" loading="lazy">
+        <figcaption><strong>Lost-Person Station · Concourse 200</strong><br>Photo-tag intake, Code Adam protocol.</figcaption>
       </figure>
-
-      <figure style="margin:0;border-radius:12px;overflow:hidden;background:#1a0606;border:1px solid rgba(239,68,68,.25);">
-        <img src="./assets/media/atl-safety-06-photo.jpg" alt="MARTA hub" loading="lazy" style="width:100%;height:240px;object-fit:cover;display:block;">
-        <figcaption style="padding:10px 12px;color:#fecaca;font-size:.82rem;"><strong style="color:#fff;">MARTA Five Points Hub</strong><br>Transit-side signage + uniformed presence.</figcaption>
+      <figure class="safety-photo-figure">
+        <img src="./assets/media/atl-safety-06-photo.jpg" alt="MARTA hub" loading="lazy">
+        <figcaption><strong>MARTA Five Points Hub</strong><br>Transit-side signage + uniformed presence.</figcaption>
       </figure>
-
-      <figure style="margin:0;border-radius:12px;overflow:hidden;background:#1a0606;border:1px solid rgba(239,68,68,.25);">
-        <img src="./assets/media/atl-safety-07-photo.jpg" alt="Hotel corridor" loading="lazy" style="width:100%;height:240px;object-fit:cover;display:block;">
-        <figcaption style="padding:10px 12px;color:#fecaca;font-size:.82rem;"><strong style="color:#fff;">Downtown Hotel Corridor</strong><br>Front-desk training kit + room placards.</figcaption>
+      <figure class="safety-photo-figure">
+        <img src="./assets/media/atl-safety-07-photo.jpg" alt="Hotel corridor" loading="lazy">
+        <figcaption><strong>Downtown Hotel Corridor</strong><br>Front-desk training kit + room placards.</figcaption>
       </figure>
-
-      <figure style="margin:0;border-radius:12px;overflow:hidden;background:#1a0606;border:1px solid rgba(239,68,68,.25);">
-        <img src="./assets/media/atl-safety-08-photo.jpg" alt="Buford Highway zone" loading="lazy" style="width:100%;height:240px;object-fit:cover;display:block;">
-        <figcaption style="padding:10px 12px;color:#fecaca;font-size:.82rem;"><strong style="color:#fff;">Buford Highway Cultural Zone</strong><br>Multilingual outreach + community liaison.</figcaption>
+      <figure class="safety-photo-figure">
+        <img src="./assets/media/atl-safety-08-photo.jpg" alt="Buford Highway zone" loading="lazy">
+        <figcaption><strong>Buford Highway Cultural Zone</strong><br>Multilingual outreach + community liaison.</figcaption>
       </figure>
-
-      <figure style="margin:0;border-radius:12px;overflow:hidden;background:#1a0606;border:1px solid rgba(239,68,68,.25);">
-        <img src="./assets/media/atl-safety-09-photo.jpg" alt="Volunteer staging" loading="lazy" style="width:100%;height:240px;object-fit:cover;display:block;">
-        <figcaption style="padding:10px 12px;color:#fecaca;font-size:.82rem;"><strong style="color:#fff;">Volunteer Staging Tent</strong><br>Daily briefing, BeFree text demo.</figcaption>
+      <figure class="safety-photo-figure">
+        <img src="./assets/media/atl-safety-09-photo.jpg" alt="Volunteer staging" loading="lazy">
+        <figcaption><strong>Volunteer Staging Tent</strong><br>Daily briefing, BeFree text demo.</figcaption>
       </figure>
-
-      <figure style="margin:0;border-radius:12px;overflow:hidden;background:#1a0606;border:1px solid rgba(239,68,68,.25);">
-        <img src="./assets/media/atl-safety-10-photo.jpg" alt="Stadium concourse" loading="lazy" style="width:100%;height:240px;object-fit:cover;display:block;">
-        <figcaption style="padding:10px 12px;color:#fecaca;font-size:.82rem;"><strong style="color:#fff;">Concourse 100 · East</strong><br>Phrase-card kiosk + hotline LED loop.</figcaption>
+      <figure class="safety-photo-figure">
+        <img src="./assets/media/atl-safety-10-photo.jpg" alt="Stadium concourse" loading="lazy">
+        <figcaption><strong>Concourse 100 · East</strong><br>Phrase-card kiosk + hotline LED loop.</figcaption>
       </figure>
-
-      <figure style="margin:0;border-radius:12px;overflow:hidden;background:#1a0606;border:1px solid rgba(239,68,68,.25);">
-        <img src="./assets/media/atl-safety-11-photo.jpg" alt="ATL airport pickup" loading="lazy" style="width:100%;height:240px;object-fit:cover;display:block;">
-        <figcaption style="padding:10px 12px;color:#fecaca;font-size:.82rem;"><strong style="color:#fff;">ATL Airport Arrivals</strong><br>Verified-driver lane &amp; staff handoff point.</figcaption>
+      <figure class="safety-photo-figure">
+        <img src="./assets/media/atl-safety-11-photo.jpg" alt="ATL airport pickup" loading="lazy">
+        <figcaption><strong>ATL Airport Arrivals</strong><br>Verified-driver lane &amp; staff handoff point.</figcaption>
       </figure>
-
-      <figure style="margin:0;border-radius:12px;overflow:hidden;background:#1a0606;border:1px solid rgba(239,68,68,.25);">
-        <img src="./assets/media/atl-safety-12-photo.jpg" alt="Field signage" loading="lazy" style="width:100%;height:240px;object-fit:cover;display:block;">
-        <figcaption style="padding:10px 12px;color:#fecaca;font-size:.82rem;"><strong style="color:#fff;">Field Deployment · Day-Of</strong><br>Banner placement &amp; QR scan-to-help.</figcaption>
+      <figure class="safety-photo-figure">
+        <img src="./assets/media/atl-safety-12-photo.jpg" alt="Field signage" loading="lazy">
+        <figcaption><strong>Field Deployment · Day-Of</strong><br>Banner placement &amp; QR scan-to-help.</figcaption>
       </figure>
-
-      <figure style="margin:0;border-radius:12px;overflow:hidden;background:#1a0606;border:1px solid rgba(239,68,68,.25);">
-        <img src="./assets/media/atl-safety-13-photo.jpg" alt="Emergency overflow" loading="lazy" style="width:100%;height:240px;object-fit:cover;display:block;">
-        <figcaption style="padding:10px 12px;color:#fecaca;font-size:.82rem;"><strong style="color:#fff;">Overflow Safe-Zone</strong><br>Backup triage + family reunification.</figcaption>
+      <figure class="safety-photo-figure">
+        <img src="./assets/media/atl-safety-13-photo.jpg" alt="Emergency overflow" loading="lazy">
+        <figcaption><strong>Overflow Safe-Zone</strong><br>Backup triage + family reunification.</figcaption>
       </figure>
-
     </div>
   </div>
 
+  <!-- Safety ops map image panel -->
+  <div class="asset-panel" style="margin-top:40px;">
+    <img src="./assets/tap-fifa/safety-ops-map.png" alt="Atlanta safety ops map — gate perimeter and rapid-response positioning" loading="lazy" />
+  </div>
+
   <!-- App tie-in -->
-  <div style="max-width:980px;margin:40px auto 0;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:16px;padding:24px 28px;">
-    <h3 style="color:#fff;margin:0 0 8px;font-size:1.25rem;">In the Tap FIFA app — every screen, every language</h3>
-    <p style="color:#fecaca;margin:0 0 14px;line-height:1.6;font-size:.95rem;">The pulsing red <strong>🏥 Emergency</strong> button on the Guest PWA never disappears. Tapping it instantly calls 1-888-827-3432, opens the BeFree text flow, and pushes the live GPS to the staff console — bypassing the AI concierge so safety is always deterministic.</p>
-    <div style="display:flex;flex-wrap:wrap;gap:10px;">
+  <div class="safety-app-callout">
+    <h3>In the Tap FIFA app — every screen, every language</h3>
+    <p>The pulsing red <strong>Emergency</strong> button on the Guest PWA never disappears. Tapping it instantly calls 1-888-827-3432, opens the BeFree text flow, and pushes the live GPS to the staff console — bypassing the AI concierge so safety is always deterministic.</p>
+    <div class="safety-app-links">
       <a class="btn btn-outline btn-sm" href="./platform.html#emergency">Emergency Pipeline →</a>
       <a class="btn btn-outline btn-sm" href="./architecture.html#safety-flow">Safety Flow →</a>
       <a class="btn btn-outline btn-sm" href="https://github.com/FTHTrading/FIFA---Wilkins" target="_blank" rel="noreferrer">View Repo →</a>
@@ -429,27 +429,27 @@
 
   <div class="explore-grid">
     <a href="./platform.html" class="explore-card">
-      <span class="explore-icon">⚙️</span>
+      <span class="explore-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16M8 3v6M12 9v6M16 15v6"/></svg></span>
       <h4>Platform</h4>
       <p>5 apps, 11 packages, 39 data models, 12 API modules.</p>
     </a>
     <a href="./architecture.html" class="explore-card">
-      <span class="explore-icon">🔧</span>
+      <span class="explore-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z"/></svg></span>
       <h4>Architecture</h4>
       <p>System topology, data flows, emergency pipeline, sponsor injection.</p>
     </a>
     <a href="./media-studio.html" class="explore-card">
-      <span class="explore-icon">🎬</span>
+      <span class="explore-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10l6-3v10l-6-3"/></svg></span>
       <h4>Media Studio</h4>
       <p>ComfyUI, Blender, FFmpeg — local engines and Cloudflare AI.</p>
     </a>
     <a href="./demand-model.html" class="explore-card">
-      <span class="explore-icon">📈</span>
+      <span class="explore-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18M17 6h6v6"/></svg></span>
       <h4>Demand Model</h4>
       <p>Revenue thesis, monetization tiers, match-day demand curve.</p>
     </a>
     <a href="./sales-kit.html" class="explore-card">
-      <span class="explore-icon">🤝</span>
+      <span class="explore-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></span>
       <h4>Sales Kit</h4>
       <p>Sponsor packages, audience profiles, activation playbook.</p>
     </a>
